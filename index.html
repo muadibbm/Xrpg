@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Our Bio XRPG Game</title>
+        <title>BioXRPG</title>
         <script>
             var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
         </script>
@@ -10,15 +10,35 @@
         <script>
             var canvas;
             var stage;
+            var text;
+            var bg;
+            var logo;
 
             function init() {
                 canvas = document.getElementById("canvas");
                 stage = new Stage(canvas);
-                var text = new Text("Hello World!", "36px Arial", "#555");
-                text.x = 0;
-                text.y = 0;
+                text = new Text("Hello World!", "36px Arial", "#666");
+                text.x = 100;
+                text.y = 100;
+
+                bg = new Image();
+                bg.src = "images/Background/bg.png";
+                bg.onload = setImage;
+            }
+
+            function setImage(event) {
+                logo = new Bitmap(bg);
+                stage.addChild(logo);
+
+                logo.x = 0;
+                logo.y = 0;
 
                 stage.addChild(text);
+
+                Ticker.addListener(window);
+            }
+
+            function tick() {
                 stage.update();
             }
 
