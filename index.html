@@ -12,12 +12,12 @@
             var stage;
             var text;
             var bg;
-            var logo;
+            var bgBitmap;
 
             function init() {
                 canvas = document.getElementById("canvas");
                 stage = new Stage(canvas);
-                text = new Text("Hello World!", "36px Arial", "#666");
+                text = new Text("Hello World!", "36px Arial", "#000");
                 text.x = 100;
                 text.y = 100;
 
@@ -27,18 +27,20 @@
             }
 
             function setImage(event) {
-                logo = new Bitmap(bg);
-                stage.addChild(logo);
-
-                logo.x = 0;
-                logo.y = 0;
-
+                bgBitmap = new Bitmap(bg);
+                bgBitmap.regX = 0;
+                bgBitmap.regY = 0;
+				stage.addChild(bgBitmap);
                 stage.addChild(text);
 
+				Ticker.setFPS(60);
                 Ticker.addListener(window);
             }
 
+			// This is like the update function in PlayN
             function tick() {
+				bgBitmap.x += (stage.mouseX - bgBitmap.x) * 0.1;
+				bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
                 stage.update();
             }
 
