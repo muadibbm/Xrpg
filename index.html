@@ -1,5 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Our Bio XRPG Game</title></head>
-    <body>Hello World!</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Our Bio XRPG Game</title>
+        <script>
+            var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
+        </script>
+        <script src="lib/easeljs-0.5.0.min.js"></script>
+        <script>
+            var canvas;
+            var stage;
+
+            function init() {
+                canvas = document.getElementById("canvas");
+                stage = new Stage(canvas);
+                var text = new Text("Hello World!", "36px Arial", "#555");
+                text.x = 0;
+                text.y = 0;
+
+                stage.addChild(text);
+                stage.update();
+            }
+
+        </script>
+    </head>
+
+    <body onload="init();">
+        
+        <canvas width="640" height="420" id="canvas"></canvas>
+
+    </body>
 </html>
