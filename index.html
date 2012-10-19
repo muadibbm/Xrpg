@@ -15,18 +15,23 @@
 		<script src="jscripts/environment.js"></script>
         <script>
             var canvas;
+			var graphics;
             var stage;
             var text;
             var bgImage;
             var bgBitmap;
 
             function init() {
+				graphics = new Graphics();
+				
                 canvas = document.getElementById("gameCanvas");
-
+				canvas.width = Const.WINDOW_WIDTH;
+				canvas.height = Const.WINDOW_HEIGHT;
+				
                 stage = new Stage(canvas);
-                //text = new Text("Xrpg - Testing", "18px Arial", "#000");
-                //text.x = 0;
-                //text.y = 0;
+                text = new Text("Xrpg - Testing", "18px Arial", "#000");
+                text.x = 0;
+                text.y = 0;
 
                 bgImage = new Image();
                 bgImage.src = "images/Background/bg.png";
@@ -65,7 +70,7 @@
     <body onload="init();">
         <!-- TODO : get window?screen size and width and take only 70% of it -->
         <div>
-            <canvas width="800" height="600" id="gameCanvas"></canvas>
+            <canvas id="gameCanvas"></canvas>
         </div>
     </body>
 </html>
