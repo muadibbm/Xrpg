@@ -3,6 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <title>BioXRPG</title>
+
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
         <script>
             var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
         </script>
@@ -19,8 +22,7 @@
 
             function init() {
                 canvas = document.getElementById("gameCanvas");
-                //canvas.width = window.innerWidth;
-                //canvas.height = window.innerHeight;
+
                 stage = new Stage(canvas);
                 text = new Text("Xrpg - Testing", "18px Arial", "#000");
                 text.x = 0;
@@ -28,20 +30,23 @@
 
                 bgImage = new Image();
                 bgImage.src = "images/Background/bg.png";
-                bgImage.onload = setImage;
+                bgImage.onload = setBgImage;
             }
 
-            function setImage(event) {
+            function setBgImage(event) {
                 bgBitmap = new Bitmap(bgImage);
                 bgBitmap.regX = 0;
                 bgBitmap.regY = 0;
-                console.log(bgBitmap);
+
+                // Adjust the image scale to fit the canvas size
                 bgBitmap.scaleX = canvas.width / bgImage.width;
                 bgBitmap.scaleY = canvas.height / bgImage.height;
-                console.log(bgBitmap.image.width);
-                console.log(bgBitmap.image.height);
+
+                // Add a css style to center the canvas onto the middle of the screen
+                $('#gameCanvas').css('margine-top', -canvas.height / 2);
+                $('#gameCanvas').css('margin-left', -canvas.width / 2);
+                
                 stage.addChild(bgBitmap);
-                //stage.addChild(text);
 
 				Ticker.setFPS(60);
                 Ticker.addListener(window);
@@ -59,7 +64,8 @@
 
     <body onload="init();">
         <!-- TODO : get window?screen size and width and take only 70% of it -->
-        <canvas width="800" height="600" id="gameCanvas"></canvas>
-
+        <div>
+            <canvas width="800" height="600" id="gameCanvas"></canvas>
+        </div>
     </body>
 </html>
