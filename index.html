@@ -10,36 +10,48 @@
             var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
         </script>
 		<script src="lib/jquery-1.8.2.min.js"></script>
-        <script src="lib/easeljs-0.5.0.min.js"></script>
+        <script src="lib/CreateJS/easeljs-NEXT.min.js"></script>
+        <script src="lib/CreateJS/preloadjs-NEXT.min.js"></script>
 		<script src="jscripts/const.js"></script>
 		<script src="jscripts/environment.js"></script>
         <script>
             var canvas;
+            var context;
+            var preload;
 			var graphics;
             var stage;
             var text;
             var bgImage;
             var bgBitmap;
 
-            function init() {
+            function initialize() {
 				graphics = new Graphics();
 				
                 canvas = document.getElementById("gameCanvas");
-				canvas.width = Const.WINDOW_WIDTH;
+                canvas.width = Const.WINDOW_WIDTH;
 				canvas.height = Const.WINDOW_HEIGHT;
-				
-                stage = new Stage(canvas);
+				context = canvas.getContext("2d");
 
-                bgImage = new Image();
-                bgImage.src = "images/Background/bg.png";
-                bgImage.onload = setBgImage;
+                stage = new Stage(canvas);
+                
+                // Use PreloadJS to make sure sound and images are loaded
+                // before we begin processing
+                // (Especially important for large/remote resources)
+                preload = new PreloadJS();
+                preload.onComplete = prepareGame;
+
+                // A JSON object to hold the images
+                var manifest = [
+                    { id: "background", src: "images/Background/bg.png" }
+                ];
+                console.log(window);
+                preload.loadManifest(manifest);
             }
 
-            function setBgImage(event) {
+            function prepareGame() {
+                bgImage = preload.getResult("background").result;
                 bgBitmap = new Bitmap(bgImage);
-                bgBitmap.regX = 0;
-                bgBitmap.regY = 0;
-
+                
                 // Adjust the image scale to fit the canvas size
                 bgBitmap.scaleX = canvas.width / bgImage.width;
                 bgBitmap.scaleY = canvas.height / bgImage.height;
@@ -49,22 +61,27 @@
                 $('#gameCanvas').css('margin-left', -canvas.width / 2);
                 
                 stage.addChild(bgBitmap);
+                stage.update();
 
-				Ticker.setFPS(60);
+                startGame();
+            }
+
+            function startGame() {
+                Ticker.setFPS(Const.UPDATE_RATE);
                 Ticker.addListener(window);
             }
 
 			// This is like the update function in PlayN
             function tick() {
 				//bgBitmap.x += (stage.mouseX - bgBitmap.x) * 0.1;
-				//bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
+                //bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
                 stage.update();
             }
 
         </script>
     </head>
 
-    <body onload="init();">
+    <body onload="initialize();">
         <!-- TODO : get window?screen size and width and take only 70% of it -->
         <div>
             <canvas id="gameCanvas"></canvas>
