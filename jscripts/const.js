@@ -173,9 +173,5 @@ var Const = {
 	VISIBLE : 1.0,
 	HIDDEN_ROAD : 0.07,
 	HIDDEN_MAPPING : 0.5,
-	SHADOW : 0.45,
-
-    // Loading the images
-	bgImage : new Image(),
-    (bgImage.src) : "images/Background/bg.png"
+	SHADOW : 0.45
 }
