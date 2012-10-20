@@ -10,11 +10,14 @@
             var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
         </script>
 		<script src="lib/jquery-1.8.2.min.js"></script>
-        <script src="lib/easeljs-0.5.0.min.js"></script>
+        <script src="lib/Create/easeljs-0.5.0.min.js"></script>
+        <script src="lib/CreateJS/preloadjs-NEXT.min.js"></script>
 		<script src="jscripts/const.js"></script>
 		<script src="jscripts/environment.js"></script>
         <script>
             var canvas;
+            var context;
+            var preload;
 			var graphics;
             var stage;
             var text;
@@ -27,11 +30,22 @@
                 canvas = document.getElementById("gameCanvas");
                 canvas.width = Const.WINDOW_WIDTH;
 				canvas.height = Const.WINDOW_HEIGHT;
-				
+				context = canvas.getContext("2d");
+
                 stage = new Stage(canvas);
-                //text = new Text("Xrpg - Testing", "18px Arial", "#000");
-                //text.x = 0;
-                //text.y = 0;
+                
+                // Use PreloadJS to make sure sound and images are loaded
+                // before we begin processing
+                // (Especially important for large/remote resources)
+                preload = new PreloadJS();
+                preload.onComplete = prepareGame;
+
+                // A JSON object to hold the images
+                var manifest = [
+                    {id: "bgImage", src: "iamges/Background/bg.png"}
+                ];
+
+                preload.loadManifest(manifest);
 
                 bgImage = new Image();
                 bgImage.src = "images/Background/bg.png";
