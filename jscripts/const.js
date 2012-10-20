@@ -1,24 +1,23 @@
 /* Constant class containing constant game values implemented in a Javascript object literal */
 var Const = {
-
-	//UPDATE_RATE : 25, (is this required?)
+	UPDATE_RATE : 60,
 	
-	WINDOW_WIDTH : (0.75)*screen.width,
-	WINDOW_HEIGHT : (0.75)*screen.height,
+	WINDOW_WIDTH : (0.75) * screen.width,
+	WINDOW_HEIGHT : (0.75) * screen.height,
 	
-	WORLD_WIDTH : (4.0)*this.WINDOW_WIDTH,
-	WORLD_HEIGHT : (4.0)*this.WINDOW_HEIGHT,
+	WORLD_WIDTH : (4.0) * this.WINDOW_WIDTH,
+	WORLD_HEIGHT : (4.0) * this.WINDOW_HEIGHT,
 	WORLD_ORIGIN_X : 0.0,
 	WORLD_ORIGIN_Y : 0.0,
 	
-	BACKGROUND_WORLD_WIDTH : (7/3)*this.WORLD_WIDTH,
-	BACKGROUND_WORLD_HEIGHT : (7/3)*this.WORLD_HEIGHT,
-	BACKGROUND_WORLD_ORIGIN_X : this.WORLD_ORIGIN_X - this.WORLD_WIDTH/3,
-	BACKGROUND_WORLD_ORIGIN_Y : this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT/3,
+	BACKGROUND_WORLD_WIDTH : (7 / 3) * this.WORLD_WIDTH,
+	BACKGROUND_WORLD_HEIGHT : (7 / 3) * this.WORLD_HEIGHT,
+	BACKGROUND_WORLD_ORIGIN_X : this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3,
+	BACKGROUND_WORLD_ORIGIN_Y : this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3,
 	BACKGROUND_DEPTH : 1.0,
 	
-	GRAPH_Y : this.WORLD_HEIGHT/30.0,
-	CAMP_GRAPH_GAP : this.WORLD_WIDTH/30.0,
+	GRAPH_Y : this.WORLD_HEIGHT / 30.0,
+	CAMP_GRAPH_GAP : this.WORLD_WIDTH / 30.0,
 	
 	STARTING_GOLD : 1000,
 	
@@ -35,8 +34,8 @@ var Const = {
 	
 	MIN_CITY_DISTANCE : 150,
 	MAX_CITY_DISTANCE : this.WORLD_WIDTH - 100.0,
-	CITY_GRAPH_WIDTH : this.WORLD_WIDTH/5.0,
-	CITY_GRAPH_HEIGHT : this.WORLD_HEIGHT - this.WORLD_HEIGHT/10.0,
+	CITY_GRAPH_WIDTH : this.WORLD_WIDTH / 5.0,
+	CITY_GRAPH_HEIGHT : this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0,
 	PALACE_X : 0.0,
 	PALACE_Y : -23.0,
 	PALACE_DEPTH : 3.2,
@@ -174,5 +173,9 @@ var Const = {
 	VISIBLE : 1.0,
 	HIDDEN_ROAD : 0.07,
 	HIDDEN_MAPPING : 0.5,
-	SHADOW : 0.45
+	SHADOW : 0.45,
+
+    // Loading the images
+	bgImage : new Image(),
+    (bgImage.src) : "images/Background/bg.png"
 }

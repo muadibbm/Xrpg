@@ -25,16 +25,15 @@
 				graphics = new Graphics();
 				
                 canvas = document.getElementById("gameCanvas");
-				canvas.width = Const.WINDOW_WIDTH;
+                canvas.width = Const.WINDOW_WIDTH;
 				canvas.height = Const.WINDOW_HEIGHT;
 				
                 stage = new Stage(canvas);
-                text = new Text("Xrpg - Testing", "18px Arial", "#000");
-                text.x = 0;
-                text.y = 0;
+                //text = new Text("Xrpg - Testing", "18px Arial", "#000");
+                //text.x = 0;
+                //text.y = 0;
 
-                bgImage = new Image();
-                bgImage.src = "images/Background/bg.png";
+                
                 bgImage.onload = setBgImage;
             }
 
@@ -53,7 +52,7 @@
                 
                 stage.addChild(bgBitmap);
 
-				Ticker.setFPS(60);
+				Ticker.setFPS(Const.UPDATE_RATE);
                 Ticker.addListener(window);
             }
 
