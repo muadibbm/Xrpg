@@ -10,7 +10,7 @@
             var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
         </script>
 		<script src="lib/jquery-1.8.2.min.js"></script>
-        <script src="lib/Create/easeljs-0.5.0.min.js"></script>
+        <script src="lib/CreateJS/easeljs-NEXT.min.js"></script>
         <script src="lib/CreateJS/preloadjs-NEXT.min.js"></script>
 		<script src="jscripts/const.js"></script>
 		<script src="jscripts/environment.js"></script>
@@ -24,7 +24,7 @@
             var bgImage;
             var bgBitmap;
 
-            function init() {
+            function initialize() {
 				graphics = new Graphics();
 				
                 canvas = document.getElementById("gameCanvas");
@@ -42,21 +42,16 @@
 
                 // A JSON object to hold the images
                 var manifest = [
-                    {id: "bgImage", src: "iamges/Background/bg.png"}
+                    {id: "background", src: "images/Background/bg.png"}
                 ];
 
                 preload.loadManifest(manifest);
-
-                bgImage = new Image();
-                bgImage.src = "images/Background/bg.png";
-                bgImage.onload = setBgImage;
             }
 
-            function setBgImage(event) {
+            function prepareGame() {
+                bgImage = preload.getResult("background").result;
                 bgBitmap = new Bitmap(bgImage);
-                bgBitmap.regX = 0;
-                bgBitmap.regY = 0;
-
+                
                 // Adjust the image scale to fit the canvas size
                 bgBitmap.scaleX = canvas.width / bgImage.width;
                 bgBitmap.scaleY = canvas.height / bgImage.height;
@@ -81,7 +76,7 @@
         </script>
     </head>
 
-    <body onload="init();">
+    <body onload="initialize();">
         <!-- TODO : get window?screen size and width and take only 70% of it -->
         <div>
             <canvas id="gameCanvas"></canvas>
