@@ -42,7 +42,7 @@
 
                 // A JSON object to hold the images
                 var manifest = [
-                    {id: "background", src: "images/Background/bg.png"}
+                    { id: "background", src: "images/Background/bg.png" }
                 ];
 
                 preload.loadManifest(manifest);
@@ -50,6 +50,7 @@
 
             function prepareGame() {
                 bgImage = preload.getResult("background").result;
+                console.log(bgImage);
                 bgBitmap = new Bitmap(bgImage);
                 
                 // Adjust the image scale to fit the canvas size
