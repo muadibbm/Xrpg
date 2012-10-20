@@ -44,13 +44,12 @@
                 var manifest = [
                     { id: "background", src: "images/Background/bg.png" }
                 ];
-
+                console.log(window);
                 preload.loadManifest(manifest);
             }
 
             function prepareGame() {
                 bgImage = preload.getResult("background").result;
-                console.log(bgImage);
                 bgBitmap = new Bitmap(bgImage);
                 
                 // Adjust the image scale to fit the canvas size
@@ -62,15 +61,20 @@
                 $('#gameCanvas').css('margin-left', -canvas.width / 2);
                 
                 stage.addChild(bgBitmap);
+                stage.update();
 
-				Ticker.setFPS(Const.UPDATE_RATE);
+                startGame();
+            }
+
+            function startGame() {
+                Ticker.setFPS(Const.UPDATE_RATE);
                 Ticker.addListener(window);
             }
 
 			// This is like the update function in PlayN
             function tick() {
 				//bgBitmap.x += (stage.mouseX - bgBitmap.x) * 0.1;
-				//bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
+                //bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
                 stage.update();
             }
 
