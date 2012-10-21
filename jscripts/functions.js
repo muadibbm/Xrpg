@@ -7,6 +7,8 @@
     context = canvas.getContext("2d");
 
     stage = new Stage(canvas);
+    //console.log(canvas.width);
+    //console.log(canvas.height);
 
     // Use PreloadJS to make sure sound and images are loaded
     // before we begin processing
