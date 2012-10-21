@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <title>BioXRPG</title>
 
-        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css" />
 
         <script>
             // Set window as the CreateJS namespace (the object the classes will be defined in)
@@ -20,44 +20,10 @@
         <!-- These two scripts must be in this order as functions.js is dependent on variables.js -->
         <script src="jscripts/variables.js"></script>
         <script src="jscripts/functions.js"></script>
-
-        <!-- Game Logic -->
-        <script>
-            function initialize() {
-				graphics = new Graphics();
-				
-                canvas = document.getElementById("gameCanvas");
-                canvas.width = Const.WINDOW_WIDTH;
-				canvas.height = Const.WINDOW_HEIGHT;
-				context = canvas.getContext("2d");
-
-                stage = new Stage(canvas);
-                
-                // Use PreloadJS to make sure sound and images are loaded
-                // before we begin processing
-                // (Especially important for large/remote resources)
-                preload = new PreloadJS();
-                preload.onComplete = prepareGame;
-                preload.loadManifest(manifest);
-            }
-
-            function startGame() {
-                Ticker.setFPS(Const.UPDATE_RATE);
-                Ticker.addListener(window);
-            }
-
-			// This is like the update function in PlayN
-            function tick() {
-				//bgBitmap.x += (stage.mouseX - bgBitmap.x) * 0.1;
-                //bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
-                stage.update();
-            }
-
-        </script>
     </head>
 
+    <!-- Game Logic - All is hidden here -->
     <body onload="initialize();">
-        <!-- TODO : get window?screen size and width and take only 70% of it -->
         <div>
             <canvas id="gameCanvas"></canvas>
         </div>

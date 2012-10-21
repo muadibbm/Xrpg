@@ -1,4 +1,22 @@
-﻿function prepareGame() {
+﻿function initialize() {
+    graphics = new Graphics();
+
+    canvas = document.getElementById("gameCanvas");
+    canvas.width = Const.WINDOW_WIDTH;
+    canvas.height = Const.WINDOW_HEIGHT;
+    context = canvas.getContext("2d");
+
+    stage = new Stage(canvas);
+
+    // Use PreloadJS to make sure sound and images are loaded
+    // before we begin processing
+    // (Especially important for large/remote resources)
+    preload = new PreloadJS();
+    preload.onComplete = prepareGame;
+    preload.loadManifest(manifest);
+}
+
+function prepareGame() {
     // Preparing stuff
     prepareBG();
     prepareCave();
@@ -53,4 +71,16 @@ function prepareCave() {
     caveBitmap.y = 0; // Scale adjustments
 
     stage.addChild(caveBitmap);
+}
+
+function startGame() {
+    Ticker.setFPS(Const.UPDATE_RATE);
+    Ticker.addListener(window);
+}
+
+// This is like the update function in PlayN
+function tick() {
+    //bgBitmap.x += (stage.mouseX - bgBitmap.x) * 0.1;
+    //bgBitmap.y += (stage.mouseY - bgBitmap.y) * 0.1;
+    stage.update();
 }
