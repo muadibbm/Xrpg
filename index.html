@@ -7,7 +7,8 @@
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
 
         <script>
-            var createjs = window; // sets window as the createjs namespace (the object the classes will be defined in)
+            // Set window as the CreateJS namespace (the object the classes will be defined in)
+            var createjs = window;
         </script>
 		<script src="lib/jquery-1.8.2.min.js"></script>
         <script src="lib/CreateJS/easeljs-NEXT.min.js"></script>
@@ -15,16 +16,13 @@
 		<script src="jscripts/constants.js"></script>
         <script src="jscripts/content.js"></script>
 		<script src="jscripts/environment.js"></script>
-        <script>
-            var canvas;
-            var context;
-            var preload;
-			var graphics;
-            var stage;
-            var text;
-            var bgImage;
-            var bgBitmap;
 
+        <!-- These two scripts must be in this order as functions.js is dependent on variables.js -->
+        <script src="jscripts/variables.js"></script>
+        <script src="jscripts/functions.js"></script>
+
+        <!-- Game Logic -->
+        <script>
             function initialize() {
 				graphics = new Graphics();
 				
@@ -41,24 +39,6 @@
                 preload = new PreloadJS();
                 preload.onComplete = prepareGame;
                 preload.loadManifest(manifest);
-            }
-
-            function prepareGame() {
-                bgImage = preload.getResult("background").result;
-                bgBitmap = new Bitmap(bgImage);
-                
-                // Adjust the image scale to fit the canvas size
-                bgBitmap.scaleX = canvas.width / bgImage.width;
-                bgBitmap.scaleY = canvas.height / bgImage.height;
-
-                // Add a css style to center the canvas onto the middle of the screen
-                $('#gameCanvas').css('margine-top', -canvas.height / 2);
-                $('#gameCanvas').css('margin-left', -canvas.width / 2);
-                
-                stage.addChild(bgBitmap);
-                stage.update();
-
-                startGame();
             }
 
             function startGame() {

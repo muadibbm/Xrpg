@@ -1,4 +1,4 @@
-/* Constant object containing constant game values implemented in a Javascript object literal */
+/* Constant object containing constant game values implemented in a JavaScript object literal */
 var Const = {
 	UPDATE_RATE : 60,
 	
