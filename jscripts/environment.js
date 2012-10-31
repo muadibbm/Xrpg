@@ -1,21 +1,65 @@
 
 function Environment() {
 
-    // public bitmap variables for the environment elements
-    this.bgBitmap;
-    this.treeOfLifeBitmap;
-    this.caveBitmap;
+    // private bitmap variables for the environment bitmap elements
+    var bgBitmap;
+    var treeOfLifeBitmap;
+    var caveBitmap;
+    // private container for the graph bitmap objects
+    var graphLayer = new Container();
+    // private container which has all the bitmaps for the game UI
+    var uiLayer = new Container();
 
-    // public method which prepares all the environment resources
+    // used for camera movement
+    var offset = new Point(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
+
+    // used of LOD (Level of Detail)
+    var zoomLevel = Const.ZOOM_DEFAULT;
+
+    // prepares all the environment resources
     this.prepare = function () {
-        this.bgBitmap = createBitmap("background", this.bgBitmap, preload, canvas);
-        this.treeOfLifeBitmap = createBitmap("treeOfLife", this.treeOfLifeBitmap, preload, canvas);
-        this.caveBitmap = createBitmap("cave", this.caveBitmap, preload, canvas);
-        transformBitmap(this.bgBitmap, 0.0, 0.0, 1.0);
-        transformBitmap(this.treeOfLifeBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * this.treeOfLifeBitmap.image.width / 5.0, canvas.height - Const.TREE_OF_LIFE_SCALE * this.treeOfLifeBitmap.image.height * 5.0, Const.TREE_OF_LIFE_SCALE);
-        transformBitmap(this.caveBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * this.caveBitmap.image.width / 2.5, 0.0, Const.DEEVE_CAVE_SCALE);
-        stage.addChild(this.bgBitmap);
-        stage.addChild(this.treeOfLifeBitmap);
-        stage.addChild(this.caveBitmap);
+        //TODO: make the background bitmap to be drawn repeatedly
+        bgBitmap = createBitmap("background", bgBitmap, preload, canvas);
+        treeOfLifeBitmap = createBitmap("treeOfLife", treeOfLifeBitmap, preload, canvas);
+        caveBitmap = createBitmap("cave", caveBitmap, preload, canvas);
+        transformBitmap(bgBitmap, 0.0, 0.0, 1.0);
+        transformBitmap(treeOfLifeBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.width / 5.0, canvas.height - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.height * 5.0, Const.TREE_OF_LIFE_SCALE);
+        transformBitmap(caveBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * caveBitmap.image.width / 2.5, 0.0, Const.DEEVE_CAVE_SCALE);
+        stage.addChild(bgBitmap);
+        stage.addChild(treeOfLifeBitmap);
+        stage.addChild(caveBitmap);
     }
+
+    // set the environment X offset 
+    this.setX = function (x) {
+        offset.x = x;
+    }
+
+    // set the environment Y offset
+    this.setY = function (y) {
+        offset.y = y;
+    }
+
+    // @return {Point} the environment offset
+    this.getOffset = function () {
+        return offset;
+    }
+
+    // @return {Container} the graph layer
+    this.getGraphLayer = function () {
+        //return graphLayer;
+    }
+
+    // @return {Container} the UI layer
+    this.getUiLayer = function () {
+        return uiLayer;
+    }
+
+    // sets the zoom level while changing the bitmaps details based on the new level
+    this.setZoomLevel = function (newLevel) {
+        zoomLevel = newLevel;
+        //TODO: add level of detail method based on zoom level
+    }
+
+    //TODO: the tree placement method from previous gameLoop should be coded here
 }
