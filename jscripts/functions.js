@@ -53,9 +53,6 @@ function prepareTreeOfLife() {
     treeOfLifeBitmap.scaleX = treeOfLifeImage.width / canvas.width;
     treeOfLifeBitmap.scaleY = treeOfLifeImage.height / canvas.height; // Scale adjustments
 
-    console.log(treeOfLifeBitmap.scaleX);
-    console.log(treeOfLifeBitmap.scaleY);
-
     // Position the tree at the bottom center of the canvas
     treeOfLifeBitmap.x = canvas.width / 2 - treeOfLifeImage.width / 6; // Scale adjustments
     treeOfLifeBitmap.y = canvas.height - treeOfLifeImage.height / 3; // Scale adjustments
