@@ -14,7 +14,6 @@ var stage;
 var environment;
 
 function initialize() {
-
     canvas = document.getElementById("gameCanvas");
     canvas.width = Const.WINDOW_WIDTH;
     canvas.height = Const.WINDOW_HEIGHT;
@@ -23,12 +22,10 @@ function initialize() {
     context = canvas.getContext("2d");
 
     preload = new PreloadJS();
-
     graphics = new Graphics();
-
     stage = new Stage(canvas);
 
-    // Construction of game objects and intitialization goes here
+    // Construction of game objects and initialization goes here
     environment = new Environment();
 
     // Use PreloadJS to make sure sound and images are loaded before we begin processing
