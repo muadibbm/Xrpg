@@ -19,9 +19,9 @@ function Environment() {
     // prepares all the environment resources
     this.prepare = function () {
         //TODO: make the background bitmap to be drawn repeatedly
-        bgBitmap = createBitmap("background", bgBitmap, preload, canvas);
-        treeOfLifeBitmap = createBitmap("treeOfLife", treeOfLifeBitmap, preload, canvas);
-        caveBitmap = createBitmap("cave", caveBitmap, preload, canvas);
+        bgBitmap = createBitmap("background");
+        treeOfLifeBitmap = createBitmap("treeOfLife");
+        caveBitmap = createBitmap("cave");
         transformBitmap(bgBitmap, 0.0, 0.0, 1.0);
         transformBitmap(treeOfLifeBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.width / 5.0, canvas.height - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.height * 5.0, Const.TREE_OF_LIFE_SCALE);
         transformBitmap(caveBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * caveBitmap.image.width / 2.5, 0.0, Const.DEEVE_CAVE_SCALE);
