@@ -1,45 +1,43 @@
 /* Constant object containing constant game values implemented in a JavaScript object literal */
-var Const = {
+function Constants () {
 
-	UPDATE_RATE : 60,
+    this.UPDATE_RATE = 60;
 	
-	WINDOW_WIDTH : (0.75) * screen.width,
-	WINDOW_HEIGHT : (0.75) * screen.height,
+    this.WINDOW_WIDTH = (0.75) * screen.width;
+    this.WINDOW_HEIGHT = (0.75) * screen.height;
 	
-	//WORLD_WIDTH : (4.0) * this.WINDOW_WIDTH,
-	//WORLD_HEIGHT : (4.0) * this.WINDOW_HEIGHT,
-	WORLD_ORIGIN_X : 0.0,
-	WORLD_ORIGIN_Y: 0.0,
+    this.WORLD_WIDTH = this.WINDOW_WIDTH;
+    this.WORLD_HEIGHT = this.WINDOW_HEIGHT;
+    this.WORLD_ORIGIN_X = 0.0;
+    this.WORLD_ORIGIN_Y = 0.0;
 
-	ZOOM_DEFAULT : 1.0,
+    this.ZOOM_DEFAULT = 1.0;
 	
-	//BACKGROUND_WORLD_WIDTH : (7 / 3) * this.WORLD_WIDTH,
-	//BACKGROUND_WORLD_HEIGHT : (7 / 3) * this.WORLD_HEIGHT,
-	//BACKGROUND_WORLD_ORIGIN_X : this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3,
-	//BACKGROUND_WORLD_ORIGIN_Y : this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3,
-	//BACKGROUND_DEPTH : 1.0,
+    //this.BACKGROUND_WORLD_WIDTH = (7 / 3) * this.WORLD_WIDTH;
+    //this.BACKGROUND_WORLD_HEIGHT = (7 / 3) * this.WORLD_HEIGHT;
+    //this.BACKGROUND_WORLD_ORIGIN_X = this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3;
+    //this.BACKGROUND_WORLD_ORIGIN_Y = this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3;
 	
-	//GRAPH_Y : this.WORLD_HEIGHT / 30.0,
-	//CAMP_GRAPH_GAP : this.WORLD_WIDTH / 30.0,
+    this.GRAPH_Y = this.WORLD_HEIGHT / 30.0;
+    this.CAMP_GRAPH_GAP = this.WORLD_WIDTH / 30.0;
 	
-	//STARTING_GOLD : 1000,
+    this.STARTING_GOLD = 1000;
 	
-	//BASE_CITY_SCALE : 0.1,
-	//BASE_CAMP_SCALE : 0.075,
-	//CITY_SELECTION_SCALE1 : 0.35,
-	//CITY_SELECTION_SCALE2 : 0.36,
-	//CAMP_SELECTION_SCALE : 0.14,
-	//BASE_DEPTH : 3.0,
-	//BASE_ALPHA : 0.45,
-	//SELECTION_ALPHA : 0.75,
-	//SELECTED_BASE_ALPHA : 1.0,
-	//BASE_SELECTION_SPEED : 1000,
+    this.BASE_CITY_SCALE = 0.012;
+    this.BASE_CAMP_SCALE = 0.06;
+    this.CITY_SELECTION_SCALE1 = 0.35;
+    this.CITY_SELECTION_SCALE2 = 0.36;
+    this.CAMP_SELECTION_SCALE = 0.14;
+    this.BASE_ALPHA = 0.45;
+    this. SELECTION_ALPHA = 0.75;
+    this.SELECTED_BASE_ALPHA = 1.0;
+    this.BASE_SELECTION_SPEED = 1000;
 	
-	/*MIN_CITY_DISTANCE : 150,
-	MAX_CITY_DISTANCE : this.WORLD_WIDTH - 100.0,
-	CITY_GRAPH_WIDTH : this.WORLD_WIDTH / 5.0,
-	CITY_GRAPH_HEIGHT : this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0,
-	PALACE_X : 0.0,
+    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 80.0;
+    this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
+    this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 5.0;
+    this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;
+	/*PALACE_X : 0.0,
 	PALACE_Y : -23.0,
 	PALACE_DEPTH : 3.2,
 	PALACE_SCALE : 0.048,
@@ -116,60 +114,96 @@ var Const = {
 	TOWER_COST : 60,
 	WALL_COST : 50,*/
 	
-	/*MIN_CAMP_DISTANCE : 60,
-	CAMP_SCALE : 1.0,
-    CAMP_GRAPH_WIDTH : this.WORLD_WIDTH/5.0,
-    CAMP_GRAPH_HEIGHT : this.WORLD_HEIGHT - this.WORLD_HEIGHT/10,
-	COMMAND_TENT_X : 0.0,
+    this.MIN_CAMP_DISTANCE = 4;
+	this.CAMP_SCALE = 1.0;
+    this.CAMP_GRAPH_WIDTH = this.WORLD_WIDTH / 5.0;
+    this.CAMP_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
+    /*COMMAND_TENT_X : 0.0,
 	COMMAND_TENT_Y : 0.0,
 	COMMAND_TENT_DEPTH : 3.3,
 	COMMAND_TENT_SCALE : (0.075)*this.CAMP_SCALE,
 	COMMAND_TENT_COST : 90,*/
-	
-	TREE_OF_LIFE_SCALE : 0.1,
-	
-	DEEVE_CAVE_SCALE : 0.1,
-	//DEEVE_WAVE_WAITING_TIME : 5000,
-	//DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
-	//DEEVE_INITIAL_POS_Y : this.WORLD_HEIGHT/10.0,
-	//DEEVE_SCALE : 0.17,
-	//DEEVE_ALPHA : 1.0,
-	//DEEVE_DEPTH : 3.0,
-	//DEEVE_SPEED : 10,
-	
-	//ROAD_DEPTH : 2.4,
-    //ROAD_WIDTH : 0.5,
-	
-	//MAPPING_DEPTH : 2.5,
-	//MAPPING_WIDTH : 0.4,
-	//MAPPING_POINT_X : 0.0,
-	//MAPPING_POINT_Y : 0.0,
-	//MAPPING_POINT_SCALE : 1.0,
-	
-	//TREE_SHADOW_DEPTH : 2.65,
-	//TREE_DEPTH : 2.7,
-	//TREE_SCALE : 0.13,
-	//MAX_TREE_NUMBER : 5000,
-	//MIN_INBETWEEN_TREE_DISTANCE : 10.0,
-	//MIN_NODE_TREE_DISTANCE : 100.0,
-	
-	//UI_DEPTH : 3.0,
-	//CONSTRUCTION_PANEL_X : 0.0,
-	//CONSTRUCTION_PANEL_Y : this.WINDOW_WIDTH/13.0,
-	//CONSTRUCTION_PANEL_SCALE : 0.15,
-	//INFO_PANEL_X : 0.0,
-	//INFO_PANEL_Y : 0.0,
-	//INFO_PANEL_SCALE : 0.3/1.9,
-	//POPULATION_SCALE : 0.7/1.9,
-	//GOLD_SCALE : 0.6/1.9,
-	/* TODO : Must be set in the initialize script
+
+	this.TREE_OF_LIFE_SCALE = 0.1;
+
+    this.DEEVE_CAVE_SCALE = 0.1;
+    //DEEVE_WAVE_WAITING_TIME : 5000,
+    //DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
+    //DEEVE_INITIAL_POS_Y : this.WORLD_HEIGHT/10.0,
+    //DEEVE_SCALE : 0.17,
+    //DEEVE_ALPHA : 1.0,
+    //DEEVE_DEPTH : 3.0,
+    //DEEVE_SPEED : 10,
+
+    this.ROAD_WIDTH = 0.25;
+
+    //MAPPING_DEPTH : 2.5,
+    //MAPPING_WIDTH : 0.4,
+    //MAPPING_POINT_X : 0.0,
+    //MAPPING_POINT_Y : 0.0,
+    //MAPPING_POINT_SCALE : 1.0,
+
+    //TREE_SHADOW_DEPTH : 2.65,
+    //TREE_DEPTH : 2.7,
+    //TREE_SCALE : 0.13,
+    //MAX_TREE_NUMBER : 5000,
+    //MIN_INBETWEEN_TREE_DISTANCE : 10.0,
+    //MIN_NODE_TREE_DISTANCE : 100.0,
+
+    //UI_DEPTH : 3.0,
+    //CONSTRUCTION_PANEL_X : 0.0,
+    //CONSTRUCTION_PANEL_Y : this.WINDOW_WIDTH/13.0,
+    //CONSTRUCTION_PANEL_SCALE : 0.15,
+    //INFO_PANEL_X : 0.0,
+    //INFO_PANEL_Y : 0.0,
+    //INFO_PANEL_SCALE : 0.3/1.9,
+    //POPULATION_SCALE : 0.7/1.9,
+    //GOLD_SCALE : 0.6/1.9,
+    /* TODO : Must be set in the initialize script
 	POPULATION_X : INFO_PANEL_X + 2*assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	POPULATION_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE,
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
-	
-	//VISIBLE : 1.0,
-	//HIDDEN_ROAD : 0.07,
-	//HIDDEN_MAPPING : 0.5,
-	//SHADOW : 0.45
+
+    //SHADOW : 0.45,
+    //HIDDEN_MAPPING : 0.5,
+	this.HIDDEN_ROAD = 0.07;
+    this.VISIBLE = 1.0;
+    this.INVISIBLE = 0.0;
+}
+
+var EdgeType = {
+    W: 1,
+    w: 2,
+    H: 3,
+    h: 4,
+    S: 5,
+    s: 6
+}
+Object.freeze(EdgeType);
+
+var Isomer = {
+    cis: 1,
+    c: 2,
+    trans: 3,
+    t: 4
+}
+Object.freeze(Isomer);
+
+var Nucleotide = {
+    A: 1,
+    a: 2,
+    ADENINE: 3,
+    T: 4,
+    t: 5,
+    THYMINE: 6,
+    U: 7,
+    u: 8,
+    URACIL: 9,
+    G: 10,
+    g: 11,
+    GUANINE: 12,
+    C: 13,
+    c: 14,
+    CYTOSINE: 15
 }

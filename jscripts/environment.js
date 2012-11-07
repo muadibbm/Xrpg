@@ -11,7 +11,7 @@ function Environment() {
     var uiLayer = new Container();
 
     // used for camera movement
-    var offset = new Point(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
+    var offset = new Tuple2d(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
 
     // used of LOD (Level of Detail)
     var zoomLevel = Const.ZOOM_DEFAULT;
@@ -19,15 +19,17 @@ function Environment() {
     // prepares all the environment resources
     this.prepare = function () {
         //TODO: make the background bitmap to be drawn repeatedly
-        bgBitmap = createBitmap("background", bgBitmap, preload, canvas);
-        treeOfLifeBitmap = createBitmap("treeOfLife", treeOfLifeBitmap, preload, canvas);
-        caveBitmap = createBitmap("cave", caveBitmap, preload, canvas);
+        bgBitmap = new Bitmap(bgImage);
+        treeOfLifeBitmap = new Bitmap(treeOfLifeImage);
+        caveBitmap = new Bitmap(caveImage);
         transformBitmap(bgBitmap, 0.0, 0.0, 1.0);
         transformBitmap(treeOfLifeBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.width / 5.0, canvas.height - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.height * 5.0, Const.TREE_OF_LIFE_SCALE);
         transformBitmap(caveBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * caveBitmap.image.width / 2.5, 0.0, Const.DEEVE_CAVE_SCALE);
         stage.addChild(bgBitmap);
         stage.addChild(treeOfLifeBitmap);
         stage.addChild(caveBitmap);
+        stage.addChild(graphLayer);
+        stage.addChild(uiLayer);
     }
 
     // set the environment X offset 
@@ -47,7 +49,7 @@ function Environment() {
 
     // @return {Container} the graph layer
     this.getGraphLayer = function () {
-        //return graphLayer;
+        return graphLayer;
     }
 
     // @return {Container} the UI layer

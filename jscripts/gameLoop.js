@@ -1,4 +1,5 @@
 ﻿// Global CreateJS Core variables
+var Const;
 var canvas;
 var context;
 var preload;
@@ -12,8 +13,18 @@ var stage;
 *		    - UI (containers)
 */
 var environment;
+var player;
+var graphDataA;
+var graphDataB;
+var cityGraphA;
+var cityGraphB;
+var campGrpahA;
+var campGrpahB;
 
 function initialize() {
+    
+    Const = new Constants();
+
     canvas = document.getElementById("gameCanvas");
     canvas.width = Const.WINDOW_WIDTH;
     canvas.height = Const.WINDOW_HEIGHT;
@@ -25,8 +36,13 @@ function initialize() {
     graphics = new Graphics();
     stage = new Stage(canvas);
 
-    // Construction of game objects and initialization goes here
+    // Construction of game objects
     environment = new Environment();
+    player = new Player(1, "player 1");
+    cityGraphA = new Graph(1, true, Const.WORLD_WIDTH / 30, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
+    //cityGraphB = new Graph(4, true, 2 * Const.WORLD_WIDTH / 30, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
+    //campGraphA = new Graph(2, false, 2 * Const.WORLD_WIDTH / 30 + Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
+    //campGraphB = new Graph(3, false, 4 * Const.WORLD_WIDTH / 30 - Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
 
     // Use PreloadJS to make sure sound and images are loaded before we begin processing
     // (Especially important for large/remote resources)
@@ -36,7 +52,14 @@ function initialize() {
 
 // Preparing and loading game resources
 function prepareGame() {
+    loadImages();
     environment.prepare();
+    graphDataA = createResource("graphDataA");
+    graphDataB = createResource("graphDataB");
+    cityGraphA.generateGraph(graphDataA, environment.getGraphLayer(), player.getId());
+    //cityGraphB.generateGraph(graphDataA, environment.getGraphLayer(), player.getId());
+    //campGraphA.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
+    //campGraphB.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
     startGame(); // Call the game loop to start
 }
 
