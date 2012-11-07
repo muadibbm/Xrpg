@@ -60,6 +60,13 @@ function prepareGame() {
     //cityGraphB.generateGraph(graphDataA, environment.getGraphLayer(), player.getId());
     //campGraphA.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
     //campGraphB.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
+
+    addMouseEvents(environment);
+
+    // Add key events listeners
+    document.onkeydown = function (e) {
+        handleKeyDown(e);
+    };
     startGame(); // Call the game loop to start
 }
 
