@@ -178,8 +178,6 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
             if (!edgesArray[i].getRoad().isPlaced()) {
                 n1 = privateGetNode1(edgesArray[i]);
                 n2 = privateGetNode2(edgesArray[i]);
-                if (n1 == null || n2 == null)
-                    break;
                 edgesArray[i].getRoad().placeRoad(n1.getPos(), n2.getPos());
             }
             edgesArray[i].getRoad().setVisible(edgesArray[i].getRoad().isVisible());

@@ -28,8 +28,6 @@ function Environment() {
         stage.addChild(bgBitmap);
         stage.addChild(treeOfLifeBitmap);
         stage.addChild(caveBitmap);
-        stage.addChild(graphLayer);
-        stage.addChild(uiLayer);
     }
 
     // set the environment X offset 

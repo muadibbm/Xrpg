@@ -76,8 +76,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Andrey
      */
     this.positionSelection = function (position) {
-        selectionLayer1.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
-		selectionLayer2.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
+        selectionLayer1.setTransform(position.x, position.y);
+		selectionLayer2.setTransform(position.x, position.y);
     }
 
     /** Position the mapping selection around a city or a camp.
@@ -85,8 +85,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Mehrdad
      */
     this.positionMappingSelection = function(position) {
-        selectionLayerM1.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
-        selectionLayerM2.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
+        selectionLayerM1.setTransform(position.x, position.y);
+        selectionLayerM2.setTransform(position.x, position.y);
     }
 
     /** Position the hovering selection around a city or a camp.
@@ -94,8 +94,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Mehrdad
      */
     this.positionHoverSelection = function(position) {
-        selectionLayerH1.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
-        selectionLayerH2.setTransform(position.x, position.y, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0);
+        selectionLayerH1.setTransform(position.x, position.y);
+        selectionLayerH2.setTransform(position.x, position.y);
     }
 
     //@return {Bitmap} the base Bitmap
@@ -118,14 +118,14 @@ function Base(graphLayer, _id, _isCity)
     {
         baseBitmap = new Bitmap(cityBaseImage);
         baseBitmap.alpha = Const.VISIBLE;
-        transformBitmap(baseBitmap, baseBitmap.image.width/2, baseBitmap.image.height/2, Const.BASE_CITY_SCALE);
+        //baseBitmap.setTransform(baseBitmap.image.width / 2, baseBitmap.image.height / 2, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         graphLayer.addChild(baseBitmap);
     }
     else 
     {
         baseBitmap = new Bitmap(towerBaseImage);
         baseBitmap.alpha = Const.VISIBLE;
-        transformBitmap(baseBitmap, baseBitmap.image.width/2, baseBitmap.image.height/2, Const.CAMP_CITY_SCALE);
+        //baseBitmap.setTransform(baseBitmap.image.width / 2, baseBitmap.image.height / 2, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
         graphLayer.addChild(baseBitmap);
     }
 
@@ -144,9 +144,9 @@ function Base(graphLayer, _id, _isCity)
     */
     this.transform = function() {
         if (isCity) {
-            baseBitmap.setTransform(this.position.x, this.position.y, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, 0.0, 0.0, 0.0, 0.0, 0.0);
+            baseBitmap.setTransform(this.position.x, this.position.y, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         } else {
-            baseBitmap.setTransform(this.position.x, this.position.y, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE, 0.0, 0.0, 0.0, 0.0, 0.0);
+            baseBitmap.setTransform(this.position.x, this.position.y, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
         }
     }
 

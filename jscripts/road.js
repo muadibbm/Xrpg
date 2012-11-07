@@ -45,8 +45,9 @@ function Road(graphLayer) {
     }
 
     //applies all the transformations
-    this.transform = function() {
-        roadBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / roadImage.width, Const.ROAD_WIDTH, Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x), 0.0, 0.0, 0.0, 0.0);
+    this.transform = function () {
+        roadBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / roadImage.width, Const.ROAD_WIDTH);
+        roadBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x);
     }
 
     //@return the placed flag

@@ -39,10 +39,10 @@ function initialize() {
     // Construction of game objects
     environment = new Environment();
     player = new Player(1, "player 1");
-    cityGraphA = new Graph(1, true, Const.WORLD_WIDTH / 30, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
-    //cityGraphB = new Graph(4, true, 2 * Const.WORLD_WIDTH / 30, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
-    //campGraphA = new Graph(2, false, 2 * Const.WORLD_WIDTH / 30 + Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
-    //campGraphB = new Graph(3, false, 4 * Const.WORLD_WIDTH / 30 - Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
+    cityGraphA = new Graph(1, true, Const.WORLD_WIDTH / 35, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
+    //cityGraphB = new Graph(4, true, 25 * Const.WORLD_WIDTH / 35, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
+    //campGraphA = new Graph(2, false, 2 * Const.WORLD_WIDTH / 35 + Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
+    //campGraphB = new Graph(3, false, 4 * Const.WORLD_WIDTH / 35 - Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
 
     // Use PreloadJS to make sure sound and images are loaded before we begin processing
     // (Especially important for large/remote resources)
@@ -61,11 +61,13 @@ function prepareGame() {
     //campGraphA.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
     //campGraphB.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
 
+    stage.addChild(environment.getGraphLayer());
+    stage.addChild(environment.getUiLayer());
+
     addMouseEvents(environment);
 
     // Add key events listeners
     document.onkeydown = function (e) {
-        handleKeyDown(e);
         //.handleKeyDown(e);
     };
     startGame(); // Call the game loop to start

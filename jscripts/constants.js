@@ -23,7 +23,7 @@ function Constants () {
 	
     this.STARTING_GOLD = 1000;
 	
-    this.BASE_CITY_SCALE = 0.012;
+    this.BASE_CITY_SCALE = 0.018;
     this.BASE_CAMP_SCALE = 0.06;
     this.CITY_SELECTION_SCALE1 = 0.35;
     this.CITY_SELECTION_SCALE2 = 0.36;
@@ -33,7 +33,7 @@ function Constants () {
     this.SELECTED_BASE_ALPHA = 1.0;
     this.BASE_SELECTION_SPEED = 1000;
 	
-    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 80.0;
+    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 50.0;
     this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 5.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;

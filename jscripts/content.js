@@ -36,12 +36,7 @@ function createResource(id) {
 
 //general public function for scale and translation of bitmaps
 function transformBitmap(bitmap, x, y, scale) {
-    // Adjust the bitmap scale to fit the canvas size
-    bitmap.scaleX = (canvas.width / bitmap.image.width) * scale;
-    bitmap.scaleY = (canvas.height / bitmap.image.height) * scale;
-    // Position the bitmap (x,y) coordinates on canvas
-    bitmap.x = x;
-    bitmap.y = y;
+    bitmap.setTransform(x, y, (canvas.width / bitmap.image.width) * scale, (canvas.height / bitmap.image.height) * scale);
 }
 
 function loadImages() {
