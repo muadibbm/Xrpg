@@ -1,28 +1,20 @@
 /* Constant object containing constant game values implemented in a JavaScript object literal */
 function Constants () {
-
     this.UPDATE_RATE = 60;
-	
-    this.WINDOW_WIDTH = (0.75) * screen.width;
+	this.WINDOW_WIDTH = (0.75) * screen.width;
     this.WINDOW_HEIGHT = (0.75) * screen.height;
-	
-    this.WORLD_WIDTH = this.WINDOW_WIDTH;
+	this.WORLD_WIDTH = this.WINDOW_WIDTH;
     this.WORLD_HEIGHT = this.WINDOW_HEIGHT;
     this.WORLD_ORIGIN_X = 0.0;
     this.WORLD_ORIGIN_Y = 0.0;
-
     this.ZOOM_DEFAULT = 1.0;
-	
-    //this.BACKGROUND_WORLD_WIDTH = (7 / 3) * this.WORLD_WIDTH;
+	//this.BACKGROUND_WORLD_WIDTH = (7 / 3) * this.WORLD_WIDTH;
     //this.BACKGROUND_WORLD_HEIGHT = (7 / 3) * this.WORLD_HEIGHT;
     //this.BACKGROUND_WORLD_ORIGIN_X = this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3;
     //this.BACKGROUND_WORLD_ORIGIN_Y = this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3;
-	
-    this.GRAPH_Y = this.WORLD_HEIGHT / 30.0;
+	this.GRAPH_Y = this.WORLD_HEIGHT / 30.0;
     this.CAMP_GRAPH_GAP = this.WORLD_WIDTH / 30.0;
-	
     this.STARTING_GOLD = 1000;
-	
     this.BASE_CITY_SCALE = 0.012;
     this.BASE_CAMP_SCALE = 0.06;
     this.CITY_SELECTION_SCALE1 = 0.35;
@@ -32,12 +24,11 @@ function Constants () {
     this. SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;
     this.BASE_SELECTION_SPEED = 1000;
-	
     this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 80.0;
     this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 5.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;
-	/*PALACE_X : 0.0,
+    /*PALACE_X : 0.0,
 	PALACE_Y : -23.0,
 	PALACE_DEPTH : 3.2,
 	PALACE_SCALE : 0.048,
@@ -98,13 +89,11 @@ function Constants () {
 	WALL_BACK_SCALE_VERTICAL : 0.0109*3,
 	WALL_SIDE_SCALE : 0.016,
 	WALL_SIDE_SCALE_VERTICAL : 0.029,*/ 
-	
 	/*CARAVAN_DEPTH : 4.0,
 	CARAVAN_ALPHA : 0.93,
 	CARAVAN_SCALE : 0.023,
 	CARAVAN_TRADING_TIME : 5000,
 	CARAVAN_SPEED : 100,*/
-	
 	/*PALACE_COST : 100,
 	BAZAR_FOOD_COST : 40,
 	BAZAR_CHINA_COST : 50,
@@ -113,7 +102,6 @@ function Constants () {
 	SMITHY_COST : 70,
 	TOWER_COST : 60,
 	WALL_COST : 50,*/
-	
     this.MIN_CAMP_DISTANCE = 4;
 	this.CAMP_SCALE = 1.0;
     this.CAMP_GRAPH_WIDTH = this.WORLD_WIDTH / 5.0;
@@ -123,9 +111,7 @@ function Constants () {
 	COMMAND_TENT_DEPTH : 3.3,
 	COMMAND_TENT_SCALE : (0.075)*this.CAMP_SCALE,
 	COMMAND_TENT_COST : 90,*/
-
 	this.TREE_OF_LIFE_SCALE = 0.1;
-
     this.DEEVE_CAVE_SCALE = 0.1;
     //DEEVE_WAVE_WAITING_TIME : 5000,
     //DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
@@ -134,22 +120,18 @@ function Constants () {
     //DEEVE_ALPHA : 1.0,
     //DEEVE_DEPTH : 3.0,
     //DEEVE_SPEED : 10,
-
     this.ROAD_WIDTH = 0.25;
-
     //MAPPING_DEPTH : 2.5,
     //MAPPING_WIDTH : 0.4,
     //MAPPING_POINT_X : 0.0,
     //MAPPING_POINT_Y : 0.0,
     //MAPPING_POINT_SCALE : 1.0,
-
     //TREE_SHADOW_DEPTH : 2.65,
     //TREE_DEPTH : 2.7,
     //TREE_SCALE : 0.13,
     //MAX_TREE_NUMBER : 5000,
     //MIN_INBETWEEN_TREE_DISTANCE : 10.0,
     //MIN_NODE_TREE_DISTANCE : 100.0,
-
     //UI_DEPTH : 3.0,
     //CONSTRUCTION_PANEL_X : 0.0,
     //CONSTRUCTION_PANEL_Y : this.WINDOW_WIDTH/13.0,
@@ -164,12 +146,21 @@ function Constants () {
 	POPULATION_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE,
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
-
     //SHADOW : 0.45,
     //HIDDEN_MAPPING : 0.5,
 	this.HIDDEN_ROAD = 0.07;
     this.VISIBLE = 1.0;
     this.INVISIBLE = 0.0;
+
+    // Key codes for key events
+    this.KEYCODE_DOWN = 40;
+    this.KEYCODE_UP = 38;
+    this.KEYCODE_LEFT = 37;
+    this.KEYCODE_RIGHT = 39;
+    this.KEYCODE_W = 87;
+    this.KEYCODE_A = 65;
+    this.KEYCODE_D = 68;
+    this.KEYCODE_S = 83;
 }
 
 var EdgeType = {
