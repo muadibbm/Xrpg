@@ -28,9 +28,9 @@ function Road(graphLayer) {
     this.setVisible = function(visible) {
         this.visible = visible;
         if(visible)
-            roadBitmap.alpha = Const.VISIBLE;
+            roadBitmap.alpha = Const.VISIBLE_ROAD;
         else
-            roadBitmap.alpha = Const.VISIBLE;
+            roadBitmap.alpha = Const.HIDDEN_ROAD;
     }
 
     /**
@@ -44,10 +44,13 @@ function Road(graphLayer) {
         placed = true;
     }
 
+    this.getPos1 = function () { return pos1; }
+    this.getPos2 = function () { return pos2; }
+
     //applies all the transformations
     this.transform = function () {
         roadBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / roadImage.width, Const.ROAD_WIDTH);
-        roadBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x);
+        roadBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)*180/Math.PI;
     }
 
     //@return the placed flag

@@ -20,7 +20,14 @@ function Base(graphLayer, _id, _isCity)
     transformBitmap(selectionLayerM1, selectionLayerM1.image.width/2, selectionLayerM1.image.height/2, Const.CITY_SELECTION_SCALE1);
     transformBitmap(selectionLayerM2, selectionLayerM2.image.width/2, selectionLayerM2.image.height/2, Const.CITY_SELECTION_SCALE2);
     transformBitmap(selectionLayerH1, selectionLayerH1.image.width/2, selectionLayerH1.image.height/2, Const.CITY_SELECTION_SCALE1);
-    transformBitmap(selectionLayerH2, selectionLayerH2.image.width/2, selectionLayerH2.image.height/2, Const.CITY_SELECTION_SCALE2);
+    transformBitmap(selectionLayerH2, selectionLayerH2.image.width / 2, selectionLayerH2.image.height / 2, Const.CITY_SELECTION_SCALE2);
+
+    selectionLayer1.alpha = Const.SELECTION_ALPHA;
+    selectionLayer2.alpha = Const.SELECTION_ALPHA;
+    selectionLayerM1.alpha = Const.SELECTION_ALPHA;
+    selectionLayerM2.alpha = Const.SELECTION_ALPHA;
+    selectionLayerH1.alpha = Const.SELECTION_ALPHA;
+    selectionLayerH2.alpha = Const.SELECTION_ALPHA;
 
     graphLayer.addChild(selectionLayer1);
     graphLayer.addChild(selectionLayer2);
@@ -34,13 +41,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Andrey
      */
     this.setSelection = function(visible) {
-        if(visible) {
-            selectionLayer1.alpha = Const.SELECTION_ALPHA;
-            selectionLayer2.alpha = Const.SELECTION_ALPHA;
-        } else {
-            selectionLayer1.alpha = Const.INVISIBLE;
-            selectionLayer2.alpha = Const.INVISIBLE;
-        }
+        selectionLayer1.visible = visible;
+        selectionLayer2.visible = visible;
     }
 
     /** Toggle the mapping selection around a city or a camp.
@@ -48,13 +50,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Mehrdad
      */
     this.setMappingSelection = function(visible) {
-        if(visible) {
-            selectionLayerM1.alpha = Const.SELECTION_ALPHA;
-            selectionLayerM2.alpha = Const.SELECTION_ALPHA;
-        } else {
-            selectionLayerM1.alpha = Const.INVISIBLE;
-            selectionLayerM2.alpha = Const.INVISIBLE;
-        }
+        selectionLayerM1.visible = visible;
+        selectionLayerM2.visible = visible;
     }
 
     /** Toggle the hovering selection around a city or a camp.
@@ -62,13 +59,8 @@ function Base(graphLayer, _id, _isCity)
      * @author Mehrdad
      */
     this.setHoverSelection = function(visible) {
-        if(visible) {
-            selectionLayerH1.alpha = Const.SELECTION_ALPHA;
-            selectionLayerH2.alpha = Const.SELECTION_ALPHA;
-        } else {
-            selectionLayerH1.alpha = Const.INVISIBLE;
-            selectionLayerH2.alpha = Const.INVISIBLE;
-        }
+        selectionLayerH1.visible = visible;
+        selectionLayerH2.visible = visible;
     }
 
     /** Position the selection around a city or a camp.
@@ -117,15 +109,13 @@ function Base(graphLayer, _id, _isCity)
     if(isCity) 
     {
         baseBitmap = new Bitmap(cityBaseImage);
-        baseBitmap.alpha = Const.VISIBLE;
-        //baseBitmap.setTransform(baseBitmap.image.width / 2, baseBitmap.image.height / 2, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
+        baseBitmap.alpha = Const.VISIBLE_BASE;
         graphLayer.addChild(baseBitmap);
     }
     else 
     {
         baseBitmap = new Bitmap(towerBaseImage);
-        baseBitmap.alpha = Const.VISIBLE;
-        //baseBitmap.setTransform(baseBitmap.image.width / 2, baseBitmap.image.height / 2, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
+        baseBitmap.alpha = Const.VISIBLE_BASE;
         graphLayer.addChild(baseBitmap);
     }
 
@@ -144,9 +134,9 @@ function Base(graphLayer, _id, _isCity)
     */
     this.transform = function() {
         if (isCity) {
-            baseBitmap.setTransform(this.position.x, this.position.y, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
+            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         } else {
-            baseBitmap.setTransform(this.position.x, this.position.y, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
+            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CAMP_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CAMP_SCALE, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
         }
     }
 
