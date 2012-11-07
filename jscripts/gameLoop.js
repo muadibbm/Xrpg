@@ -37,6 +37,7 @@ function initialize() {
 // Preparing and loading game resources
 function prepareGame() {
     environment.prepare();
+    addMouseEvents(environment);
     startGame(); // Call the game loop to start
 }
 

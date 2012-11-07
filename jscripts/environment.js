@@ -62,4 +62,17 @@ function Environment() {
     }
 
     //TODO: the tree placement method from previous gameLoop should be coded here
+
+    // Getters for the bitmaps
+    this.getBgBitmap = function () {
+        return bgBitmap;
+    }
+
+    this.getCaveBitmap = function () {
+        return caveBitmap;
+    }
+
+    this.getTreeOfLifeBitmap = function () {
+        return treeOfLifeBitmap;
+    }
 }
