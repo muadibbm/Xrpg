@@ -3,7 +3,7 @@ var manifest = [
     { id: "graphDataA", src: "graphData/1FUF_modified" },
     { id: "graphDataB", src: "graphData/3CGP_modified" },
     { id: "background", src: "images/Background/bg.png" },
-    { id: "treeOfLife", src: "images/Tree Of Life/treeOfLife.png" },
+    //{ id: "treeOfLife", src: "images/Tree Of Life/treeOfLife.png" },
     { id: "cave", src: "images/Cave/cave.png" },
     { id: "cityBase", src: "images/City/cityBase.png" },
     { id: "towerBase", src: "images/Tower/towerBase.png" },
@@ -17,7 +17,7 @@ var manifest = [
 ];
 // List of all Images
 var bgImage;
-var treeOfLifeImage;
+//var treeOfLifeImage;
 var caveImage;
 var cityBaseImage;
 var towerBaseImage;
@@ -34,14 +34,14 @@ function createResource(id) {
     return preload.getResult(id).result;
 }
 
-//general public function for scale and translation of bitmaps
-function transformBitmap(bitmap, x, y, scale) {
-    bitmap.setTransform(x, y, (canvas.width / bitmap.image.width) * scale, (canvas.height / bitmap.image.height) * scale);
+function normalizeOnCanvas(bitmap) {
+    bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
+    bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
 }
 
 function loadImages() {
     bgImage = createResource("background");
-    treeOfLifeImage = createResource("treeOfLife");
+    //treeOfLifeImage = createResource("treeOfLife");
     caveImage = createResource("cave");
     cityBaseImage = createResource("cityBase");
     towerBaseImage = createResource("towerBase");

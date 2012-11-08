@@ -3,7 +3,6 @@ function Environment() {
 
     // private bitmap variables for the environment bitmap elements
     var bgBitmap;
-    var treeOfLifeBitmap;
     var caveBitmap;
     // private container for the graph bitmap objects
     var graphLayer = new Container();
@@ -18,15 +17,14 @@ function Environment() {
 
     // prepares all the environment resources
     this.prepare = function () {
-        //TODO: make the background bitmap to be drawn repeatedly
+        //TODO: make the background bitmap to be drawn repeatedly OR add a higher quality background (larger image 4x)
         bgBitmap = new Bitmap(bgImage);
-        treeOfLifeBitmap = new Bitmap(treeOfLifeImage);
         caveBitmap = new Bitmap(caveImage);
-        transformBitmap(bgBitmap, 0.0, 0.0, 1.0);
-        transformBitmap(treeOfLifeBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.width / 5.0, canvas.height - Const.TREE_OF_LIFE_SCALE * treeOfLifeBitmap.image.height * 5.0, Const.TREE_OF_LIFE_SCALE);
-        transformBitmap(caveBitmap, canvas.width / 2.0 - Const.TREE_OF_LIFE_SCALE * caveBitmap.image.width / 2.5, 0.0, Const.DEEVE_CAVE_SCALE);
-        stage.addChild(bgBitmap);
-        stage.addChild(treeOfLifeBitmap);
+        bgBitmap.setTransform(0.0, 0.0);
+        normalizeOnCanvas(bgBitmap);
+        normalizeOnCanvas(caveBitmap);
+        caveBitmap.setTransform(Const.WORLD_WIDTH / 1.05, Const.WORLD_HEIGHT / 2 - caveBitmap.image.height * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+        //stage.addChild(bgBitmap);
         stage.addChild(caveBitmap);
     }
 
@@ -68,10 +66,6 @@ function Environment() {
 
     this.getCaveBitmap = function () {
         return caveBitmap;
-    }
-
-    this.getTreeOfLifeBitmap = function () {
-        return treeOfLifeBitmap;
     }
 
     //TODO: the tree placement method from previous gameLoop should be coded here
