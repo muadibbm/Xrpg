@@ -68,7 +68,7 @@ function prepareGame() {
 
     // Add key events listeners
     document.onkeydown = function (e) {
-        //.handleKeyDown(e);
+        handleKeyDownEvents(e);
     };
     startGame(); // Call the game loop to start
 }

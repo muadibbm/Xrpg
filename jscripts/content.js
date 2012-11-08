@@ -34,6 +34,7 @@ function createResource(id) {
     return preload.getResult(id).result;
 }
 
+// CommentAuthor: Andrey - This method does not do anything, accoding to my observation
 function normalizeOnCanvas(bitmap) {
     bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
     bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);

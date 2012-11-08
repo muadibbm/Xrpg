@@ -28,6 +28,17 @@ function Base(graphLayer, _id, _isCity) {
     graphLayer.addChild(selectionLayerH1);
     graphLayer.addChild(selectionLayerH2);
 
+    // Instantiate all the animations
+    //var mouseOverCity = new SpriteSheet({
+    //    // image to use
+    //    images: [],
+    //    // width, height & registration point of each sprite
+    //    frames: { width: 64, height: 64, regX: 32, regY: 32 },
+    //    animations: {
+    //        walk: [0, 9, "overCity"]
+    //    }
+    //});
+
     /** Toggle the selection around a city or a camp.
      * @param visible
      * @author Andrey
@@ -123,7 +134,7 @@ function Base(graphLayer, _id, _isCity) {
     * @param y - float y coordinate
     */
     this.transform = function () {
-        normalizeOnCanvas(baseBitmap);
+        //normalizeOnCanvas(baseBitmap);
         if (isCity) {
             baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         } else {
