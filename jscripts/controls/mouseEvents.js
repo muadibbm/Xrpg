@@ -10,4 +10,8 @@
     env.getCaveBitmap().onPress = function () {
         console.log("Cave click!");
     }
+
+    //env.getUiLayer().onPress = function () {
+        console.log(env.getGraphLayer());
+    //}
 }

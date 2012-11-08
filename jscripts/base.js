@@ -20,7 +20,7 @@ function Base(graphLayer, _id, _isCity)
     transformBitmap(selectionLayerM1, selectionLayerM1.image.width/2, selectionLayerM1.image.height/2, Const.CITY_SELECTION_SCALE1);
     transformBitmap(selectionLayerM2, selectionLayerM2.image.width/2, selectionLayerM2.image.height/2, Const.CITY_SELECTION_SCALE2);
     transformBitmap(selectionLayerH1, selectionLayerH1.image.width/2, selectionLayerH1.image.height/2, Const.CITY_SELECTION_SCALE1);
-    transformBitmap(selectionLayerH2, selectionLayerH2.image.width / 2, selectionLayerH2.image.height / 2, Const.CITY_SELECTION_SCALE2);
+    transformBitmap(selectionLayerH2, selectionLayerH2.image.width/2, selectionLayerH2.image.height/2, Const.CITY_SELECTION_SCALE2);
 
     selectionLayer1.alpha = Const.SELECTION_ALPHA;
     selectionLayer2.alpha = Const.SELECTION_ALPHA;

@@ -1,7 +1,7 @@
 ﻿// Used to download all needed resources from the web server
 var manifest = [
-    { id: "graphDataA", src: "./graphData/1FUF_modified" },
-    { id: "graphDataB", src: "./graphData/3CGP_modified" },
+    { id: "graphDataA", src: "graphData/1FUF_modified" },
+    { id: "graphDataB", src: "graphData/3CGP_modified" },
     { id: "background", src: "images/Background/bg.png" },
     { id: "treeOfLife", src: "images/Tree Of Life/treeOfLife.png" },
     { id: "cave", src: "images/Cave/cave.png" },
