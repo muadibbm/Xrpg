@@ -120,7 +120,7 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
                 }
                 else
                 {
-                    if(distance < Const.MIN_CAMP_DISTANCE)// || distance > Const.MAX_CAMP_DISTANCE
+                    if(distance < Const.MIN_TOWER_DISTANCE)// || distance > Const.MAX_TOWER_DISTANCE
                         return false;
                 }
             }

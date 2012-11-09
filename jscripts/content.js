@@ -35,9 +35,14 @@ function createResource(id) {
 }
 
 // CommentAuthor: Andrey - This method does not do anything, accoding to my observation
-function normalizeOnCanvas(bitmap) {
-    bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
-    bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
+function resizeOnZoom(bitmap) {
+    //switch() {
+        
+    //}
+    console.log(bitmap.image.outerHTML);
+    //caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+    //bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
+    //bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
 }
 
 function loadImages() {

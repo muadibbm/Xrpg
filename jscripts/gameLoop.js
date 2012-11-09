@@ -40,7 +40,7 @@ function initialize() {
     environment = new Environment();
     player = new Player(1, "player 1");
     cityGraphA = new Graph(1, true, Const.GRAPH_X, Const.GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
-    //campGraphA = new Graph(2, false, Const.GRAPH_X + Const.GRAPH_GAP + Const.CITY_GRAPH_WIDTH, Const.GRAPH_Y, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
+    campGraphA = new Graph(2, false, Const.GRAPH_X + Const.GRAPH_GAP + Const.CITY_GRAPH_WIDTH, Const.GRAPH_Y, Const.CAMP_GRAPH_WIDTH, Const.CAMP_GRAPH_HEIGHT);
     //cityGraphB = new Graph(4, true, 25 * Const.WORLD_WIDTH / 35, Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CITY_GRAPH_HEIGHT);
     //campGraphB = new Graph(3, false, 4 * Const.WORLD_WIDTH / 35 - Const.CAMP_GRAPH_GAP, 2 * Const.GRAPH_Y, Const.WORLD_WIDTH / 5, Const.CAMP_GRAPH_HEIGHT - Const.GRAPH_Y);
 
@@ -57,7 +57,7 @@ function prepareGame() {
     graphDataA = createResource("graphDataA");
     graphDataB = createResource("graphDataB");
     cityGraphA.generateGraph(graphDataA, environment.getGraphLayer(), player.getId());
-    //campGraphA.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
+    campGraphA.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
     //cityGraphB.generateGraph(graphDataA, environment.getGraphLayer(), player.getId());
     //campGraphB.generateGraph(graphDataB, environment.getGraphLayer(), player.getId());
 

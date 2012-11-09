@@ -11,12 +11,10 @@
 
     //}﻿
         var gLayer = env.getGraphLayer().children;
-        //console.log(gLayer);
 
         for (var i = 0; i < gLayer.length; i++) {
             if (gLayer[i].image.outerHTML.toLowerCase().indexOf("selection") != -1) {
-                //console.log(gLayer[i].image.outerHTML.toLowerCase().indexOf("selection"));
-                console.log(gLayer[i]);
+                //console.log(gLayer[i]);
             }
         }
 

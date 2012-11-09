@@ -114,7 +114,7 @@ function Constants () {
 	TOWER_COST : 60,
 	WALL_COST : 50,*/
     
-    this.MIN_CAMP_DISTANCE = 4;
+    this.MIN_TOWER_DISTANCE = 4;
 	this.CAMP_SCALE = 1.0;
     this.CAMP_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.CAMP_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;

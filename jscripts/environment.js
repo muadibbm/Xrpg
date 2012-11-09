@@ -21,8 +21,7 @@ function Environment() {
         bgBitmap = new Bitmap(bgImage);
         caveBitmap = new Bitmap(caveImage);
         //bgBitmap.setTransform(0.0, 0.0);
-        //normalizeOnCanvas(bgBitmap);
-        //normalizeOnCanvas(caveBitmap);
+        resizeOnZoom(bgBitmap);
         caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
         //stage.addChild(bgBitmap);
         stage.addChild(caveBitmap);
