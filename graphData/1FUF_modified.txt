@@ -26,3 +26,17 @@
 50 U 3(A) - A 4(A) - cWW - 0
 51 U 19(B) - U 5(A) - cWW - 0
 52 u 5(A) - U 19(B) - cWW - 0
+53 G 3(B) - U 25(B) - cWW - 0
+54 U 25(B) - G 5(B) - cWW - 0
+55 A 4(A) - U 7(A) - cWW - 0
+56 U 9(A) - A 4(A) - cWW - 0
+57 G 9(B) - U 2(B) - cWW - 0
+58 U 26(B) - G 8(B) - cWW - 0
+59 A 26(A) - U 27(A) - cWW - 0
+60 U 28(A) - A 27(A) - cWW - 0
+61 U 28(B) - G 8(B) - cWW - 0
+62 A 29(A) - U 27(A) - cWW - 0
+63 U 30(A) - A 27(A) - cWW - 0
+64 U 31(B) - G 21(B) - cWW - 0
+65 A 32(A) - U 7(A) - cWW - 0
+66 U 1(A) - A 27(A) - cWW - 0

@@ -18,9 +18,9 @@ function Constants () {
     //this.BACKGROUND_WORLD_ORIGIN_X = this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3;
     //this.BACKGROUND_WORLD_ORIGIN_Y = this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3;
 	
-    this.GRAPH_X = this.WORLD_WIDTH / 100.0;
-    this.GRAPH_Y = this.WORLD_HEIGHT / 100.0;
-    this.GRAPH_GAP = this.WORLD_WIDTH / 30.0;
+    this.GRAPH_X = this.WORLD_WIDTH / 45.0;
+    this.GRAPH_Y = this.WORLD_HEIGHT/ 45.0;
+    this.GRAPH_GAP = this.WORLD_WIDTH / 10.0;
     
     this.STARTING_GOLD = 1000;
     
@@ -34,7 +34,7 @@ function Constants () {
     this.SELECTED_BASE_ALPHA = 1.0;
     this.BASE_SELECTION_SPEED = 1000;
     
-    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 50.0;
+    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 30.0;
     this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;
@@ -114,10 +114,10 @@ function Constants () {
 	TOWER_COST : 60,
 	WALL_COST : 50,*/
     
-    this.MIN_TOWER_DISTANCE = 4;
-	this.CAMP_SCALE = 1.0;
-    this.CAMP_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
-    this.CAMP_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
+    this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 50.0;
+    this.BASE_TOWER_SCALE = 0.03;
+    this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
+    this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
     
     /*COMMAND_TENT_X : 0.0,
 	COMMAND_TENT_Y : 0.0,

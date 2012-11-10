@@ -1,7 +1,7 @@
 ﻿// Used to download all needed resources from the web server
 var manifest = [
-    { id: "graphDataA", src: "graphData/1FUF_modified" },
-    { id: "graphDataB", src: "graphData/3CGP_modified" },
+    { id: "graphDataA", src: "graphData/1FUF_modified.txt" },
+    { id: "graphDataB", src: "graphData/3CGP_modified.txt" },
     { id: "background", src: "images/Background/bg.png" },
     //{ id: "treeOfLife", src: "images/Tree Of Life/treeOfLife.png" },
     { id: "cave", src: "images/Cave/cave.png" },
@@ -39,10 +39,10 @@ function resizeOnZoom(bitmap) {
     //switch() {
         
     //}
-    console.log(bitmap.image.outerHTML);
+    //console.log(bitmap.image.outerHTML);
     //caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
-    //bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
-    //bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
+    bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
+    bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
 }
 
 function loadImages() {

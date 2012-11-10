@@ -5,6 +5,7 @@ function Base(graphLayer, _id, _isCity) {
     var population = 0;//degree of the node
     var position = new Tuple2d(0.0, 0.0);
     var id = _id;
+    var isCity = _isCity;
     var baseBitmap;
     //Selection Bitmaps
     var selectionLayer1 = new Bitmap(cityBaseSelectedImage1);
@@ -102,8 +103,6 @@ function Base(graphLayer, _id, _isCity) {
     this.setMappingSelection(false);
     this.setHoverSelection(false);
 
-    var isCity = _isCity;
-
     //@return true if the base is a city and false if its a tower
     this.isCity = function () {
         return isCity;
@@ -112,13 +111,12 @@ function Base(graphLayer, _id, _isCity) {
     if (isCity) {
         baseBitmap = new Bitmap(cityBaseImage);
         baseBitmap.alpha = Const.VISIBLE_BASE;
-        graphLayer.addChild(baseBitmap);
     }
     else {
         baseBitmap = new Bitmap(towerBaseImage);
         baseBitmap.alpha = Const.VISIBLE_BASE;
-        graphLayer.addChild(baseBitmap);
     }
+    graphLayer.addChild(baseBitmap);
 
     this.getPosition = function () {
         return position;
@@ -138,7 +136,7 @@ function Base(graphLayer, _id, _isCity) {
         if (isCity) {
             baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         } else {
-            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CAMP_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CAMP_SCALE, Const.CAMP_CITY_SCALE, Const.CAMP_CITY_SCALE);
+            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
         }
     }
 

@@ -20,10 +20,9 @@ function Environment() {
         //TODO: make the background bitmap to be drawn repeatedly OR add a higher quality background (larger image 4x)
         bgBitmap = new Bitmap(bgImage);
         caveBitmap = new Bitmap(caveImage);
-        //bgBitmap.setTransform(0.0, 0.0);
         resizeOnZoom(bgBitmap);
-        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
-        //stage.addChild(bgBitmap);
+        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2 - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+        stage.addChild(bgBitmap);
         stage.addChild(caveBitmap);
     }
 

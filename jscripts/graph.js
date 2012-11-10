@@ -17,6 +17,14 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 
     var caravanList = [];
 
+    var self = this;
+
+    var layer = new Container();
+
+    this.getLayer = function () {
+        return layer;
+    }
+
     //@return {Boolean} true if this graph instance is a city type and false otherwise
     this.isCity = function () {
         return isCity;
@@ -88,7 +96,7 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
     * @return {Node} the Node instance
     */
     this.getNode1 = function (edge) {
-        return this.getNode(edge.getN1());
+        return getNode(edge.getN1());
     }
 
     /**
@@ -97,15 +105,7 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 	 * @return {node} the Node instance
 	 */
     this.getNode2 = function (edge) {
-        return this.getNode(edge.getN2());
-    }
-
-    privateGetNode1 = function (edge) {
-        return this.getNode(edge.getN1());
-    }
-
-    privateGetNode2 = function (edge) {
-        return this.getNode(edge.getN2());
+        return getNode(edge.getN2());
     }
 
     isSeperated = function (test_coordinates) {
@@ -155,12 +155,12 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
                 if (node != node2) {
                     var distance = node.getPos().getDistanceFrom(node2.getPos());
                     if (isCity) {
-                        if (distance < Const.MIN_CITY_DISTANCE) {
+                        if (distance < Const.MIN_CITY_DISTANCE && tempNodeX > xOffset && tempNodeY > yOffset) {
                             tempNodeX = Math.random() * width + xOffset;
                             tempNodeY = Math.random() * height + yOffset;
                             node.placeNode(tempNodeX, tempNodeY);
                         }
-                    } else if (distance < Const.MIN_CAMP_DISTANCE) {
+                    } else if (distance < Const.MIN_TOWER_DISTANCE && tempNodeX > xOffset && tempNodeY > yOffset) {
                         tempNodeX = Math.random() * width + xOffset;
                         tempNodeY = Math.random() * height + yOffset;
                         node.placeNode(tempNodeX, tempNodeY);
@@ -176,8 +176,8 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
         var n2;
         for (var i = 0; i < edgesArray.length; i++) {
             if (!edgesArray[i].getRoad().isPlaced()) {
-                n1 = privateGetNode1(edgesArray[i]);
-                n2 = privateGetNode2(edgesArray[i]);
+                n1 = self.getNode1(edgesArray[i]);
+                n2 = self.getNode2(edgesArray[i]);
                 edgesArray[i].getRoad().placeRoad(n1.getPos(), n2.getPos());
             }
             edgesArray[i].getRoad().setVisible(edgesArray[i].getRoad().isVisible());
@@ -218,8 +218,9 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
         for (var i = 0; i < nodesArray.length; i++) {
             nodesArray[i].getBase().transform();
         }
-        for (var i = 0; i < edgesArray.length; i++)
+        for (var i = 0; i < edgesArray.length; i++) {
             edgesArray[i].getRoad().transform();
+        }
     }
 
     /**
@@ -228,8 +229,8 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 	 * @param graphLayer - the container that all the bitmaps in this graph instance are added to
 	 * @param player_id - the unique integer value of the player assigned to this graph's elements
 	 */
-    this.generateGraph = function (data, graphLayer, player_id) {
-        parseGraphFile(data, graphLayer, player_id);
+    this.generateGraph = function (data, player_id) {
+        parseGraphFile(data, layer, player_id);
         nodesArray = nodes.values();
         edgesArray = edges.values();
         placeNodes();

@@ -160,4 +160,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 }
             }
     }*/
+
+    this.toString = function () {
+        return "id:" + id + ", " + "nucleotide:" + nucleotide + ", " + "neighbors:" + neighbors.length + ", " + "x:" + coordinates.x + ", " + "y:" + coordinates.y + ", " + "graph_id:" + graph_id + ", " + "placed:" + placed;
+    }
 }

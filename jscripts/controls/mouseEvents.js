@@ -10,13 +10,13 @@
     //env.getUiLayer().onPress = function () {
 
     //}﻿
-        var gLayer = env.getGraphLayer().children;
+        /*var gLayer = env.getGraphLayer().children;
 
         for (var i = 0; i < gLayer.length; i++) {
             if (gLayer[i].image.outerHTML.toLowerCase().indexOf("selection") != -1) {
                 //console.log(gLayer[i]);
             }
-        }
+        }*/
 
     // create spritesheet and assign the associated data.
         //var spriteSheet = new createjs.SpriteSheet({

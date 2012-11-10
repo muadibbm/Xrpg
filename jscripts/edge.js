@@ -39,7 +39,6 @@ function Edge (_id, _isomer, _n1, _n2, _e1, _e2, graphLayer) {
         return road;
     }
 
-    //@override
     this.toString = function () {
         return "Edge ID: " + id + "\t(" + isomer + e1 + e2 + " between " + n1 + " - " + n2 + ")";
     }
