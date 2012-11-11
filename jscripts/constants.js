@@ -24,12 +24,13 @@ function Constants () {
     
     this.STARTING_GOLD = 1000;
     
-    this.BASE_CITY_SCALE = 0.018;
-    this.BASE_CAMP_SCALE = 0.06;
+    this.BASE_ALPHA = 0.45;
+    this.BASE_CITY_SCALE = 0.03;
+    this.BASE_TOWER_SCALE = 0.027;
+
     this.CITY_SELECTION_SCALE1 = 0.35;
     this.CITY_SELECTION_SCALE2 = 0.36;
     this.CAMP_SELECTION_SCALE = 0.14;
-    this.BASE_ALPHA = 0.45;
     this. SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;
     this.BASE_SELECTION_SPEED = 1000;
@@ -115,7 +116,6 @@ function Constants () {
 	WALL_COST : 50,*/
     
     this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 50.0;
-    this.BASE_TOWER_SCALE = 0.03;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
     
@@ -127,7 +127,7 @@ function Constants () {
 	
     //this.TREE_OF_LIFE_SCALE = 0.1;
     
-	this.DEEVE_CAVE_SCALE = 0.1;
+	this.DEEVE_CAVE_SCALE = 0.15;
     //DEEVE_WAVE_WAITING_TIME : 5000,
     //DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
     //DEEVE_INITIAL_POS_Y : this.WORLD_HEIGHT/10.0,
@@ -143,13 +143,12 @@ function Constants () {
     //MAPPING_POINT_X : 0.0,
     //MAPPING_POINT_Y : 0.0,
     //MAPPING_POINT_SCALE : 1.0,
-    
-    //TREE_SHADOW_DEPTH : 2.65,
-    //TREE_DEPTH : 2.7,
-    //TREE_SCALE : 0.13,
-    //MAX_TREE_NUMBER : 5000,
-    //MIN_INBETWEEN_TREE_DISTANCE : 10.0,
-    //MIN_NODE_TREE_DISTANCE : 100.0,
+
+    this.TREE_SCALE = 0.57,
+    this.MAX_TREE_NUMBER = 3600,
+    this.MIN_INBETWEEN_TREE_DISTANCE = 10.0,
+    this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 10.0,
+    this.MIN_NODE_TREE_DISTANCE = this.WORLD_WIDTH / 30.0,
     
     //UI_DEPTH : 3.0,
     //CONSTRUCTION_PANEL_X : 0.0,

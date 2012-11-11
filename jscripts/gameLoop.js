@@ -13,6 +13,7 @@ var stage;
 *		    - UI (containers)
 */
 var environment;
+var trees;
 var player;
 var graphDataA;
 var graphDataB;
@@ -61,8 +62,12 @@ function prepareGame() {
     campGraphA = new Graph(2, false, Const.GRAPH_X + Const.GRAPH_GAP + Const.CITY_GRAPH_WIDTH, Const.GRAPH_Y, Const.TOWER_GRAPH_WIDTH, Const.TOWER_GRAPH_HEIGHT);
     campGraphA.generateGraph(graphDataB, player.getId());
 
+    trees = [];
+    plantTrees(0, 0, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER, cityGraphA, campGraphA, environment.getTreeLayer(), trees);
+
     environment.getGraphLayer().addChild(cityGraphA.getLayer(), campGraphA.getLayer());
 
+    stage.addChild(environment.getTreeLayer());
     stage.addChild(environment.getGraphLayer());
     stage.addChild(environment.getUiLayer());
 

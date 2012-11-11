@@ -8,6 +8,8 @@ function Environment() {
     var graphLayer = new Container();
     // private container which has all the bitmaps for the game UI
     var uiLayer = new Container();
+    // private container which holds the tree bitmaps
+    var treeLayer = new Container();
 
     // used for camera movement
     var offset = new Tuple2d(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
@@ -21,7 +23,7 @@ function Environment() {
         bgBitmap = new Bitmap(bgImage);
         caveBitmap = new Bitmap(caveImage);
         resizeOnZoom(bgBitmap);
-        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2 - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2.0 - caveBitmap.image.height / 2.0 * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
         stage.addChild(bgBitmap);
         stage.addChild(caveBitmap);
     }
@@ -49,6 +51,11 @@ function Environment() {
     // @return {Container} the UI layer
     this.getUiLayer = function () {
         return uiLayer;
+    }
+
+    // @return {Container} the tree layer
+    this.getTreeLayer = function () {
+        return treeLayer;
     }
 
     // sets the zoom level while changing the bitmaps details based on the new level

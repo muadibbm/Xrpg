@@ -3,8 +3,9 @@ var manifest = [
     { id: "graphDataA", src: "graphData/1FUF_modified.txt" },
     { id: "graphDataB", src: "graphData/3CGP_modified.txt" },
     { id: "background", src: "images/Background/bg.png" },
-    //{ id: "treeOfLife", src: "images/Tree Of Life/treeOfLife.png" },
     { id: "cave", src: "images/Cave/cave.png" },
+    { id: "tree", src: "images/Background/tree.png" },
+    { id: "treeShadow", src: "images/Background/tree_shadow.png" },
     { id: "cityBase", src: "images/City/cityBase.png" },
     { id: "towerBase", src: "images/Tower/towerBase.png" },
     { id: "baseSelected1", src: "images/City/selection1.png" },
@@ -17,8 +18,9 @@ var manifest = [
 ];
 // List of all Images
 var bgImage;
-//var treeOfLifeImage;
 var caveImage;
+var treeImage;
+var treeShadowImage;
 var cityBaseImage;
 var towerBaseImage;
 var cityBaseSelectedImage1;
@@ -35,20 +37,17 @@ function createResource(id) {
 }
 
 // CommentAuthor: Andrey - This method does not do anything, accoding to my observation
+// reply: Mehrdad - For now its being used to fit the background onto the canvas
 function resizeOnZoom(bitmap) {
-    //switch() {
-        
-    //}
-    //console.log(bitmap.image.outerHTML);
-    //caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
     bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
     bitmap.scaleY = bitmap.scaleY * (canvas.height / bitmap.image.height);
 }
 
 function loadImages() {
     bgImage = createResource("background");
-    //treeOfLifeImage = createResource("treeOfLife");
     caveImage = createResource("cave");
+    treeImage = createResource("tree");
+    treeShadowImage = createResource("treeShadow");
     cityBaseImage = createResource("cityBase");
     towerBaseImage = createResource("towerBase");
     cityBaseSelectedImage1 = createResource("baseSelected1");
