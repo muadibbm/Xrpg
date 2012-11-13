@@ -110,11 +110,11 @@ function Base(graphLayer, _id, _isCity) {
 
     if (isCity) {
         baseBitmap = new Bitmap(cityBaseImage);
-        baseBitmap.alpha = Const.VISIBLE_BASE;
+        baseBitmap.alpha = Const.BASE_ALPHA;
     }
     else {
         baseBitmap = new Bitmap(towerBaseImage);
-        baseBitmap.alpha = Const.VISIBLE_BASE;
+        baseBitmap.alpha = Const.BASE_ALPHA;
     }
     graphLayer.addChild(baseBitmap);
 

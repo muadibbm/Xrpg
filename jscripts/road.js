@@ -1,8 +1,8 @@
 ﻿/**
 * This class contains all the image and game logic for a corresponding edge
-* @param graphLayer - the Container of bitmaps of the graph
+* @param roadLayer - the Container of bitmaps of the graph
 */
-function Road(graphLayer) {
+function Road(roadLayer) {
     
     var roadBitmap = new Bitmap(roadImage);
     var visible = false;
@@ -14,7 +14,7 @@ function Road(graphLayer) {
 
     roadBitmap.alpha = Const.HIDDEN_ROAD;
 
-    graphLayer.addChild(roadBitmap);
+    roadLayer.addChild(roadBitmap);
 
     //@return the visible flag
     this.isVisible = function() {

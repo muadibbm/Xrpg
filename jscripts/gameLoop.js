@@ -65,8 +65,11 @@ function prepareGame() {
     trees = [];
     plantTrees(0, 0, Const.WORLD_WIDTH, Const.WORLD_HEIGHT, Const.MAX_TREE_NUMBER, cityGraphA, campGraphA, environment.getTreeLayer(), trees);
 
-    environment.getGraphLayer().addChild(cityGraphA.getLayer(), campGraphA.getLayer());
+    environment.getRoadLayer().addChild(cityGraphA.getRoadLayer(), campGraphA.getRoadLayer())
+    environment.getGraphLayer().addChild(cityGraphA.getGraphLayer(), campGraphA.getGraphLayer());
 
+    stage.addChild(environment.getRoadLayer());
+    stage.addChild(environment.getMappingLayer());
     stage.addChild(environment.getTreeLayer());
     stage.addChild(environment.getGraphLayer());
     stage.addChild(environment.getUiLayer());

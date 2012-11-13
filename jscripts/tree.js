@@ -6,7 +6,7 @@ function Tree(layer, x, y)
     treeBitmap.setTransform(x - treeBitmap.image.width / 2.0, y - treeBitmap.image.height / 2.0, Const.TREE_SCALE, Const.TREE_SCALE);
     var treeShadowBitmap = new Bitmap(treeShadowImage);
     treeShadowBitmap.alpha = Const.SHADOW;
-    treeShadowBitmap.setTransform(x, y - treeBitmap.image.height/7.0, Const.TREE_SCALE, Const.TREE_SCALE);
+    treeShadowBitmap.setTransform(x - treeBitmap.image.width / 2.0, y - treeBitmap.image.height / 7.0, Const.TREE_SCALE, Const.TREE_SCALE);
 
     layer.addChild(treeBitmap, treeShadowBitmap);
 }

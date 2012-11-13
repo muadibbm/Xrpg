@@ -1,6 +1,6 @@
 ﻿body {
-    background-color: black;
-    background-image: url(../images/Background/bgGradient.png);
+    background-color: white;
+    background-image: url(../images/Background/frame.png);
     background-repeat: repeat-x;
 }
 
@@ -13,6 +13,6 @@
     top: 5%;
     left: 50%;
 
-    border: 5px solid rgba(255, 255, 255, 0.1);
+    border: 5px solid rgba(255, 216, 100, 0.45);
     box-shadow: 0px 0px 30px #000;
 }

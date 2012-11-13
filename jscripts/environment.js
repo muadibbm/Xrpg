@@ -6,6 +6,10 @@ function Environment() {
     var caveBitmap;
     // private container for the graph bitmap objects
     var graphLayer = new Container();
+    // private container for the road bitmap objects
+    var roadLayer = new Container();
+    // private container for the mapping bitmap objects
+    var mappingLayer = new Container();
     // private container which has all the bitmaps for the game UI
     var uiLayer = new Container();
     // private container which holds the tree bitmaps
@@ -21,6 +25,7 @@ function Environment() {
     this.prepare = function () {
         //TODO: make the background bitmap to be drawn repeatedly OR add a higher quality background (larger image 4x)
         bgBitmap = new Bitmap(bgImage);
+        bgBitmap.alpha = Const.BACKGROUND_ALPHA;
         caveBitmap = new Bitmap(caveImage);
         resizeOnZoom(bgBitmap);
         caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width * Const.DEEVE_CAVE_SCALE, Const.WORLD_HEIGHT / 2.0 - caveBitmap.image.height / 2.0 * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
@@ -46,6 +51,16 @@ function Environment() {
     // @return {Container} the graph layer
     this.getGraphLayer = function () {
         return graphLayer;
+    }
+
+    // @return {Container} the road layer
+    this.getRoadLayer = function () {
+        return roadLayer;
+    }
+
+    // @return {Container} the mapping layer
+    this.getMappingLayer = function () {
+        return mappingLayer;
     }
 
     // @return {Container} the UI layer

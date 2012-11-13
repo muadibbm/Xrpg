@@ -17,15 +17,16 @@ function Constants () {
     //this.BACKGROUND_WORLD_HEIGHT = (7 / 3) * this.WORLD_HEIGHT;
     //this.BACKGROUND_WORLD_ORIGIN_X = this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3;
     //this.BACKGROUND_WORLD_ORIGIN_Y = this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3;
-	
+    this.BACKGROUND_ALPHA = 0.93;
+
     this.GRAPH_X = this.WORLD_WIDTH / 45.0;
     this.GRAPH_Y = this.WORLD_HEIGHT/ 45.0;
     this.GRAPH_GAP = this.WORLD_WIDTH / 10.0;
     
     this.STARTING_GOLD = 1000;
     
-    this.BASE_ALPHA = 0.45;
-    this.BASE_CITY_SCALE = 0.03;
+    this.BASE_ALPHA = 0.54;
+    this.BASE_CITY_SCALE = 0.027;
     this.BASE_TOWER_SCALE = 0.027;
 
     this.CITY_SELECTION_SCALE1 = 0.35;
@@ -127,7 +128,7 @@ function Constants () {
 	
     //this.TREE_OF_LIFE_SCALE = 0.1;
     
-	this.DEEVE_CAVE_SCALE = 0.15;
+	this.DEEVE_CAVE_SCALE = 0.17;
     //DEEVE_WAVE_WAITING_TIME : 5000,
     //DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
     //DEEVE_INITIAL_POS_Y : this.WORLD_HEIGHT/10.0,
@@ -135,14 +136,6 @@ function Constants () {
     //DEEVE_ALPHA : 1.0,
     //DEEVE_DEPTH : 3.0,
     //DEEVE_SPEED : 10,
-    
-    this.ROAD_WIDTH = 0.3;
-    
-    //MAPPING_DEPTH : 2.5,
-    //MAPPING_WIDTH : 0.4,
-    //MAPPING_POINT_X : 0.0,
-    //MAPPING_POINT_Y : 0.0,
-    //MAPPING_POINT_SCALE : 1.0,
 
     this.TREE_SCALE = 0.57,
     this.MAX_TREE_NUMBER = 3600,
@@ -165,8 +158,12 @@ function Constants () {
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
     
+    this.ROAD_WIDTH = 0.3;
+    this.MAPPING_WIDTH = 0.36;
+
     this.SHADOW = 0.45;
-    this.HIDDEN_MAPPING = 0.5;
+    this.HIDDEN_MAPPING = 0.1;
+    this.VISIBLE_MAPPING = 0.9;
 	this.HIDDEN_ROAD = 0.05;
 	this.VISIBLE_ROAD = 0.8;
 	this.VISIBLE_BASE = 0.9;

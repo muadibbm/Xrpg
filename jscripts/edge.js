@@ -8,7 +8,7 @@
 * @param e2 - the EdgeType read from raw data
 * @param graphLayer - the graph bitmaps Container
 */
-function Edge (_id, _isomer, _n1, _n2, _e1, _e2, graphLayer) {
+function Edge (_id, _isomer, _n1, _n2, _e1, _e2, roadLayer) {
     
     var id = _id;
     var isomer = _isomer;
@@ -17,7 +17,7 @@ function Edge (_id, _isomer, _n1, _n2, _e1, _e2, graphLayer) {
     var e1 = _e1;
     var e2 = _e2;
 
-    var road = new Road(graphLayer);
+    var road = new Road(roadLayer);
 
     //@return the unique integer id
     this.getID = function() {

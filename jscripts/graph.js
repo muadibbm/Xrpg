@@ -19,10 +19,15 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 
     var self = this;
 
-    var layer = new Container();
+    var graphLayer = new Container();
+    var roadLayer = new Container();
 
-    this.getLayer = function () {
-        return layer;
+    this.getGraphLayer = function () {
+        return graphLayer;
+    }
+
+    this.getRoadLayer = function () {
+        return roadLayer;
     }
 
     //@return {Boolean} true if this graph instance is a city type and false otherwise
@@ -226,11 +231,10 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
     /**
 	 * Fill all the nodes and edges of the graph
 	 * @param data - the file containing the graph raw data
-	 * @param graphLayer - the container that all the bitmaps in this graph instance are added to
 	 * @param player_id - the unique integer value of the player assigned to this graph's elements
 	 */
     this.generateGraph = function (data, player_id) {
-        parseGraphFile(data, layer, player_id);
+        parseGraphFile(data, player_id);
         nodesArray = nodes.values();
         edgesArray = edges.values();
         placeNodes();
@@ -251,7 +255,7 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
     }
 
     //parses the file containing the raw graph data and creates all the nodes and edges instances
-    parseGraphFile = function (data, graphLayer, player_id) {
+    parseGraphFile = function (data, player_id) {
 
         // Check for the various File API support.
         if (!window.File || !window.FileReader)
@@ -349,7 +353,7 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
             nodeID = parseInt(subEntries[2]);
             neighborID = parseInt(subEntries[5]);
 
-            e = new Edge(edgeID, iso, nodeID, neighborID, et1, et2, graphLayer)
+            e = new Edge(edgeID, iso, nodeID, neighborID, et1, et2, roadLayer)
             addEdge(e);
 
             //parse first node

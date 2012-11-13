@@ -14,7 +14,8 @@ var manifest = [
     { id: "baseSelected4", src: "images/City/selection4.png" },
     { id: "baseSelected5", src: "images/City/selection5.png" },
     { id: "baseSelected6", src: "images/City/selection6.png" },
-    { id: "road", src: "images/Road/sampleRoad.png" }
+    { id: "road", src: "images/Road/sampleRoad.png" },
+    { id: "mapping", src: "images/Road/sampleMapping.png" }
 ];
 // List of all Images
 var bgImage;
@@ -30,6 +31,7 @@ var cityBaseSelectedImage4;
 var cityBaseSelectedImage5;
 var cityBaseSelectedImage6;
 var roadImage;
+var mappingImage;
 
 //general public function for creating resources(called once for every resource)
 function createResource(id) {
@@ -57,4 +59,5 @@ function loadImages() {
     cityBaseSelectedImage5 = createResource("baseSelected5");
     cityBaseSelectedImage6 = createResource("baseSelected6");
     roadImage = createResource("road");
+    mappingImage = createResource("mapping");
 }
