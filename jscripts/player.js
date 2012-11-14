@@ -49,7 +49,7 @@ function Player(player_id, player_name) {
     }
 
     //@return the node instance the player has selected from mapping
-    this.getNodeToBeMappe = function () {
-        return nodeToBeMapped;
+    this.getNodeToBeMapped = function () {
+        return nodeTobeMapped;
     }
 }

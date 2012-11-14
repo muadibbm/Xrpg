@@ -29,8 +29,8 @@ function Constants () {
     this.BASE_CITY_SCALE = 0.027;
     this.BASE_TOWER_SCALE = 0.027;
 
-    this.CITY_SELECTION_SCALE1 = 0.35;
-    this.CITY_SELECTION_SCALE2 = 0.36;
+    this.CITY_SELECTION_SCALE1 = 0.16;
+    this.CITY_SELECTION_SCALE2 = 0.12;
     this.CAMP_SELECTION_SCALE = 0.14;
     this. SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;

@@ -21,6 +21,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
 
     var base = new Base(graphLayer, id, isCity);
 
+    var self = this;
+
     /**
 	* places the node at the given (x,y) coordinates and flag placed to true
 	* @param x - float x coordinate
@@ -132,7 +134,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         removeMapping();
     }
 
-    /* Mapping Score Propagation Logic
+    //Mapping Score Propagation Logic
     propagateMapping = function(score) {
         for(var i=0; i < neighbors.length; i++) {
             if(neighbors[i].getMapping() != null) {
@@ -144,9 +146,9 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()+score);
 		    }
 	    }
-    }*/
+    }
 
-    /* Unmapping Score Propagation Logic
+    //Unmapping Score Propagation Logic
     propagateUnmapping = function(score) {
         if(score > 0)
             for(var i=0; i < neighbors.length; i++) {
@@ -159,9 +161,111 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                         neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()-score);
                 }
             }
-    }*/
+    }
 
     this.toString = function () {
         return "id:" + id + ", " + "nucleotide:" + nucleotide + ", " + "neighbors:" + neighbors.length + ", " + "x:" + coordinates.x + ", " + "y:" + coordinates.y + ", " + "graph_id:" + graph_id + ", " + "placed:" + placed;
+    }
+
+    this.addMouseClick = function (graph, player) {
+        //base.getBitmap.onMouse
+    }
+
+    this.addOnMouseOut = function (graph, player) {
+        base.getBitmap().onMouseOut = function (event) { //Called when the mouse leaves a Bitmap.
+            if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
+                    (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
+                    (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
+                self.getBase().setVisible(false);
+                neighbors = self.getNeighbors();
+                for (var j = 0; j < neighbors.length; j++)
+                    if (player.getSelectedNode() != neighbors[j] & player.getNodeToBeMapped() != neighbors[j])
+                        neighbors[j].getBase().setVisible(false);
+                //Set all edges of the selected node invisible
+                for (var j = 0; j < graph.getEdges().length; j++) {
+                    edge = graph.getEdges()[j];
+                    if (id == graph.getNode1(edge).getID()) {
+                        edge.getRoad().setVisible(false);
+                        self.getBase().setHoverSelection(false);
+                    }
+                }
+            }
+        }
+
+            //gui.hidePopulation();
+
+            if (player.getSelectedNode() != null) {
+                //Show population
+                /* switch(player.getSelectedNode().getNodeLevel()) {
+                     case 1 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+                     case 2 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+                     case 3 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+                     case 4 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+                     case 5 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+                     case 6 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+                     case 7 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+                     case 8 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+                     case 9 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+                     default : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+                 }
+             }
+             if (player.getNodeToBeMapped() != null) {
+                 //Show population
+                 /*switch(player.getNodeToBeMapped().getNodeLevel()) {
+                     case 1 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+                     case 2 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+                     case 3 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+                     case 4 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+                     case 5 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+                     case 6 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+                     case 7 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+                     case 8 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+                     case 9 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+                     default : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+                 }
+             }*/
+            }
+    }
+
+    this.addOnMouseOver = function(graph, player) {
+        base.getBitmap().onMouseOver = function (event) { //Called when the mouse enters a Bitmap.
+
+            if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
+                (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
+                (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
+                //Set the node and neighbors visible
+                self.getBase().setVisible(true);
+                neighbors = self.getNeighbors();
+                for (var j = 0; j < neighbors.length; j++)
+                    neighbors[j].getBase().setVisible(true);
+                //Set all edges of the selected node visible
+                for (var j = 0; j < graph.getEdges().length; j++) {
+                    edge = graph.getEdges()[j];
+
+                    if (id == graph.getNode1(edge).getID()) {
+                        edge.getRoad().setVisible(true);
+                        self.getBase().positionHoverSelection(self.getPos());
+                        self.getBase().setHoverSelection(true);
+                    }
+                }
+                //Set the mapping of the selected node visible
+                if (self.getMapping() != null)
+                    self.getMapping().setVisible(true);
+
+                //Show population
+                /*switch(node.getNodeLevel()) {
+                    case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
+                    case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
+                    case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
+                    case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
+                    case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
+                    case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
+                    case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
+                    case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
+                    case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
+                    default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
+                }*/
+            }
+        }
     }
 }

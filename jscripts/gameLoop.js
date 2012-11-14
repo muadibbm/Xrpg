@@ -15,12 +15,12 @@ var stage;
 var environment;
 var trees;
 var player;
+var gui;
 var graphDataA;
 var graphDataB;
 var cityGraphA;
 var campGraphA;
-//var cityGraphB;
-//var campGraphB;
+var hover_node;//global variable for MouseOver and MouseOut
 
 function initialize() {
     
@@ -35,7 +35,10 @@ function initialize() {
 
     preload = new PreloadJS();
     graphics = new Graphics();
+
     stage = new Stage(canvas);
+    stage.enableMouseOver();
+    hover_node = null;
 
     // Use PreloadJS to make sure sound and images are loaded before we begin processing
     // (Especially important for large/remote resources)
@@ -74,7 +77,15 @@ function prepareGame() {
     stage.addChild(environment.getGraphLayer());
     stage.addChild(environment.getUiLayer());
 
-    addMouseEvents(environment);
+    for (var i = 0; i < cityGraphA.getNodes().length; i++) {
+        cityGraphA.getNodes()[i].addOnMouseOut(cityGraphA, player);
+        cityGraphA.getNodes()[i].addOnMouseOver(cityGraphA, player);
+    }
+
+    for (var i = 0; i < campGraphA.getNodes().length; i++) {
+        campGraphA.getNodes()[i].addOnMouseOut(campGraphA, player);
+        campGraphA.getNodes()[i].addOnMouseOver(campGraphA, player);
+    }
 
     // Add key events listeners
     document.onkeydown = function (e) {

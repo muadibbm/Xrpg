@@ -22,13 +22,6 @@ function Base(graphLayer, _id, _isCity) {
     selectionLayerH1.alpha = Const.SELECTION_ALPHA;
     selectionLayerH2.alpha = Const.SELECTION_ALPHA;
 
-    graphLayer.addChild(selectionLayer1);
-    graphLayer.addChild(selectionLayer2);
-    graphLayer.addChild(selectionLayerM1);
-    graphLayer.addChild(selectionLayerM2);
-    graphLayer.addChild(selectionLayerH1);
-    graphLayer.addChild(selectionLayerH2);
-
     // Instantiate all the animations
     //var mouseOverCity = new SpriteSheet({
     //    // image to use
@@ -72,8 +65,8 @@ function Base(graphLayer, _id, _isCity) {
      * @author Andrey
      */
     this.positionSelection = function (position) {
-        selectionLayer1.setTransform(position.x + selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y + selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayer2.setTransform(position.x + selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y + selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayer1.setTransform(position.x - selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayer2.setTransform(position.x - selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the mapping selection around a city or a camp.
@@ -81,8 +74,8 @@ function Base(graphLayer, _id, _isCity) {
      * @author Mehrdad
      */
     this.positionMappingSelection = function (position) {
-        selectionLayerM1.setTransform(position.x + selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y + selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerM2.setTransform(position.x + selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y + selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayerM1.setTransform(position.x - selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerM2.setTransform(position.x - selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the hovering selection around a city or a camp.
@@ -90,18 +83,29 @@ function Base(graphLayer, _id, _isCity) {
      * @author Mehrdad
      */
     this.positionHoverSelection = function (position) {
-        selectionLayerH1.setTransform(position.x + selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y + selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerH2.setTransform(position.x + selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y + selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayerH1.setTransform(position.x - selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerH2.setTransform(position.x - selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     //@return {Bitmap} the base Bitmap
-    this.getBaselayer = function () {
-        return baseLayer;
+    this.getBitmap = function () {
+        return baseBitmap;
     }
 
     this.setSelection(false);
     this.setMappingSelection(false);
     this.setHoverSelection(false);
+
+    /**
+    * sets the visibility(transparency level) of the base bitmap according to the given visibility flag
+    * @param visible - the boolean flag
+    */
+    this.setVisible = function (visible) {
+        if (visible)
+            baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+        else
+            baseBitmap.alpha = Const.BASE_ALPHA;
+    }
 
     //@return true if the base is a city and false if its a tower
     this.isCity = function () {
@@ -116,7 +120,14 @@ function Base(graphLayer, _id, _isCity) {
         baseBitmap = new Bitmap(towerBaseImage);
         baseBitmap.alpha = Const.BASE_ALPHA;
     }
+
     graphLayer.addChild(baseBitmap);
+    graphLayer.addChild(selectionLayer1);
+    graphLayer.addChild(selectionLayer2);
+    graphLayer.addChild(selectionLayerM1);
+    graphLayer.addChild(selectionLayerM2);
+    graphLayer.addChild(selectionLayerH1);
+    graphLayer.addChild(selectionLayerH2);
 
     this.getPosition = function () {
         return position;
