@@ -141,7 +141,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.setMapping = function (node, score) {
         mapped_node = node;
         node.setMappedNode(self);
-        mapping = new Mapping(graphLayer, coordinates, mapped_node.getPos(), score);
+        mapping = new Mapping(environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
         mapping.transform();
         mapped_node.copyMapping(mapping);
         propagateMapping(score-1);

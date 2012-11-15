@@ -135,8 +135,8 @@ function Constants () {
     //DEEVE_DEPTH : 3.0,
     //DEEVE_SPEED : 10,
 
-    this.TREE_SCALE = 0.57,
-    this.MAX_TREE_NUMBER = 3600,
+    this.TREE_SCALE = 0.81,
+    this.MAX_TREE_NUMBER = 1800,
     this.MIN_INBETWEEN_TREE_DISTANCE = 10.0,
     this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 10.0,
     this.MIN_NODE_TREE_DISTANCE = this.WORLD_WIDTH / 30.0,
@@ -156,8 +156,8 @@ function Constants () {
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
     
-    this.ROAD_WIDTH = 0.3;
-    this.MAPPING_WIDTH = 0.36;
+    this.ROAD_WIDTH = 0.31;
+    this.MAPPING_WIDTH = 0.32;
 
     this.SHADOW = 0.45;
     this.HIDDEN_MAPPING = 0.3;
