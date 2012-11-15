@@ -25,13 +25,11 @@ function Constants () {
     
     this.STARTING_GOLD = 1000;
     
-    this.BASE_ALPHA = 0.54;
-    this.BASE_CITY_SCALE = 0.027;
-    this.BASE_TOWER_SCALE = 0.027;
+    this.BASE_CITY_SCALE = 0.45;
+    this.BASE_TOWER_SCALE = 0.3;
 
-    this.CITY_SELECTION_SCALE1 = 0.16;
+    this.CITY_SELECTION_SCALE1 = 0.17;
     this.CITY_SELECTION_SCALE2 = 0.12;
-    this.CAMP_SELECTION_SCALE = 0.14;
     this. SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;
     this.BASE_SELECTION_SPEED = 1000;
@@ -162,10 +160,11 @@ function Constants () {
     this.MAPPING_WIDTH = 0.36;
 
     this.SHADOW = 0.45;
-    this.HIDDEN_MAPPING = 0.1;
+    this.HIDDEN_MAPPING = 0.3;
     this.VISIBLE_MAPPING = 0.9;
-	this.HIDDEN_ROAD = 0.05;
+	this.HIDDEN_ROAD = 0.1;
 	this.VISIBLE_ROAD = 0.8;
+	this.BASE_ALPHA = 0.5;
 	this.VISIBLE_BASE = 0.9;
 
     // Key codes for key events

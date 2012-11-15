@@ -40,7 +40,7 @@ function Player(player_id, player_name) {
     //Sets the node to be mapping to the given node
     //@ node - instance of Node
     this.setNodeToBeMapped = function (node) {
-        nodeToBeMapped = node;
+        nodeTobeMapped = node;
     }
 
     //@return the node instance selected by the player

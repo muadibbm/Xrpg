@@ -38,7 +38,6 @@ function initialize() {
 
     stage = new Stage(canvas);
     stage.enableMouseOver();
-    hover_node = null;
 
     // Use PreloadJS to make sure sound and images are loaded before we begin processing
     // (Especially important for large/remote resources)
@@ -78,11 +77,15 @@ function prepareGame() {
     stage.addChild(environment.getUiLayer());
 
     for (var i = 0; i < cityGraphA.getNodes().length; i++) {
+        cityGraphA.getNodes()[i].addMouseClick(cityGraphA, campGraphA, player);
+        cityGraphA.getNodes()[i].addMouseDoubleClick(cityGraphA, campGraphA, player);
         cityGraphA.getNodes()[i].addOnMouseOut(cityGraphA, player);
         cityGraphA.getNodes()[i].addOnMouseOver(cityGraphA, player);
     }
 
     for (var i = 0; i < campGraphA.getNodes().length; i++) {
+        campGraphA.getNodes()[i].addMouseClick(campGraphA, cityGraphA, player);
+        campGraphA.getNodes()[i].addMouseDoubleClick(campGraphA, cityGraphA, player);
         campGraphA.getNodes()[i].addOnMouseOut(campGraphA, player);
         campGraphA.getNodes()[i].addOnMouseOver(campGraphA, player);
     }

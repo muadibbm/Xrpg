@@ -7,7 +7,7 @@
 */
 function Mapping(mappingLayer, _pos1, _pos2, _score)
 {	
-    var mapBitmap = new Bitmap(mapImage);
+    var mapBitmap = new Bitmap(mappingImage);
     mapBitmap.alpha = Const.VISIBLE_MAPPING;
     var visible = true;
     
@@ -15,6 +15,8 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
 
     var pos1 = _pos1;
     var pos2 = _pos2;
+
+    mappingLayer.addChild(mapBitmap);
 
     //TODO
     //scoreImage = new Digits(graphLayer, Const.MAPPING_POINT_X + (pos2.getX() + pos1.getX())/2.0f, Const.MAPPING_POINT_Y + (pos2.getY() + pos1.getY())/2.0f, Const.MAPPING_POINT_SCALE, Const.MAPPING_DEPTH+1.0f);
@@ -63,9 +65,8 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
     this.transform = function () {
         //TODO add paintScore(); transofrm for digits
         mapBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / mappingImage.width, Const.MAPPING_WIDTH);
-        mapBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x)*180/Math.PI;
+        mapBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x) * 180 / Math.PI;
     }
-
 
     //@return {Integer} the points this mapping has
     this.getScore = function() {
@@ -83,12 +84,10 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
             score = _score;
     }
 
-    /**
-    * destroys the mapping layer
-    */
+    //destroys the mapping bitmap
     this.destroy = function() {
         visible = false;
-        //TODO : how to remove the bitmap
-        //TODO scoreImage.destroy();
+        mappingLayer.removeChild(mapBitmap);
+        //TODO mappingLayer.removeChild(scoreImage);
     }
 }

@@ -64,27 +64,27 @@ function Base(graphLayer, _id, _isCity) {
      * @param position
      * @author Andrey
      */
-    this.positionSelection = function (position) {
-        selectionLayer1.setTransform(position.x - selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayer2.setTransform(position.x - selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+    this.positionSelection = function () {
+        selectionLayer1.setTransform(this.position.x - selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayer2.setTransform(this.position.x - selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the mapping selection around a city or a camp.
      * @param position
      * @author Mehrdad
      */
-    this.positionMappingSelection = function (position) {
-        selectionLayerM1.setTransform(position.x - selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerM2.setTransform(position.x - selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+    this.positionMappingSelection = function () {
+        selectionLayerM1.setTransform(this.position.x - selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerM2.setTransform(this.position.x - selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the hovering selection around a city or a camp.
      * @param position
      * @author Mehrdad
      */
-    this.positionHoverSelection = function (position) {
-        selectionLayerH1.setTransform(position.x - selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerH2.setTransform(position.x - selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+    this.positionHoverSelection = function () {
+        selectionLayerH1.setTransform(this.position.x - selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerH2.setTransform(this.position.x - selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     //@return {Bitmap} the base Bitmap
@@ -138,7 +138,7 @@ function Base(graphLayer, _id, _isCity) {
     }
 
     /**
-    * transforms the base at the given coordinates
+    * transforms the base at the given coordinates and all its sleection combinations
     * @param x - float x coordinate
     * @param y - float y coordinate
     */
@@ -149,6 +149,9 @@ function Base(graphLayer, _id, _isCity) {
         } else {
             baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
         }
+        this.positionSelection();
+        this.positionMappingSelection();
+        this.positionHoverSelection();
     }
 
     /**
