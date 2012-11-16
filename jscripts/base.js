@@ -6,7 +6,10 @@ function Base(graphLayer, _id, _isCity) {
     var position = new Tuple2d(0.0, 0.0);
     var id = _id;
     var isCity = _isCity;
+    var hasBazaar = false;
+    var hasCaravan = false;
     var baseBitmap;
+
     //Selection Bitmaps
     var selectionLayer1 = new Bitmap(cityBaseSelectedImage1);
     var selectionLayer2 = new Bitmap(cityBaseSelectedImage2);
@@ -92,6 +95,10 @@ function Base(graphLayer, _id, _isCity) {
         return baseBitmap;
     }
 
+    this.getBaseLayer = function () {
+        return baseLayer;
+    }
+
     this.setSelection(false);
     this.setMappingSelection(false);
     this.setHoverSelection(false);
@@ -112,11 +119,18 @@ function Base(graphLayer, _id, _isCity) {
         return isCity;
     }
 
+    this.getBitmap = function () {
+        return baseBitmap;
+    }
+
+    this.setIsCity = function(_isCity) {
+        isCity = _isCity;
+    }
+
     if (isCity) {
         baseBitmap = new Bitmap(cityBaseImage);
         baseBitmap.alpha = Const.BASE_ALPHA;
-    }
-    else {
+    } else {
         baseBitmap = new Bitmap(towerBaseImage);
         baseBitmap.alpha = Const.BASE_ALPHA;
     }
@@ -138,7 +152,7 @@ function Base(graphLayer, _id, _isCity) {
     }
 
     /**
-    * transforms the base at the given coordinates and all its sleection combinations
+    * transforms the base at the given coordinates and all its selection combinations
     * @param x - float x coordinate
     * @param y - float y coordinate
     */
@@ -166,4 +180,54 @@ function Base(graphLayer, _id, _isCity) {
     this.getPopulation = function () {
         return population;
     }
+
+		// Additional set of functions for a city
+        this.hasBazaar = function () {
+            return hasBazaar;
+        }
+
+        this.setHasBazaar = function (_hasBazaar) {
+            hasBazaar = _hasBazaar;
+        }
+
+        this.getBaseBitmap = function () {
+            return baseBitmap;
+        }
+
+        this.setIsCity = function (_isCity) {
+            isCity = _isCity;
+        }
+
+        /**
+         * Sets the population of this node to the given number
+         * @param population - int
+         */
+        this.setPopulation = function (_population) {
+            this.population = _population;
+        }
+
+        //@return {integer} the population of this node
+        this.getPopulation = function () {
+            return population;
+        }
+
+        this.hasCaravan = function () {
+            return hasCaravan;
+        }
+
+        this.setHasCaravan = function (_hasCaravan) {
+            hasCaravan = _hasCaravan;
+        }
+
+        this.buildBazaar = function () {
+            // TODO: Build bazaar. This will contain all there types of market we have so far.
+        }
+
+        this.getPosition = function () {
+            return position;
+        }
+
+        this.setPosition = function (_position) {
+            this.position = _position;
+        }
 }

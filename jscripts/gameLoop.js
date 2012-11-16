@@ -104,5 +104,6 @@ function startGame() {
 
 //The game Loop update function
 function tick() {
+    cityGraphA.updateAll();
     stage.update();
 }
