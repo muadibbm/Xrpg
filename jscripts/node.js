@@ -396,7 +396,11 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
                     (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
                     (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
+
                 base.setVisible(false);
+                for (var j = 0; j < neighbors.length; j++)
+                    if (player.getSelectedNode() == neighbors[j])
+                        base.setVisible(true);
                 base.setHoverSelection(false);
                 for (var j = 0; j < neighbors.length; j++)
                     if (player.getSelectedNode() != neighbors[j] & player.getNodeToBeMapped() != neighbors[j])
@@ -409,7 +413,9 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }
                 }
             }
-        }
+
+            if (mapping != null)
+                mapping.setVisible(false);
 
             //gui.hidePopulation();
 
@@ -444,6 +450,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                  }
              }*/
             }
+        }
     }
 
     this.addOnMouseOver = function(graph, player) {

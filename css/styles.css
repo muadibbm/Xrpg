@@ -1,11 +1,12 @@
 ﻿body {
     background-color: white;
     background-image: url(../images/Background/scene.png);
-    background-repeat: repeat-x;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #container {
-    width:100%
+
 }
 
 #gameCanvas {
