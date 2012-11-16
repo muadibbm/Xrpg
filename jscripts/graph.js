@@ -16,6 +16,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     var height = height;
 
     var caravanList = [];
+    var deeveList = [];
 
     var self = this;
 
@@ -43,8 +44,16 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
         return caravanList;
     }
 
-    this.setCaravanList = function (newCaravanList) {
-        caravanList = newCaravanList;
+    this.setCaravanList = function (_caravanList) {
+        caravanList = _caravanList;
+    }
+
+    this.getDeeveList = function () {
+        return deeveList;
+    }
+
+    this.setDeeveList = function (_deeveList) {
+        deeveList = _deeveList;
     }
 
     // @return {Double} the graph width
@@ -193,7 +202,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     }
 
     if (isCity) {
-        movingCaravans = function () {
+        var movingCaravans = function () {
             for (var i = 0; i < nodesArray.length; i++) {
                 // The graph contains only cities
                 var city1 = nodesArray[i].getBase();
@@ -215,6 +224,10 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
                 }
             }
         }
+    }
+
+    var movingDeeves = function () {
+        //TODO: Set a periodic timer to denote the waves of deeves and then move them
     }
 
     //sets the transformations of all the bitmaps in this graph instance after placement
@@ -253,6 +266,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     // updates all the positions of the moving instances associated with the graph
     this.updateAll = function () {
         movingCaravans();
+        movingDeeves();
     }
 
     if (typeof String.prototype.startsWith != 'function') {

@@ -140,7 +140,7 @@ function Constants() {
     //DEEVE_SCALE : 0.17,
     //DEEVE_ALPHA : 1.0,
     //DEEVE_DEPTH : 3.0,
-    //DEEVE_SPEED : 10,
+    this.DEEVE_SPEED = 100,
 
     this.TREE_SCALE = 0.81,
     this.MAX_TREE_NUMBER = 1800,
@@ -175,6 +175,8 @@ function Constants() {
     this.VISIBLE_BASE = 0.9;
     this.HIDDEN_CARAVAN = 0.0;
     this.VISIBLE_CARAVAN = 1.0;
+    this.HIDDEN_DEEVE = 0.0;
+    this.VISIBLE_DEEVE = 1.0;
 
     // Key codes for key events
     this.KEYCODE_DOWN = 40;

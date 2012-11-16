@@ -9,6 +9,7 @@ var manifest = [
     { id: "cityBase",      src: "images/City/cityBase.png" },
     { id: "towerBase",     src: "images/Tower/towerBase.png" },
     { id: "caravan",       src: "images/Caravan/caravan.png" },
+    { id: "deeve",         src: "images/Deeve/deeve.png"},
     { id: "baseSelected1", src: "images/City/selection1.png" },
     { id: "baseSelected2", src: "images/City/selection2.png" },
     { id: "baseSelected3", src: "images/City/selection3.png" },
@@ -26,6 +27,7 @@ var treeShadowImage;
 var cityBaseImage;
 var towerBaseImage;
 var caravanImage;
+var deeveImage;
 var cityBaseSelectedImage1;
 var cityBaseSelectedImage2;
 var cityBaseSelectedImage3;
@@ -40,7 +42,7 @@ function createResource(id) {
     return preload.getResult(id).result;
 }
 
-// CommentAuthor: Andrey - This method does not do anything, accoding to my observation
+// CommentAuthor: Andrey - This method does not do anything, according to my observation
 // reply: Mehrdad - For now its being used to fit the background onto the canvas
 function resizeOnZoom(bitmap) {
     bitmap.scaleX = bitmap.scaleX * (canvas.width / bitmap.image.width);
@@ -55,6 +57,7 @@ function loadImages() {
     cityBaseImage = createResource("cityBase");
     towerBaseImage = createResource("towerBase");
     caravanImage = createResource("caravan");
+    deeveImage = createResource("deeve");
     cityBaseSelectedImage1 = createResource("baseSelected1");
     cityBaseSelectedImage2 = createResource("baseSelected2");
     cityBaseSelectedImage3 = createResource("baseSelected3");

@@ -18,37 +18,13 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
     graphLayer.addChild(caravanBitmap);
 
     caravanLevel = 1;
-    initialPosition = city1Pos; // Tuple2d
-    currentPosition = city1Pos; // Tuple2d
-    finalPosition = city2Pos;   // Tuple2d
+    initialPosition = city1Pos;
+    currentPosition = city1Pos;
+    finalPosition = city2Pos;
     stoppingDist = stoppingDistance;
     hasArrived = false;
 
-    dx = Math.abs(finalPosition.x - initialPosition.x);
-    dy = Math.abs(finalPosition.y - initialPosition.y);
-    err = dx - dy;
-
-    if (currentPosition.x < finalPosition.x) {
-        sx = 1;
-    } else {
-        sx = -1;
-    }
-
-    if (currentPosition.y < finalPosition.y) {
-        sy = 1;
-    } else {
-        sy = -1;
-    }
-
-    moveAgain = function () {
-        currentTimer = setInterval(moveCaravan, Const.CARAVAN_MOVING_TIME);
-    }
-
-    swapDestination = function () {
-        var temp = finalPosition;
-        finalPosition = initialPosition;
-        initialPosition = temp;
-
+    var reeval = function () {
         dx = Math.abs(finalPosition.x - initialPosition.x);
         dy = Math.abs(finalPosition.y - initialPosition.y);
         err = dx - dy;
@@ -64,6 +40,20 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
         } else {
             sy = -1;
         }
+    }
+
+    reeval();
+
+    var moveAgain = function () {
+        currentTimer = setInterval(moveCaravan, Const.CARAVAN_MOVING_TIME);
+    }
+
+    var swapDestination = function () {
+        var temp = finalPosition;
+        finalPosition = initialPosition;
+        initialPosition = temp;
+
+        reeval();
 
         setTimeout(moveAgain, Const.CARAVAN_TRADING_TIME);
         hasArrived = false;
@@ -73,7 +63,7 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
     * to make the camel/caravan find the right city and going around the cities, the current node is connected to.
     * Declaring the function before call below it. Otherwise, produces an error of undefined. 
     */
-    moveCaravan = function () {
+    var moveCaravan = function () {
         var e2 = 2 * err;
         var newPosition = new Tuple2d(currentPosition.x, currentPosition.y);
 
@@ -96,7 +86,7 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
         }
     }
 
-    setPosition = function (_position) {
+    var setPosition = function (_position) {
         currentPosition = _position;
         caravanBitmap.x = currentPosition.x;
         caravanBitmap.y = currentPosition.y;
@@ -125,17 +115,12 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
         return currentPosition;
     }
 
-    //@return the visible flag
     this.isVisible = function () {
         return visible;
     }
 
-    /**
-    * sets the visibility (transparency level) of the Caravan bitmap according to the given visibility flag
-    * @param visible - the boolean flag
-    */
-    this.setVisible = function (visible) {
-        this.visible = visible;
+    this.setVisible = function (_visible) {
+        visible = _visible;
 
         if (visible) {
             caravanBitmap.alpha = Const.VISIBLE_CARAVAN;
@@ -144,7 +129,6 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
         }
     }
 
-    //@return the road layer of type ImageLayer
     this.getBitmap = function () {
         return caravanBitmap;
     }
