@@ -16,8 +16,14 @@ function isTreeSeperated(graph, posX, posY) {
     var distance = 0.0;
     for (var i = 0; i < graph.getNodes().length; i++) {
         distance = graph.getNodes()[i].getPos().getDistanceFrom(new Tuple2d(posX, posY));
-        if (distance < Const.MIN_NODE_TREE_DISTANCE)
-            return false;
+        if (graph.getNodes()[i].getBase().isCity()) {
+            if (distance < Const.MIN_CITY_TREE_DISTANCE)
+                return false;
+        }
+        else {
+            if (distance < Const.MIN_TOWER_TREE_DISTANCE)
+                return false;
+        }
     }
     var cavePos = new Tuple2d(environment.getCaveBitmap().x, environment.getCaveBitmap().y);
     distance = cavePos.getDistanceFrom(new Tuple2d(posX, posY));

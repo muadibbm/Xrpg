@@ -285,8 +285,13 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 
             s1 = s1.replace(/\\s+/g, "");
             s1 = s1.replace(/([0-9]*)([ATUGCatugc])([0-9]*)(\\([A-Z0-9]\\))-([ATUGCatugc])([0-9]*)(\\([A-Z0-9]\\))-([a-zA-Z]*)-([0-9]*)/g, "$1 $2 $3 $4 $5 $6 $7 $8 $9");
+
             //99 A 99 (A) A 99 (A) cWW 99
             subEntries = s1.split(" ");
+            subEntries.splice(0, 2);
+            subEntries.splice(7, 3);
+            subEntries.splice(8, 1);
+            subEntries.splice(9, 3);
 
             //parse edge
             edgeID = parseInt(subEntries[0]);

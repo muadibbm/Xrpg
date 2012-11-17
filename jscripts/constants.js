@@ -17,7 +17,7 @@ function Constants () {
     //this.BACKGROUND_WORLD_HEIGHT = (7 / 3) * this.WORLD_HEIGHT;
     //this.BACKGROUND_WORLD_ORIGIN_X = this.WORLD_ORIGIN_X - this.WORLD_WIDTH / 3;
     //this.BACKGROUND_WORLD_ORIGIN_Y = this.WORLD_ORIGIN_Y - this.WORLD_HEIGHT / 3;
-    this.BACKGROUND_ALPHA = 0.93;
+    this.BACKGROUND_ALPHA = 0.99;
 
     this.GRAPH_X = this.WORLD_WIDTH / 45.0;
     this.GRAPH_Y = this.WORLD_HEIGHT/ 45.0;
@@ -25,16 +25,16 @@ function Constants () {
     
     this.STARTING_GOLD = 1000;
     
-    this.BASE_CITY_SCALE = 0.45;
-    this.BASE_TOWER_SCALE = 0.3;
+    this.BASE_CITY_SCALE = 0.3;
+    this.BASE_TOWER_SCALE = 0.2;
 
     this.CITY_SELECTION_SCALE1 = 0.17;
     this.CITY_SELECTION_SCALE2 = 0.12;
     this. SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;
-    this.BASE_SELECTION_SPEED = 1000;
+    //this.BASE_SELECTION_SPEED = 1000;
     
-    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 30.0;
+    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 60.0;
     this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;
@@ -114,7 +114,7 @@ function Constants () {
 	TOWER_COST : 60,
 	WALL_COST : 50,*/
     
-    this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 50.0;
+    this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 100.0;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
     
@@ -138,8 +138,9 @@ function Constants () {
     this.TREE_SCALE = 0.81,
     this.MAX_TREE_NUMBER = 1800,
     this.MIN_INBETWEEN_TREE_DISTANCE = 10.0,
-    this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 10.0,
-    this.MIN_NODE_TREE_DISTANCE = this.WORLD_WIDTH / 30.0,
+    this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 9.0,
+    this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 43.0,
+    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 63.0,
     
     //UI_DEPTH : 3.0,
     //CONSTRUCTION_PANEL_X : 0.0,
@@ -156,15 +157,15 @@ function Constants () {
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
     
-    this.ROAD_WIDTH = 0.31;
-    this.MAPPING_WIDTH = 0.32;
+    this.ROAD_WIDTH = 0.3;
+    this.MAPPING_WIDTH = 0.3;
 
     this.SHADOW = 0.45;
     this.HIDDEN_MAPPING = 0.3;
     this.VISIBLE_MAPPING = 0.9;
-	this.HIDDEN_ROAD = 0.1;
+	this.HIDDEN_ROAD = 0.05;
 	this.VISIBLE_ROAD = 0.8;
-	this.BASE_ALPHA = 0.5;
+	this.BASE_ALPHA = 0.39;
 	this.VISIBLE_BASE = 0.9;
 
     // Key codes for key events

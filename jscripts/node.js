@@ -272,9 +272,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }//else --> Andrey remove drag mapping indication HERE <--
                     player.setNodeToBeMapped(null);
                 }
-                //Set the mapping of the selected node visible
-                if (mapping != null)
-                    mapping.setVisible(true);
 
                 //show the available Constructions for this node
                 //gui.showConstructions(player.getSelectedNode(), graph.isCity(), true);
@@ -298,6 +295,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             }*/
             nodes = null;
             edges = null;
+
+            //Set the mapping of the selected node visible
+            if (mapping != null) {
+                mapping.setVisible(true);
+                mapped_node.getBase().setVisible(true);
+            }
         }
     }
 
@@ -362,8 +365,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     //TODO : add some graphical indication - Andrey add drag mapping HERE <--
                 }
                 //Set the mapping of the selected node visible
-                if (mapping != null)
+                if (mapping != null) {
                     mapping.setVisible(true);
+                    mapped_node.getBase().setVisible(true);
+                }
 
                 //show the available Constructions for this node
                 //gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), true);
@@ -394,10 +399,16 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.addOnMouseOut = function (graph, player) {
         base.getBitmap().onMouseOut = function (event) { //Called when the mouse leaves a Bitmap.
             if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
-                    (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
-                    (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
+                    ((player.getSelectedNode() != null & player.getSelectedNode() != self) ||
+                    (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) ||
+                    mapped_node != null & mapped_node != player.getSelectedNode() & (player.getSelectedNode() != null & player.getSelectedNode() != self)) {
 
                 base.setVisible(false);
+                if (mapping != null)
+                    if (mapped_node != player.getSelectedNode()) {
+                        mapping.setVisible(false);
+                        mapped_node.getBase().setVisible(false);
+                    }
                 for (var j = 0; j < neighbors.length; j++)
                     if (player.getSelectedNode() == neighbors[j])
                         base.setVisible(true);
@@ -413,9 +424,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }
                 }
             }
-
-            if (mapping != null)
-                mapping.setVisible(false);
 
             //gui.hidePopulation();
 
@@ -472,8 +480,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }
                 }
                 //Set the mapping of the selected node visible
-                if (mapping != null)
+                if (mapping != null) {
                     mapping.setVisible(true);
+                    mapped_node.getBase().setVisible(true);
+                }
 
                 //Show population
                 /*switch(node.getNodeLevel()) {
