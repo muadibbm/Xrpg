@@ -157,12 +157,18 @@ function Constants () {
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
     
+    this.MAPPING_POINT_X = 0.0;
+    this.MAPPING_POINT_Y = 0.0;
+    this.MAPPING_POINT_SCALE = 0.43;
+
     this.ROAD_WIDTH = 0.3;
     this.MAPPING_WIDTH = 0.3;
 
     this.SHADOW = 0.45;
     this.HIDDEN_MAPPING = 0.3;
     this.VISIBLE_MAPPING = 0.9;
+    this.HIDDEN_SCORE = 0.27;
+    this.VISIBLE_SCORE = 1.0;
 	this.HIDDEN_ROAD = 0.05;
 	this.VISIBLE_ROAD = 0.8;
 	this.BASE_ALPHA = 0.39;
