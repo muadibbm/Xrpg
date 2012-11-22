@@ -16,8 +16,18 @@ var manifest = [
     { id: "baseSelected4", src: "images/City/selection4.png" },
     { id: "baseSelected5", src: "images/City/selection5.png" },
     { id: "baseSelected6", src: "images/City/selection6.png" },
+    { id: "road",          src: "images/Road/sampleRoad.png" },
     { id: "mapping",       src: "images/Road/sampleMapping.png" },
-    { id: "road",          src: "images/Road/sampleRoad.png" }
+    { id: "n1",            src: "images/UI/1.png" },
+    { id: "n2",            src: "images/UI/2.png" },
+    { id: "n3",            src: "images/UI/3.png" },
+    { id: "n4",            src: "images/UI/4.png" },
+    { id: "n5",            src: "images/UI/5.png" },
+    { id: "n6",            src: "images/UI/6.png" },
+    { id: "n7",            src: "images/UI/7.png" },
+    { id: "n8",            src: "images/UI/8.png" },
+    { id: "n9",            src: "images/UI/9.png" },
+    { id: "n0",            src: "images/UI/0.png" }
 ];
 // List of all Images
 var bgImage;
@@ -36,6 +46,16 @@ var cityBaseSelectedImage5;
 var cityBaseSelectedImage6;
 var roadImage;
 var mappingImage;
+var n1Image;
+var n2Image;
+var n3Image;
+var n4Image;
+var n5Image;
+var n6Image;
+var n7Image;
+var n8Image;
+var n9Image;
+var n0Image;
 
 //general public function for creating resources(called once for every resource)
 function createResource(id) {
@@ -66,4 +86,14 @@ function loadImages() {
     cityBaseSelectedImage6 = createResource("baseSelected6");
     roadImage = createResource("road");
     mappingImage = createResource("mapping");
+    n1Image = createResource("n1");
+    n2Image = createResource("n2");
+    n3Image = createResource("n3");
+    n4Image = createResource("n4");
+    n5Image = createResource("n5");
+    n6Image = createResource("n6");
+    n7Image = createResource("n7");
+    n8Image = createResource("n8");
+    n9Image = createResource("n9");
+    n0Image = createResource("n0");
 }

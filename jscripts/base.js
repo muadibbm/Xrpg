@@ -173,7 +173,7 @@ function Base(graphLayer, _id, _isCity) {
      * @param population - int
      */
     this.setPopulation = function (_population) {
-        this.population = _population;
+        population = _population;
     }
 
     //@return {integer} the population of this node

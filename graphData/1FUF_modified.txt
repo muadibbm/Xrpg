@@ -1,20 +1,26 @@
-1 C 1(B) - C 2(A) - cWW - 0
-2 C 2(A) - C 1(B) - cWW - 0
-3 G 3(B) - A 4(A) - cWW - 0
-4 A 4(A) - G 3(B) - cWW - 0
-5 G 4(A) - U 2(A) - cWW - 0
-6 U 2(A) - G 4(A) - cWW - 0
-7 A 5(A) - G 6(B) - cWW - 0
-8 G 6(A) - U 5(A) - cWW - 0
-9 C 6(B) - C 1(A) - cWW - 0
-10 C 2(A) - C 5(B) - cWW - 0
-11 G 5(B) - A 2(A) - cWW - 0
-12 A 7(A) - G 3(B) - cWW - 0
-13 G 3(A) - U 7(A) - cWW - 0
-14 U 8(A) - G 4(A) - cWW - 0
-15 A 4(A) - G 8(B) - cWW - 0
-16 G 1(A) - U 6(A) - cWW - 0
-17 A 4(A) - G 6(B) - cWW - 0
-18 G 6(A) - U 4(A) - cWW - 0
-19 A 1(A) - G 8(B) - cWW - 0
-20 G 8(A) - U 1(A) - cWW - 0
+  101 C 1(A) - G 6(A) -    cWW  -    0
+  102 C 6(A) - G 1(A) -    cWW  -    0
+  103 G 1(A) - C 2(A) -    cWW  -    0
+  104 A 2(A) - U 1(A) -    cWW  -    0
+  105 G 1(A) - C 5(A) -    cWW  -    0
+  106 A 5(A) - U 1(A) -    cWW  -    0
+  107 G 2(A) - C 6(A) -    cWW  -    0
+  108 G 6(A) - C 2(A) -    cWW  -    0
+  109 C 5(A) - G 7(A) -    cWW  -    0
+  110 G 7(A) - C 5(A) -    cWW  -    0
+  111 C 3(A) - G 5(A) -    cWW  -    0
+  112 C 5(A) - G 3(A) -    cWW  -    0
+  113 U 3(A) - A 6(A) -    cWW  -    0
+  114 C 6(A) - G 3(A) -    cWW  -    0
+  115 G 7(A) - C 4(A) -    cWW  -    0
+  116 C 4(A) - G 7(A) -    cWW  -    0
+  117 G 8(A) - C 2(A) -    cWW  -    0
+  118 A 2(A) - U 8(A) -    cWW  -    0
+  119 C 9(A) - G 8(A) -    cWW  -    0
+  120 G 8(A) - U 9(A) -    cWW  -    0
+  121 G 8(A) - C 1(A) -    cWW  -    0
+  122 A 1(A) - U 8(A) -    cWW  -    0
+  123 C 9(A) - G 10(A) -    cWW  -    0
+  124 G 10(A) - U 9(A) -    cWW  -    0
+  125 C 11(A) - G 10(A) -    cWW  -    0
+  126 G 10(A) - U 11(A) -    cWW  -    0

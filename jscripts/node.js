@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Contains all the research-based data for a node and also the game logic required for every node
 * @param id - the unique integer associated with this node read from the raw data
 * @param nucl - type of Nucleotide read from raw data
@@ -15,14 +15,13 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     var graph_id = _graph_id;
     var player_id = _player_id;
     var placed = false;
-    var self = this;
+
     var mapped_node = null;
     var mapping = null;
+
     var base = new Base(graphLayer, id, isCity);
 
-    this.getGraphLayer = function () {
-        return graphLayer;
-    }
+    var self = this;
 
     /**
 	* places the node at the given (x,y) coordinates and flag placed to true
@@ -104,7 +103,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     * Returns the node which this instance is mapped to
     * @return mapped_node - the instance of Node
     */
-    this.getMappedNode = function() {
+    this.getMappedNode = function () {
         return mapped_node;
     }
 
@@ -112,12 +111,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
 	* Sets the mapped_node to be the given node
 	* @param node - the instance of Node
 	*/
-    this.setMappedNode = function(node) {
+    this.setMappedNode = function (node) {
         mapped_node = node;
     }
 
     //copies the mapping itself not the nodes
-    this.copyMapping = function(_mapping) {
+    this.copyMapping = function (_mapping) {
         mapping = _mapping;
     }
 
@@ -125,11 +124,11 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
 	* Returns the mapping this node has
 	* @return mapping - the instance of Mapping
 	*/
-    this.getMapping = function() {
+    this.getMapping = function () {
         return mapping;
     }
 
-    this.removeMapping = function() {
+    this.removeMapping = function () {
         mapped_node = null;
         mapping = null;
     }
@@ -142,58 +141,58 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.setMapping = function (node, score) {
         mapped_node = node;
         node.setMappedNode(self);
-        mapping = new Mapping(environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
+        mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
         mapping.transform();
         mapped_node.copyMapping(mapping);
-        propagateMapping(score-1);
+        propagateMapping(score - 1);
     }
 
     /**
     * Removes the existing mapping from this node to the given node
     * Note : If used on a node with no mapping will cause a NullPointerException
     */
-    this.unMap = function(score) {
-        propagateUnmapping(score-1);
+    this.unMap = function (score) {
+        propagateUnmapping(score - 1);
         mapped_node.removeMapping();
         mapping.destroy();
         self.removeMapping();
     }
 
     //Mapping Score Propagation Logic
-    propagateMapping = function(score) {
-        for(var i=0; i < neighbors.length; i++) {
-            if(neighbors[i].getMapping() != null) {
-                if(mapped_node!=null & neighbors[i].getMappedNode() != null) {
-                    if(neighbors[i].getMappedNode().isNeighbor(mapped_node))
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()+score+1);
-		        }
-		        else
-                    neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()+score);
-		    }
-	    }
+    propagateMapping = function (score) {
+        for (var i = 0; i < neighbors.length; i++) {
+            if (neighbors[i].getMapping() != null) {
+                if (mapped_node != null & neighbors[i].getMappedNode() != null) {
+                    if (neighbors[i].getMappedNode().isNeighbor(mapped_node))
+                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() + score + 1);
+                }
+                else
+                    neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() + score);
+            }
+        }
     }
 
     //Unmapping Score Propagation Logic
-    propagateUnmapping = function(score) {
-        if(score > 0)
-            for(var i=0; i < neighbors.length; i++) {
+    propagateUnmapping = function (score) {
+        if (score > 0)
+            for (var i = 0; i < neighbors.length; i++) {
                 if (neighbors[i].getMapping() != null) {
-                    if(mapped_node!=null & neighbors[i].getMappedNode() != null) {
-                        if(neighbors[i].getMappedNode().isNeighbor(mapped_node))
-                            neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()-score-1);
+                    if (mapped_node != null & neighbors[i].getMappedNode() != null) {
+                        if (neighbors[i].getMappedNode().isNeighbor(mapped_node))
+                            neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score - 1);
                     }
                     else
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()-score);
+                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score);
                 }
             }
     }
 
     this.toString = function () {
-        return "id:" + id + ", " + "nucleotide:" + nucleotide + ", " + "neighbours:" + neighbors.length + ", " + "x:" + coordinates.x + ", " + "y:" + coordinates.y + ", " + "graph_id:" + graph_id + ", " + "placed:" + placed;
+        return "id:" + id + ", " + "nucleotide:" + nucleotide + ", " + "neighbors:" + neighbors.length + ", " + "x:" + coordinates.x + ", " + "y:" + coordinates.y + ", " + "graph_id:" + graph_id + ", " + "placed:" + placed;
     }
 
     this.addMouseClick = function (graph, otherGraph, player) {
-        base.getBitmap().onClick = function(event) { //Called when the mouse is pressed and released
+        base.getBitmap().onClick = function (event) { //Called when the mouse is pressed and released
             //Hide previous selections
             var nodes = graph.getNodes();
             for (var i = 0; i < nodes.length; i++) {
@@ -219,7 +218,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             edges = otherGraph.getEdges();
             for (var i = 0; i < edges.length; i++)
                 edges[i].getRoad().setVisible(false);
-            //Select New Node and set new neighbours visible
+            //Select New Node and set new neighbors visible
             player.selectNode(self);
             base.setVisible(true);
             base.setSelection(true);
@@ -237,35 +236,37 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 //Create Mapping if a Node is already set to be mapped
                 if (player.getNodeToBeMapped() != null) {
                     if (player_id == player.getSelectedNode().getPlayerID() & player.getSelectedNode().getMapping() == null) {
+                        console.log("NodeTobeMapped: " + player.getNodeToBeMapped().getNodeLevel());
+                        console.log("selectedNode: " + player.getSelectedNode().getNodeLevel());
                         if (base.isCity() & player.getNodeToBeMapped().getBase().isCity() == false) {
                             //Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
                             //mapping score : 0 , mapping propagation score : -1
                             if (player.getSelectedNode().getNodeLevel() < player.getNodeToBeMapped().getNodeLevel()) {
                                 self.setMapping(player.getNodeToBeMapped(), 0);
                             }
-                            //Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
-                            //mapping score : 1 , mapping propagation score : 0
+                                //Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+                                //mapping score : 1 , mapping propagation score : 0
                             else if (player.getSelectedNode().getNodeLevel() > player.getNodeToBeMapped().getNodeLevel()) {
                                 self.setMapping(player.getNodeToBeMapped(), 1);
                             }
-                            //Efficient mapping occurs when the city population is exactly matches the capacity of a camp
-                             //mapping score : 2 , mapping propagation score : 1
+                                //Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+                                //mapping score : 2 , mapping propagation score : 1
                             else {
                                 self.setMapping(player.getNodeToBeMapped(), 2);
                             }
-                        } else if (base.isCity()==false & player.getNodeToBeMapped().getBase().isCity()==true) {
+                        } else if (base.isCity() == false & player.getNodeToBeMapped().getBase().isCity() == true) {
                             //Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
                             //mapping score : 0 , mapping propagation score : -1
                             if (player.getNodeToBeMapped().getNodeLevel() < player.getSelectedNode().getNodeLevel()) {
                                 player.getNodeToBeMapped().setMapping(self, 0);
                             }
-                            //Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
-                            //mapping score : 1 , mapping propagation score : 0
+                                //Acceptable mapping occurs when the city population is more than the capacity of a camp, thus the has the resources for the camp but the camp is too small for the city
+                                //mapping score : 1 , mapping propagation score : 0
                             else if (player.getNodeToBeMapped().getNodeLevel() > player.getSelectedNode().getNodeLevel()) {
                                 player.getNodeToBeMapped().setMapping(self, 1);
                             }
-                            //Efficient mapping occurs when the city population is exactly matches the capacity of a camp
-                            //mapping score : 2 , mapping propagation score : 1
+                                //Efficient mapping occurs when the city population is exactly matches the capacity of a camp
+                                //mapping score : 2 , mapping propagation score : 1
                             else {
                                 player.getNodeToBeMapped().setMapping(self, 2);
                             }
@@ -273,9 +274,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }//else --> Andrey remove drag mapping indication HERE <--
                     player.setNodeToBeMapped(null);
                 }
-                //Set the mapping of the selected node visible
-                if (mapping != null)
-                    mapping.setVisible(true);
 
                 //show the available Constructions for this node
                 //gui.showConstructions(player.getSelectedNode(), graph.isCity(), true);
@@ -299,6 +297,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             }*/
             nodes = null;
             edges = null;
+
+            //Set the mapping of the selected node visible
+            if (mapping != null) {
+                mapping.setVisible(true);
+                mapped_node.getBase().setVisible(true);
+            }
         }
     }
 
@@ -329,7 +333,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             edges = otherGraph.getEdges();
             for (var i = 0; i < edges.length; i++)
                 edges[i].getRoad().setVisible(false);
-            //Select New Node and set new neighbours visible
+            //Select New Node and set new neighbors visible
             player.selectNode(self);
             base.setVisible(true);
             if (player.getSelectedNode().getMapping() != null) {
@@ -363,8 +367,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     //TODO : add some graphical indication - Andrey add drag mapping HERE <--
                 }
                 //Set the mapping of the selected node visible
-                if (mapping != null)
+                if (mapping != null) {
                     mapping.setVisible(true);
+                    mapped_node.getBase().setVisible(true);
+                }
 
                 //show the available Constructions for this node
                 //gui.showConstructions(player.getSelectedNode(), graph.isCityGraph(), true);
@@ -395,17 +401,41 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.addOnMouseOut = function (graph, player) {
         base.getBitmap().onMouseOut = function (event) { //Called when the mouse leaves a Bitmap.
             if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
-                    (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
-                    (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
+                    ((player.getSelectedNode() != null & player.getSelectedNode() != self) ||
+                    (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) ||
+                    mapped_node != null & mapped_node != player.getSelectedNode() & (player.getSelectedNode() != null & player.getSelectedNode() != self)) {
 
                 base.setVisible(false);
+                if (mapping != null) {
+                    if (mapped_node != player.getSelectedNode()) {
+                        mapping.setVisible(false);
+                        mapped_node.getBase().setVisible(false);
+                        if (player.getSelectedNode() != null) {
+                            if (player.getSelectedNode().getNeighbors().indexOf(mapped_node) != -1) {
+                                mapped_node.getBase().setVisible(true);
+                            }
+                        }
+                    }
+                    else
+                        base.setVisible(true);
+                }
                 for (var j = 0; j < neighbors.length; j++)
-                    if (player.getSelectedNode() == neighbors[j])
+                    if (player.getSelectedNode() == neighbors[j] || player.getNodeToBeMapped() == neighbors[j])
                         base.setVisible(true);
                 base.setHoverSelection(false);
-                for (var j = 0; j < neighbors.length; j++)
+                for (var j = 0; j < neighbors.length; j++) {
                     if (player.getSelectedNode() != neighbors[j] & player.getNodeToBeMapped() != neighbors[j])
                         neighbors[j].getBase().setVisible(false);
+                    if (player.getSelectedNode() != null) {
+                        if (player.getSelectedNode().getNeighbors().indexOf(neighbors[j]) != -1 || player.getSelectedNode().getMappedNode() == neighbors[j]) {
+                            neighbors[j].getBase().setVisible(true);
+                        }
+                    }
+                    if (player.getNodeToBeMapped() != null) {
+                        if (player.getNodeToBeMapped().getNeighbors().indexOf(neighbors[j]) != -1)
+                            neighbors[j].getBase().setVisible(true);
+                    }
+                }
                 //Set all edges of the selected node invisible
                 for (var j = 0; j < graph.getEdges().length; j++) {
                     edge = graph.getEdges()[j];
@@ -414,9 +444,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }
                 }
             }
-
-            if (mapping != null)
-                mapping.setVisible(false);
 
             //gui.hidePopulation();
 
@@ -454,12 +481,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         }
     }
 
-    this.addOnMouseOver = function(graph, player) {
+    this.addOnMouseOver = function (graph, player) {
         base.getBitmap().onMouseOver = function (event) { //Called when the mouse enters a Bitmap.
             if ((player.getSelectedNode() == null & player.getNodeToBeMapped() == null) ||
                 (player.getSelectedNode() != null & player.getSelectedNode() != self) ||
                 (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
-                //Set the node and neighbours visible
+                //Set the node and neighbors visible
                 base.setVisible(true);
                 base.setHoverSelection(true);
                 for (var j = 0; j < neighbors.length; j++)
@@ -473,8 +500,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     }
                 }
                 //Set the mapping of the selected node visible
-                if (mapping != null)
+                if (mapping != null) {
                     mapping.setVisible(true);
+                    mapped_node.getBase().setVisible(true);
+                }
 
                 //Show population
                 /*switch(node.getNodeLevel()) {

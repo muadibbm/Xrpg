@@ -5,7 +5,7 @@
 * @param pos2 - the coordinates of the node the mapping goes to
 * @param score - the mapping score
 */
-function Mapping(mappingLayer, _pos1, _pos2, _score)
+function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
 {	
     var mapBitmap = new Bitmap(mappingImage);
     mapBitmap.alpha = Const.VISIBLE_MAPPING;
@@ -18,10 +18,7 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
 
     mappingLayer.addChild(mapBitmap);
 
-    //TODO
-    //scoreImage = new Digits(graphLayer, Const.MAPPING_POINT_X + (pos2.getX() + pos1.getX())/2.0f, Const.MAPPING_POINT_Y + (pos2.getY() + pos1.getY())/2.0f, Const.MAPPING_POINT_SCALE, Const.MAPPING_DEPTH+1.0f);
-    //scoreImage.setAlpha(Const.VISIBLE);
-
+    var scoreImage = new Digits(uiLayer, Const.MAPPING_POINT_X + (pos2.x + pos1.x) / 2.0, Const.MAPPING_POINT_Y + (pos2.y + pos1.y) / 2.0, Const.MAPPING_POINT_SCALE);
 
     //@return the visible flag
     this.isVisible = function() {
@@ -34,18 +31,22 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
     */
     this.setVisible = function(visible) {
         this.visible = visible;
-        if(visible)
+        if (visible) {
             mapBitmap.alpha = Const.VISIBLE_MAPPING;
-        else
+            scoreImage.setAlpha(Const.VISIBLE_SCORE);
+        }
+        else {
             mapBitmap.alpha = Const.HIDDEN_MAPPING;
+            scoreImage.setAlpha(Const.HIDDEN_SCORE);
+        }
     }
 
-    /*
-    private void paintScore() {
-        if(!scoreImage.destroyed()) {
-            scoreImage.setDigits(this.score);
+    
+    paintScore = function() {
+        if(scoreImage != null) {
+            scoreImage.setDigits(_score);
         }
-    }*/
+    }
 
     /**
     * places the positions of the mapping
@@ -63,7 +64,7 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
 
     //applies all the transformations
     this.transform = function () {
-        //TODO add paintScore(); transofrm for digits
+        paintScore();
         mapBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / mappingImage.width, Const.MAPPING_WIDTH);
         mapBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x) * 180 / Math.PI;
     }
@@ -88,6 +89,7 @@ function Mapping(mappingLayer, _pos1, _pos2, _score)
     this.destroy = function() {
         visible = false;
         mappingLayer.removeChild(mapBitmap);
-        //TODO mappingLayer.removeChild(scoreImage);
+        scoreImage.destroy();
+        scoreImage = null;
     }
 }
