@@ -74,6 +74,7 @@ function prepareGame() {
     stage.addChild(environment.getMappingLayer());
     stage.addChild(environment.getTreeLayer());
     stage.addChild(environment.getGraphLayer());
+    stage.addChild(environment.getCreatureLayer());
     stage.addChild(environment.getUiLayer());
 
     for (var i = 0; i < cityGraphA.getNodes().length; i++) {

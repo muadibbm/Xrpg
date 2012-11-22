@@ -11,7 +11,6 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
     var caravanLevel;
     var hasArrived;
     var dx, dy, err, sx, sy;
-    var isFirstTime = true;
     var currentTimer = null;
 
     caravanBitmap.alpha = Const.HIDDEN_CARAVAN;

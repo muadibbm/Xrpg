@@ -2,7 +2,7 @@
  * @author Andrey
  *
  */
-function Deeve(graphLayer, pointsList) {
+function Deeve(pointsList) {
     var deeveBitmap = new Bitmap(deeveImage);
     var initialPosition;
     var currentPosition;
@@ -15,16 +15,16 @@ function Deeve(graphLayer, pointsList) {
     var health = 100; // 100 % full
     var damage = 10; // Level 1 == 10 units of damage
     var hasArrived = false;
-    var isFirstTime = true;
     var currentTimer = null;
 
     deeveBitmap.alpha = Const.HIDDEN_DEEVE;
-    graphLayer.addChild(deeveBitmap);
+    environment.getCreatureLayer().addChild(deeveBitmap);
 
-    deeveLevel = 1;
     initialPosition = pointsList[index];
     currentPosition = initialPosition;
     finalPosition = pointsList[index + 1];
+
+    deeveLevel = 1;
     stoppingDist = 15;
     hasArrived = false;
 
@@ -48,8 +48,6 @@ function Deeve(graphLayer, pointsList) {
 
     reeval();
 
-    currentTimer = new setInterval(moveDeeve, Const.DEEVE_SPEED);
-
     var moveDeeve = function () {
         var e2 = 2 * err;
         var newPosition = new Tuple2d(currentPosition.x, currentPosition.y);
@@ -69,7 +67,7 @@ function Deeve(graphLayer, pointsList) {
         } else {
             if (index == (pointsList.length - 1)) {
                 hasArrived = true;
-                deeveStopMoving();
+                clearInterval(currentTimer);
             } else {
                 initialPosition = finalPosition;
                 currentPosition = initialPosition;
@@ -80,16 +78,20 @@ function Deeve(graphLayer, pointsList) {
         }
     }
 
+    var setPosition = function (_position) {
+        currentPosition = _position;
+        deeveBitmap.x = currentPosition.x;
+        deeveBitmap.y = currentPosition.y;
+    }
+
+    currentTimer = setInterval(moveDeeve, Const.DEEVE_SPEED);
+
     this.hasArrived = function () {
         return hasArrived;
     }
 
     this.setHasArrived = function (_hasArrived) {
         hasArrived = _hasArrived;
-    }
-
-    this.deeveStopMoving = function () {
-        clearInterval(currentTimer);
     }
 
     this.getDeeveLevel = function () {
@@ -102,10 +104,6 @@ function Deeve(graphLayer, pointsList) {
 
     this.getPosition = function () {
         return currentPosition;
-    }
-
-    this.setPosition = function (_position) {
-        currentPosition = _position;
     }
 
     this.isVisible = function () {
