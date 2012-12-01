@@ -25,6 +25,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     var roadLayer = new Container();
 
     deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 47, environment.getCaveBitmap().y + 60));
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 40, environment.getCaveBitmap().y + 60));
 
     this.getGraphLayer = function () {
         return graphLayer;
@@ -229,9 +230,13 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
         }
     }
 
+    var nextWave = function () {
+        nextWave = true;
+    }
+
     var addingDeeves = function () {
         //TODO: Set a periodic timer to denote the waves of deeves and then move them
-        if (deeveMovesList.length == 1) {
+        if (setInterval(waveTime, 5000)) {
             deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 100, Const.WINDOW_HEIGHT - 100));
             deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 200, Const.WINDOW_HEIGHT - 200));
             deeveMovesList.push(new Tuple2d(0, 0));
@@ -244,7 +249,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     }
 
     //sets the transformations of all the bitmaps in this graph instance after placement
-    transform = function () {
+    var transform = function () {
         for (var i = 0; i < nodesArray.length; i++) {
             nodesArray[i].getBase().transform();
         }
@@ -279,9 +284,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     // updates all the positions of the moving instances associated with the graph
     this.updateAll = function () {
         addingCaravans();
-        //if (isWaveWaitTimeOver) {
-            addingDeeves();
-        //}
+        addingDeeves();
     }
 
     if (typeof String.prototype.startsWith != 'function') {
