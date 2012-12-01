@@ -1,4 +1,4 @@
-﻿/**
+/**
 * Contains all the research-based data for a node and also the game logic required for every node
 * @param id - the unique integer associated with this node read from the raw data
 * @param nucl - type of Nucleotide read from raw data

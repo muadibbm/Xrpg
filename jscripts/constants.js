@@ -1,16 +1,12 @@
 /* Constant object containing constant game values implemented in a JavaScript object literal */
-function Constants () {
-    
+function Constants() {
     this.UPDATE_RATE = 60;
-	
     this.WINDOW_WIDTH = (0.75) * screen.width;
     this.WINDOW_HEIGHT = (0.75) * screen.height;
-	
     this.WORLD_WIDTH = this.WINDOW_WIDTH;
     this.WORLD_HEIGHT = this.WINDOW_HEIGHT;
     this.WORLD_ORIGIN_X = 0.0;
     this.WORLD_ORIGIN_Y = 0.0;
-    
     this.ZOOM_DEFAULT = 1.0;
 	
     //this.BACKGROUND_WORLD_WIDTH = (7 / 3) * this.WORLD_WIDTH;
@@ -20,9 +16,9 @@ function Constants () {
     this.BACKGROUND_ALPHA = 0.99;
 
     this.GRAPH_X = this.WORLD_WIDTH / 45.0;
-    this.GRAPH_Y = this.WORLD_HEIGHT/ 45.0;
+    this.GRAPH_Y = this.WORLD_HEIGHT / 45.0;
     this.GRAPH_GAP = this.WORLD_WIDTH / 10.0;
-    
+
     this.STARTING_GOLD = 1000;
     
     this.BASE_CITY_SCALE = 0.3;
@@ -30,8 +26,14 @@ function Constants () {
 
     this.CITY_SELECTION_SCALE1 = 0.17;
     this.CITY_SELECTION_SCALE2 = 0.12;
-    this. SELECTION_ALPHA = 0.75;
+    this.CARAVAN_SCALE = 0.02;
+    this.CARAVAN_MOVING_TIME = 200;
+    this.CARAVAN_TRADING_TIME = 5000;
+    this.CAMP_SELECTION_SCALE = 0.14;
+    this.SELECTION_ALPHA = 0.75;
     this.SELECTED_BASE_ALPHA = 1.0;
+    this.BASE_SELECTION_SPEED = 1000;
+
     //this.BASE_SELECTION_SPEED = 1000;
     
     this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 60.0;
@@ -117,23 +119,11 @@ function Constants () {
     this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 100.0;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
-    
-    /*COMMAND_TENT_X : 0.0,
-	COMMAND_TENT_Y : 0.0,
-	COMMAND_TENT_DEPTH : 3.3,
-	COMMAND_TENT_SCALE : (0.075)*this.CAMP_SCALE,
-	COMMAND_TENT_COST : 90,*/
-	
-    //this.TREE_OF_LIFE_SCALE = 0.1;
-    
-	this.DEEVE_CAVE_SCALE = 0.17;
-    //DEEVE_WAVE_WAITING_TIME : 5000,
-    //DEEVE_INITIAL_POS_X : this.WORLD_WIDTH/2.0,
-    //DEEVE_INITIAL_POS_Y : this.WORLD_HEIGHT/10.0,
-    //DEEVE_SCALE : 0.17,
-    //DEEVE_ALPHA : 1.0,
-    //DEEVE_DEPTH : 3.0,
-    //DEEVE_SPEED : 10,
+
+    this.DEEVE_CAVE_SCALE = 0.17;
+    this.DEEVE_WAVE_WAITING_TIME = 5000,
+    this.DEEVE_SCALE = 0.8,
+    this.DEEVE_SPEED = 20,
 
     this.TREE_SCALE = 0.81,
     this.MAX_TREE_NUMBER = 1800,
@@ -141,6 +131,27 @@ function Constants () {
     this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 9.0,
     this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 43.0,
     this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 63.0,
+
+    this.MAPPING_POINT_X = 0.0;
+    this.MAPPING_POINT_Y = 0.0;
+    this.MAPPING_POINT_SCALE = 0.43;
+
+    this.ROAD_WIDTH = 0.31;
+    this.MAPPING_WIDTH = 0.32;
+
+    this.SHADOW = 0.45;
+    this.HIDDEN_MAPPING = 0.3;
+    this.VISIBLE_MAPPING = 0.9;
+    this.HIDDEN_SCORE = 0.27;
+    this.VISIBLE_SCORE = 1.0;
+    this.HIDDEN_ROAD = 0.1;
+    this.VISIBLE_ROAD = 0.8;
+    this.BASE_ALPHA = 0.39;
+    this.VISIBLE_BASE = 0.9;
+    this.HIDDEN_CARAVAN = 0.0;
+    this.VISIBLE_CARAVAN = 1.0;
+    this.HIDDEN_DEEVE = 0.0;
+    this.VISIBLE_DEEVE = 1.0;
     
     //UI_DEPTH : 3.0,
     //CONSTRUCTION_PANEL_X : 0.0,
@@ -156,23 +167,6 @@ function Constants () {
 	POPULATION_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE,
 	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
 	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
-    
-    this.MAPPING_POINT_X = 0.0;
-    this.MAPPING_POINT_Y = 0.0;
-    this.MAPPING_POINT_SCALE = 0.43;
-
-    this.ROAD_WIDTH = 0.3;
-    this.MAPPING_WIDTH = 0.3;
-
-    this.SHADOW = 0.45;
-    this.HIDDEN_MAPPING = 0.3;
-    this.VISIBLE_MAPPING = 0.9;
-    this.HIDDEN_SCORE = 0.27;
-    this.VISIBLE_SCORE = 1.0;
-	this.HIDDEN_ROAD = 0.05;
-	this.VISIBLE_ROAD = 0.8;
-	this.BASE_ALPHA = 0.39;
-	this.VISIBLE_BASE = 0.9;
 
     // Key codes for key events
     this.KEYCODE_DOWN = 40;

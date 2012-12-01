@@ -15,6 +15,8 @@ function Environment() {
     // private container which holds the tree bitmaps
     var treeLayer = new Container();
 
+    var creatureLayer = new Container();
+
     // used for camera movement
     var offset = new Tuple2d(Const.WORLD_ORIGIN_X, Const.WORLD_ORIGIN_Y);
 
@@ -73,6 +75,10 @@ function Environment() {
         return treeLayer;
     }
 
+    this.getCreatureLayer = function () {
+        return creatureLayer;
+    }
+
     // sets the zoom level while changing the bitmaps details based on the new level
     this.setZoomLevel = function (newLevel) {
         zoomLevel = newLevel;
@@ -87,6 +93,4 @@ function Environment() {
     this.getCaveBitmap = function () {
         return caveBitmap;
     }
-
-    //TODO: the tree placement method from previous gameLoop should be coded here
 }

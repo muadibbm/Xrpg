@@ -1,8 +1,7 @@
 ﻿/**
  * This class contains the nodes and edges of the given graph read from the file system
  */
-function Graph(id, isCity, xOffset, yOffset, width, height) {
-
+function Graph(id, _isCity, xOffset, yOffset, width, height) {
     var nodes = new Hashtable();
     var edges = new Hashtable();
 
@@ -10,17 +9,23 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
     var edgesArray = [];
 
     var id = id;
-    var isCity = isCity;
+    var isCity = _isCity;
     var Offset = new Tuple2d(xOffset, yOffset);
     var width = width;
     var height = height;
 
     var caravanList = [];
-
+    var deeveList = [];
+    var deeveMovesList = [];
+    var caveBitmap = null;
     var self = this;
+    var isWaveWaitTimeOver = false;
 
     var graphLayer = new Container();
     var roadLayer = new Container();
+
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 47, environment.getCaveBitmap().y + 60));
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 40, environment.getCaveBitmap().y + 60));
 
     this.getGraphLayer = function () {
         return graphLayer;
@@ -43,8 +48,16 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
         return caravanList;
     }
 
-    this.setCaravanList = function (newCaravanList) {
-        caravanList = newCaravanList;
+    this.setCaravanList = function (_caravanList) {
+        caravanList = _caravanList;
+    }
+
+    this.getDeeveList = function () {
+        return deeveList;
+    }
+
+    this.setDeeveList = function (_deeveList) {
+        deeveList = _deeveList;
     }
 
     // @return {Double} the graph width
@@ -115,17 +128,14 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 
     isSeperated = function (test_coordinates) {
         var distance = 0.0;
-        for(var i = 0; i < nodesArray.length; i++) {
+        for (var i = 0; i < nodesArray.length; i++) {
             if (nodesArray[i].isPlaced()) {
                 distance = nodesArray[i].getPos().getDistanceFrom(test_coordinates);
-                if (isCity)
-                {
-                    if(distance < Const.MIN_CITY_DISTANCE)// || distance > Const.MAX_CITY_DISTANCE
+                if (isCity) {
+                    if (distance < Const.MIN_CITY_DISTANCE)// || distance > Const.MAX_CITY_DISTANCE
                         return false;
-                }
-                else
-                {
-                    if(distance < Const.MIN_TOWER_DISTANCE)// || distance > Const.MAX_TOWER_DISTANCE
+                } else {
+                    if (distance < Const.MIN_TOWER_DISTANCE)// || distance > Const.MAX_TOWER_DISTANCE
                         return false;
                 }
             }
@@ -195,31 +205,51 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
         }
     }
 
-    movingCaravans = function () {
-        /*for (Entry<Integer, Node> entry: nodes.entrySet()) {
-            Node node = entry.getValue();
-            if (node.getBase() instanceof City) {
-                City c1 = (City) node.getBase(); 
-                if (c1.hasBazaar()) {
-                    List<Node> neighbours = node.getNeighbors();
-                    for (Node neighbour: neighbours) {
-                        City c2 = (City) neighbour.getBase();
-                        if (c2.hasBazaar()) {
-                            if (!c1.hasCaravan() || !c2.hasCaravan()) {
-                                c1.setHasCaravan(true);
-                                c2.setHasCaravan(true);
-                                caravanList.add(new Caravan(node.getGraphLayer(), node.getPos(), neighbour.getPos(), node.getBase().getBaseLayer().scaledWidth() / 10));
+    if (isCity) {
+        var addingCaravans = function () {
+            for (var i = 0; i < nodesArray.length; i++) {
+                // The graph contains only cities
+                var city1 = nodesArray[i].getBase();
+                if (city1.hasBazaar()) {
+                    var neighbours = nodesArray[i].getNeighbors();
+                    for (var j = 0; j < neighbours.length; j++) {
+                        var city2 = neighbours[j].getBase();
+                        if (city2.hasBazaar()) {
+                            if (!city1.hasCaravan() || !city2.hasCaravan()) {
+                                city1.setHasCaravan(true);
+                                city2.setHasCaravan(true);
+                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), (nodesArray[i].getBase().getBaseBitmap().image.width * Const.BASE_CITY_SCALE) / 10);
+                                caravan.setVisible(true);
+                                caravan.transform();
+                                caravanList.push(caravan);
                             }
                         }
                     }
                 }
             }
         }
-*/
+    }
+
+    var nextWave = function () {
+        nextWave = true;
+    }
+
+    var addingDeeves = function () {
+        //TODO: Set a periodic timer to denote the waves of deeves and then move them
+        if (setInterval(waveTime, 5000)) {
+            deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 100, Const.WINDOW_HEIGHT - 100));
+            deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 200, Const.WINDOW_HEIGHT - 200));
+            deeveMovesList.push(new Tuple2d(0, 0));
+
+            var deeve = new Deeve(deeveMovesList);
+            deeve.setVisible(true);
+            deeve.transform();
+            deeveList.push(deeve);
+        }
     }
 
     //sets the transformations of all the bitmaps in this graph instance after placement
-    transform = function () {
+    var transform = function () {
         for (var i = 0; i < nodesArray.length; i++) {
             nodesArray[i].getBase().transform();
         }
@@ -236,6 +266,14 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
     this.generateGraph = function (data, player_id) {
         parseGraphFile(data, player_id);
         nodesArray = nodes.values();
+
+        // TEST
+        if (isCity) {
+            nodesArray[0].getBase().setHasBazaar(true);
+            nodesArray[0].getNeighbors()[0].getBase().setHasBazaar(true);
+        }
+        //TEST
+
         edgesArray = edges.values();
         placeNodes();
         setNodeLevels();
@@ -245,7 +283,8 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
 
     // updates all the positions of the moving instances associated with the graph
     this.updateAll = function () {
-        movingCaravans();
+        addingCaravans();
+        addingDeeves();
     }
 
     if (typeof String.prototype.startsWith != 'function') {
@@ -421,7 +460,6 @@ function Graph(id, isCity, xOffset, yOffset, width, height) {
                 n2 = getNode(neighborID);
             }
             n1.addNeighbor(n2);
-
         }
     }
 }
