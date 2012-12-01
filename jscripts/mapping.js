@@ -16,13 +16,17 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
     var pos1 = _pos1;
     var pos2 = _pos2;
 
-    mappingLayer.addChild(mapBitmap);
-
     var scoreImage = new Digits(uiLayer, Const.MAPPING_POINT_X + (pos2.x + pos1.x) / 2.0, Const.MAPPING_POINT_Y + (pos2.y + pos1.y) / 2.0, Const.MAPPING_POINT_SCALE);
+
+    mappingLayer.addChild(mapBitmap);
 
     //@return the visible flag
     this.isVisible = function() {
         return visible;
+    }
+
+    this.getScoreImage = function() {
+        return scoreImage;
     }
 
     /**
@@ -38,13 +42,6 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
         else {
             mapBitmap.alpha = Const.HIDDEN_MAPPING;
             scoreImage.setAlpha(Const.HIDDEN_SCORE);
-        }
-    }
-
-    
-    paintScore = function() {
-        if(scoreImage != null) {
-            scoreImage.setDigits(_score);
         }
     }
 
@@ -64,12 +61,11 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
 
     //applies all the transformations
     this.transform = function () {
-        paintScore();
         mapBitmap.setTransform(pos1.x, pos1.y, pos1.getDistanceFrom(pos2) / mappingImage.width, Const.MAPPING_WIDTH);
         mapBitmap.rotation = Math.atan2(pos2.y - pos1.y, pos2.x - pos1.x) * 180 / Math.PI;
     }
 
-    //@return {Integer} the points this mapping has
+    //@return the points this mapping has
     this.getScore = function() {
         return score;
     }
@@ -78,11 +74,15 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
     * Sets the points of this mapping to the given value
     * @param points - integer
     */
-    this.setScore = function(_score) {
-        if(_score < 0)
+    this.setScore = function (newScore) {
+        if (newScore < 0)
             score = 0;
         else
-            score = _score;
+            score = newScore;
+    }
+
+    this.paintScore = function () {
+        scoreImage.setDigits(score);
     }
 
     //destroys the mapping bitmap
@@ -91,5 +91,9 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
         mappingLayer.removeChild(mapBitmap);
         scoreImage.destroy();
         scoreImage = null;
+    }
+
+    this.toString = function () {
+        return "scoreImage:" + scoreImage + ", " + "score:" + score + ", " + "pos1:" + pos1 + ", " + "pos2:" + pos2;
     }
 }

@@ -133,6 +133,19 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         mapping = null;
     }
 
+    //Unmapping Score Propagation Logic
+    this.propagateUnmapping = function (score) {
+        /*if (score > 0)
+            for (var i = 0; i < neighbors.length; i++) {
+                if (neighbors[i].getMapping() != null) {
+                    if (neighbors[i].getMappedNode().isNeighbor(mapped_node))
+                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score - 1);
+                    else
+                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score);
+                }
+            }*/
+    }
+
     /**
     * Sets a mapping from this node to the given node
     * @param node - the node to be mapped to
@@ -142,9 +155,26 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         mapped_node = node;
         node.setMappedNode(self);
         mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
+        mapping.setScore(20);
+        mapping.paintScore();
+        //console.log("node: " + self);
+        //console.log("this MAPPING: " + mapping);
+        //console.log("mapped node: " + node);
         mapping.transform();
         mapped_node.copyMapping(mapping);
-        propagateMapping(score-1);
+        var mappingNeighbors = self.getNeighbors();
+        for (var k = 0; k < mappingNeighbors.length; k++) {
+            if (mappingNeighbors[k].getMapping() != null) {
+                //if (mapped_node.isNeighbor(neighbors[i].getMappedNode())) {
+                    //console.log("neighbor: " + neighbors[i]);
+                mappingNeighbors[k].getMapping().setScore(100);
+                console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
+                mappingNeighbors[k].getMapping().paintScore();
+                console.log("neighbor " + mappingNeighbors[k].getMapping().getScoreImage().getLayer().getNumChildren());
+                console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
+                //}
+            }
+        }
     }
 
     /**
@@ -152,39 +182,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     * Note : If used on a node with no mapping will cause a NullPointerException
     */
     this.unMap = function(score) {
-        propagateUnmapping(score-1);
+        self.propagateUnmapping(score-1);
         mapped_node.removeMapping();
         mapping.destroy();
         self.removeMapping();
-    }
-
-    //Mapping Score Propagation Logic
-    propagateMapping = function(score) {
-        for(var i=0; i < neighbors.length; i++) {
-            if(neighbors[i].getMapping() != null) {
-                if(mapped_node!=null & neighbors[i].getMappedNode() != null) {
-                    if(neighbors[i].getMappedNode().isNeighbor(mapped_node))
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()+score+1);
-		        }
-		        else
-                    neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()+score);
-		    }
-	    }
-    }
-
-    //Unmapping Score Propagation Logic
-    propagateUnmapping = function(score) {
-        if(score > 0)
-            for(var i=0; i < neighbors.length; i++) {
-                if (neighbors[i].getMapping() != null) {
-                    if(mapped_node!=null & neighbors[i].getMappedNode() != null) {
-                        if(neighbors[i].getMappedNode().isNeighbor(mapped_node))
-                            neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()-score-1);
-                    }
-                    else
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore()-score);
-                }
-            }
     }
 
     this.toString = function () {
@@ -192,7 +193,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     }
 
     this.addMouseClick = function (graph, otherGraph, player) {
-        base.getBitmap().onClick = function(event) { //Called when the mouse is pressed and released
+        base.getBitmap().onClick = function (event) { //Called when the mouse is pressed and released
             //Hide previous selections
             var nodes = graph.getNodes();
             for (var i = 0; i < nodes.length; i++) {
@@ -236,8 +237,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 //Create Mapping if a Node is already set to be mapped
                 if (player.getNodeToBeMapped() != null) {
                     if (player_id == player.getSelectedNode().getPlayerID() & player.getSelectedNode().getMapping() == null) {
-                        console.log("NodeTobeMapped: " + player.getNodeToBeMapped().getNodeLevel());
-                        console.log("selectedNode: " + player.getSelectedNode().getNodeLevel());
                         if (base.isCity() & player.getNodeToBeMapped().getBase().isCity() == false) {
                             //Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
                             //mapping score : 0 , mapping propagation score : -1
@@ -254,7 +253,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                             else {
                                 self.setMapping(player.getNodeToBeMapped(), 2);
                             }
-                        } else if (base.isCity()==false & player.getNodeToBeMapped().getBase().isCity()==true) {
+                        } else if (base.isCity() == false & player.getNodeToBeMapped().getBase().isCity() == true) {
                             //Inefficient mapping occurs when the city population is less than the capacity of a camp, thus the city lacks the required resources for the camp
                             //mapping score : 0 , mapping propagation score : -1
                             if (player.getNodeToBeMapped().getNodeLevel() < player.getSelectedNode().getNodeLevel()) {
@@ -302,6 +301,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             if (mapping != null) {
                 mapping.setVisible(true);
                 mapped_node.getBase().setVisible(true);
+                console.log("score " + mapping.getScore());
             }
         }
     }
@@ -411,7 +411,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                         mapping.setVisible(false);
                         mapped_node.getBase().setVisible(false);
                         if (player.getSelectedNode() != null) {
-                            if (player.getSelectedNode().getNeighbors().indexOf(mapped_node) != -1) {
+                            if (player.getSelectedNode().isNeighbor(mapped_node)) {
                                 mapped_node.getBase().setVisible(true);
                             }
                         }
@@ -427,12 +427,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                     if (player.getSelectedNode() != neighbors[j] & player.getNodeToBeMapped() != neighbors[j])
                         neighbors[j].getBase().setVisible(false);
                     if (player.getSelectedNode() != null) {
-                        if (player.getSelectedNode().getNeighbors().indexOf(neighbors[j]) != -1 || player.getSelectedNode().getMappedNode() == neighbors[j]) {
+                        if (player.getSelectedNode().isNeighbor(neighbors[j]) || player.getSelectedNode().getMappedNode() == neighbors[j]) {
                             neighbors[j].getBase().setVisible(true);
                         }
                     }
                     if (player.getNodeToBeMapped() != null) {
-                        if (player.getNodeToBeMapped().getNeighbors().indexOf(neighbors[j]) != -1)
+                        if (player.getNodeToBeMapped().isNeighbor(neighbors[j]))
                             neighbors[j].getBase().setVisible(true);
                     }
                 }

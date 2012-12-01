@@ -12,12 +12,20 @@ function Digits(uiLayer, _x, _y, _scale)
     var digit3 = null;
     var digit4 = null;
 
+    var digitsLayer = new Container();
+
     var x = _x - digit1.image.width / 2.0 * _scale;
     var y = _y - digit1.image.height / 2.0 * _scale;
     var scale = _scale;
 
     digit1.setTransform(x, y, scale, scale);
-    uiLayer.addChild(digit1);
+    digitsLayer.addChild(digit1);
+
+    uiLayer.addChild(digitsLayer);
+
+    this.getLayer = function() {
+        return digitsLayer;
+    }
 
     //@return true if the Bitmap digit1 is destroyed
     this.destroyed = function() {
@@ -27,17 +35,19 @@ function Digits(uiLayer, _x, _y, _scale)
     //destroys the digits layers
     this.destroy = function() {
         if(digit1 != null)
-            uiLayer.removeChild(digit1);
+            digitsLayer.removeChild(digit1);
         if(digit2 != null)
-            uiLayer.removeChild(digit2);
+            digitsLayer.removeChild(digit2);
         if(digit3 != null)
-            uiLayer.removeChild(digit3);
+            digitsLayer.removeChild(digit3);
         if(digit4 != null)
-            uiLayer.removeChild(digit4);
+            digitsLayer.removeChild(digit4);
         digit1 = null;
         digit2 = null;
         digit3 = null;
         digit4 = null;
+        uiLayer.removeChild(digitsLayer);
+        digitsLayer = null;
     }
 
     /**
@@ -45,17 +55,10 @@ function Digits(uiLayer, _x, _y, _scale)
     * @param alpha - float
     */
     this.setAlpha = function(alpha) {
-        if(digit1 != null)
-            digit1.alpha = alpha;
-        if(digit2 != null)
-            digit2.alpha = alpha;
-        if(digit3 != null)
-            digit3.alpha = alpha;
-        if(digit4 != null)
-            digit4.alpha = alpha;
+        digitsLayer.alpha = alpha;
     }
 
-    getNumberImage = function(digit) {
+    getNumberImage = function (digit) {
         switch(digit) {
             case 1 : return n1Image;
             case 2 : return n2Image;
@@ -76,42 +79,38 @@ function Digits(uiLayer, _x, _y, _scale)
     }
 
     setFirstDigit = function(digit) {
-        if(digit1 != null)
-            uiLayer.removeChild(digit1);
+        digitsLayer.removeChild(digit1);
         digit1 = new Bitmap(getNumberImage(digit));
         digit1.setTransform(x, y, scale, scale);
-        uiLayer.addChild(digit1);
+        digitsLayer.addChild(digit1);
     }
 
     setSecondDigit = function(digit) {
-        if(digit2 != null)
-            uiLayer.removeChild(digit2);
+        digitsLayer.removeChild(digit2);
         digit2 = new Bitmap(getNumberImage(digit));
         digit2.setTransform(x - n0Image.width * 1.44 * scale, y, scale, scale);
-        uiLayer.addChild(digit2);
+        digitsLayer.addChild(digit2);
     }
 
     setThirdDigit = function(digit) {
-        if(digit3 != null)
-            uiLayer.removeChild(digit3);
+        digitsLayer.removeChild(digit3);
         digit3 = new Bitmap(getNumberImage(digit));
         digit3.setTransform(x - n0Image.width * 2.8 * scale, y, scale, scale);
-        uiLayer.addChild(digit3);
+        digitsLayer.addChild(digit3);
     }
 
     setFourthDigit = function(digit) {
-        if(digit4 != null)
-            uiLayer.removeChild(digit4);
+        digitsLayer.removeChild(digit4);
         digit4 = new Bitmap(getNumberImage(digit));
         digit4.setTransform(x - n0Image.width * 4.2 * scale, y, scale, scale);
-        uiLayer.addChild(digit4);
+        digitsLayer.addChild(digit4);
     }
 
     /**
     * Draws the image of the given number
     * @param digits - integer
     */
-    this.setDigits = function(digits) {
+    this.setDigits = function (digits) {
 	    var sDigits =  reverse(digits.toString());
         var sDigit;
         for(var i = 0; i < sDigits.length; i++) {
@@ -132,5 +131,9 @@ function Digits(uiLayer, _x, _y, _scale)
             digit4.visible = false;
         sDigits = null;
         sDigit = null;
+    }
+
+    this.toString = function () {
+        return "digit1:" + digit1 + ", " + "digit2:" + digit2 + ", " + "digit3:" + digit3 + ", " + "digit4:" + digit4;
     }
 }

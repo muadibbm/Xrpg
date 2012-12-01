@@ -16,4 +16,8 @@
             return Math.floor((this.y - pointB.y) / (this.x - pointB.x));
         return 0.0;
     }
+
+    this.toString = function () {
+        return "x:" + this.x + ", " + "y:" + this.y;
+    }
 }
