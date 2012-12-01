@@ -168,9 +168,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 //if (mapped_node.isNeighbor(neighbors[i].getMappedNode())) {
                     //console.log("neighbor: " + neighbors[i]);
                 mappingNeighbors[k].getMapping().setScore(100);
+                console.log("mapping score " + mapping.getScore());
                 console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
                 mappingNeighbors[k].getMapping().paintScore();
+                console.log("neighbor score " + mappingNeighbors[k].getMapping().getScore());
                 console.log("neighbor " + mappingNeighbors[k].getMapping().getScoreImage().getLayer().getNumChildren());
+                console.log("mapping score " + mapping.getScore());
                 console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
                 //}
             }

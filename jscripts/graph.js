@@ -236,7 +236,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
 
     var addingDeeves = function () {
         //TODO: Set a periodic timer to denote the waves of deeves and then move them
-        if (setInterval(waveTime, 5000)) {
+        /*if (setInterval(waveTime, 5000)) {
             deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 100, Const.WINDOW_HEIGHT - 100));
             deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 200, Const.WINDOW_HEIGHT - 200));
             deeveMovesList.push(new Tuple2d(0, 0));
@@ -245,7 +245,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
             deeve.setVisible(true);
             deeve.transform();
             deeveList.push(deeve);
-        }
+        }*/
     }
 
     //sets the transformations of all the bitmaps in this graph instance after placement
