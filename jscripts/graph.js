@@ -218,7 +218,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
                             if (!city1.hasCaravan() || !city2.hasCaravan()) {
                                 city1.setHasCaravan(true);
                                 city2.setHasCaravan(true);
-                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), (nodesArray[i].getBase().getBaseBitmap().image.width * Const.BASE_CITY_SCALE) / 10);
+                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), (nodesArray[i].getBase().getBitmap().image.width * Const.BASE_CITY_SCALE) / 10);
                                 caravan.setVisible(true);
                                 caravan.transform();
                                 caravanList.push(caravan);

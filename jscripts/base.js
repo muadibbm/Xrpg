@@ -68,8 +68,8 @@ function Base(graphLayer, _id, _isCity) {
      * @author Andrey
      */
     this.positionSelection = function () {
-        selectionLayer1.setTransform(this.position.x - selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayer2.setTransform(this.position.x - selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayer1.setTransform(position.x - selectionLayer1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayer1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayer2.setTransform(position.x - selectionLayer2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayer2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the mapping selection around a city or a camp.
@@ -77,8 +77,8 @@ function Base(graphLayer, _id, _isCity) {
      * @author Mehrdad
      */
     this.positionMappingSelection = function () {
-        selectionLayerM1.setTransform(this.position.x - selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerM2.setTransform(this.position.x - selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayerM1.setTransform(position.x - selectionLayerM1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerM1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerM2.setTransform(position.x - selectionLayerM2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerM2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     /** Position the hovering selection around a city or a camp.
@@ -86,8 +86,8 @@ function Base(graphLayer, _id, _isCity) {
      * @author Mehrdad
      */
     this.positionHoverSelection = function () {
-        selectionLayerH1.setTransform(this.position.x - selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, this.position.y - selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
-        selectionLayerH2.setTransform(this.position.x - selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, this.position.y - selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
+        selectionLayerH1.setTransform(position.x - selectionLayerH1.image.width / 2 * Const.CITY_SELECTION_SCALE1, position.y - selectionLayerH1.image.height / 2 * Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1, Const.CITY_SELECTION_SCALE1);
+        selectionLayerH2.setTransform(position.x - selectionLayerH2.image.width / 2 * Const.CITY_SELECTION_SCALE2, position.y - selectionLayerH2.image.height / 2 * Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2, Const.CITY_SELECTION_SCALE2);
     }
 
     //@return {Bitmap} the base Bitmap
@@ -148,7 +148,7 @@ function Base(graphLayer, _id, _isCity) {
     }
 
     this.setPosition = function (_position) {
-        this.position = _position;
+        position = _position;
     }
 
     /**
@@ -159,9 +159,9 @@ function Base(graphLayer, _id, _isCity) {
     this.transform = function () {
         //normalizeOnCanvas(baseBitmap);
         if (isCity) {
-            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
+            baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
         } else {
-            baseBitmap.setTransform(this.position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, this.position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
+            baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
         }
         this.positionSelection();
         this.positionMappingSelection();
@@ -181,53 +181,24 @@ function Base(graphLayer, _id, _isCity) {
         return population;
     }
 
-		// Additional set of functions for a city
-        this.hasBazaar = function () {
-            return hasBazaar;
-        }
+	// Additional set of functions for a city
+    this.hasBazaar = function () {
+        return hasBazaar;
+    }
 
-        this.setHasBazaar = function (_hasBazaar) {
-            hasBazaar = _hasBazaar;
-        }
+    this.setHasBazaar = function (_hasBazaar) {
+        hasBazaar = _hasBazaar;
+    }
 
-        this.getBaseBitmap = function () {
-            return baseBitmap;
-        }
+    this.hasCaravan = function () {
+        return hasCaravan;
+    }
 
-        this.setIsCity = function (_isCity) {
-            isCity = _isCity;
-        }
+    this.setHasCaravan = function (_hasCaravan) {
+        hasCaravan = _hasCaravan;
+    }
 
-        /**
-         * Sets the population of this node to the given number
-         * @param population - int
-         */
-        this.setPopulation = function (_population) {
-            this.population = _population;
-        }
-
-        //@return {integer} the population of this node
-        this.getPopulation = function () {
-            return population;
-        }
-
-        this.hasCaravan = function () {
-            return hasCaravan;
-        }
-
-        this.setHasCaravan = function (_hasCaravan) {
-            hasCaravan = _hasCaravan;
-        }
-
-        this.buildBazaar = function () {
-            // TODO: Build bazaar. This will contain all there types of market we have so far.
-        }
-
-        this.getPosition = function () {
-            return position;
-        }
-
-        this.setPosition = function (_position) {
-            this.position = _position;
-        }
+    this.buildBazaar = function () {
+        // TODO: Build bazaar. This will contain all there types of market we have so far.
+    }
 }

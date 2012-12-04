@@ -79,9 +79,6 @@ function Mapping(uiLayer, mappingLayer, _pos1, _pos2, _score)
             score = 0;
         else
             score = newScore;
-    }
-
-    this.paintScore = function () {
         scoreImage.setDigits(score);
     }
 

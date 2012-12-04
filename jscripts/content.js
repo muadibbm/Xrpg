@@ -8,7 +8,7 @@ var manifest = [
     { id: "treeShadow",    src: "images/Background/tree_shadow.png" },
     { id: "cityBase",      src: "images/City/cityBase.png" },
     { id: "towerBase",     src: "images/Tower/towerBase.png" },
-    { id: "caravan",       src: "images/Caravan/caravan.png" },
+    { id: "caravan",       src: "images/Caravan/Caravan.png" },
     { id: "deeve",         src: "images/Deeve/deeve.png"},
     { id: "baseSelected1", src: "images/City/selection1.png" },
     { id: "baseSelected2", src: "images/City/selection2.png" },

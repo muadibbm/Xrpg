@@ -133,19 +133,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         mapping = null;
     }
 
-    //Unmapping Score Propagation Logic
-    this.propagateUnmapping = function (score) {
-        /*if (score > 0)
-            for (var i = 0; i < neighbors.length; i++) {
-                if (neighbors[i].getMapping() != null) {
-                    if (neighbors[i].getMappedNode().isNeighbor(mapped_node))
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score - 1);
-                    else
-                        neighbors[i].getMapping().setScore(neighbors[i].getMapping().getScore() - score);
-                }
-            }*/
-    }
-
     /**
     * Sets a mapping from this node to the given node
     * @param node - the node to be mapped to
@@ -154,30 +141,17 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.setMapping = function (node, score) {
         mapped_node = node;
         node.setMappedNode(self);
-        mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
-        mapping.setScore(20);
-        mapping.paintScore();
-        //console.log("node: " + self);
-        //console.log("this MAPPING: " + mapping);
-        //console.log("mapped node: " + node);
-        mapping.transform();
-        mapped_node.copyMapping(mapping);
-        var mappingNeighbors = self.getNeighbors();
-        for (var k = 0; k < mappingNeighbors.length; k++) {
-            if (mappingNeighbors[k].getMapping() != null) {
-                //if (mapped_node.isNeighbor(neighbors[i].getMappedNode())) {
-                    //console.log("neighbor: " + neighbors[i]);
-                mappingNeighbors[k].getMapping().setScore(100);
-                console.log("mapping score " + mapping.getScore());
-                console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
-                mappingNeighbors[k].getMapping().paintScore();
-                console.log("neighbor score " + mappingNeighbors[k].getMapping().getScore());
-                console.log("neighbor " + mappingNeighbors[k].getMapping().getScoreImage().getLayer().getNumChildren());
-                console.log("mapping score " + mapping.getScore());
-                console.log("mapping " + mapping.getScoreImage().getLayer().getNumChildren());
-                //}
+        for (var k = 0; k < neighbors.length; k++) {
+            if (neighbors[k].getMapping() != null) {
+                if (mapped_node.isNeighbor(neighbors[k].getMappedNode())) {
+                    neighbors[k].getMapping().setScore(neighbors[k].getMapping().getScore() + score);
+                }
             }
         }
+        mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
+        mapping.setScore(score);
+        mapping.transform();
+        mapped_node.copyMapping(mapping);
     }
 
     /**
@@ -185,7 +159,13 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     * Note : If used on a node with no mapping will cause a NullPointerException
     */
     this.unMap = function(score) {
-        self.propagateUnmapping(score-1);
+        for (var k = 0; k < neighbors.length; k++) {
+            if (neighbors[k].getMapping() != null) {
+                if (mapped_node.isNeighbor(neighbors[k].getMappedNode())) {
+                    neighbors[k].getMapping().setScore(neighbors[k].getMapping().getScore() - score);
+                }
+            }
+        }
         mapped_node.removeMapping();
         mapping.destroy();
         self.removeMapping();

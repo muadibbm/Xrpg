@@ -34,14 +34,10 @@ function Digits(uiLayer, _x, _y, _scale)
 
     //destroys the digits layers
     this.destroy = function() {
-        if(digit1 != null)
-            digitsLayer.removeChild(digit1);
-        if(digit2 != null)
-            digitsLayer.removeChild(digit2);
-        if(digit3 != null)
-            digitsLayer.removeChild(digit3);
-        if(digit4 != null)
-            digitsLayer.removeChild(digit4);
+        digitsLayer.removeChild(digit1);
+        digitsLayer.removeChild(digit2);
+        digitsLayer.removeChild(digit3);
+        digitsLayer.removeChild(digit4);
         digit1 = null;
         digit2 = null;
         digit3 = null;
@@ -78,29 +74,33 @@ function Digits(uiLayer, _x, _y, _scale)
         return string;
     }
 
-    setFirstDigit = function(digit) {
-        digitsLayer.removeChild(digit1);
+    setFirstDigit = function (digit) {
+        if(digitsLayer.contains(digit1))
+            digitsLayer.removeChild(digit1);
         digit1 = new Bitmap(getNumberImage(digit));
         digit1.setTransform(x, y, scale, scale);
         digitsLayer.addChild(digit1);
     }
 
-    setSecondDigit = function(digit) {
-        digitsLayer.removeChild(digit2);
+    setSecondDigit = function (digit) {
+        if (digitsLayer.contains(digit2))
+            digitsLayer.removeChild(digit2);
         digit2 = new Bitmap(getNumberImage(digit));
         digit2.setTransform(x - n0Image.width * 1.44 * scale, y, scale, scale);
         digitsLayer.addChild(digit2);
     }
 
-    setThirdDigit = function(digit) {
-        digitsLayer.removeChild(digit3);
+    setThirdDigit = function (digit) {
+        if (digitsLayer.contains(digit3))
+            digitsLayer.removeChild(digit3);
         digit3 = new Bitmap(getNumberImage(digit));
         digit3.setTransform(x - n0Image.width * 2.8 * scale, y, scale, scale);
         digitsLayer.addChild(digit3);
     }
 
-    setFourthDigit = function(digit) {
-        digitsLayer.removeChild(digit4);
+    setFourthDigit = function (digit) {
+        if (digitsLayer.contains(digit4))
+            digitsLayer.removeChild(digit4);
         digit4 = new Bitmap(getNumberImage(digit));
         digit4.setTransform(x - n0Image.width * 4.2 * scale, y, scale, scale);
         digitsLayer.addChild(digit4);
