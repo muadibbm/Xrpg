@@ -30,7 +30,7 @@ function Environment() {
         bgBitmap.alpha = Const.BACKGROUND_ALPHA;
         caveBitmap = new Bitmap(caveImage);
         resizeOnZoom(bgBitmap);
-        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width / 2.0 * Const.DEEVE_CAVE_SCALE - Const.WORLD_WIDTH/30.0, Const.WORLD_HEIGHT / 2.0 - caveBitmap.image.height / 1.5 * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
+        caveBitmap.setTransform(Const.WORLD_WIDTH - caveBitmap.image.width / 2.0 * Const.DEEVE_CAVE_SCALE - Const.WORLD_WIDTH / 30.0, Const.WORLD_HEIGHT / 2 - caveBitmap.image.height / 1.5 * Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE, Const.DEEVE_CAVE_SCALE);
         stage.addChild(bgBitmap);
         stage.addChild(caveBitmap);
     }

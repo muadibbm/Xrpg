@@ -26,7 +26,7 @@ function Constants() {
 
     this.CITY_SELECTION_SCALE1 = 0.17;
     this.CITY_SELECTION_SCALE2 = 0.12;
-    this.CARAVAN_SCALE = 0.02;
+    this.CARAVAN_SCALE = 0.1;
     this.CARAVAN_MOVING_TIME = 200;
     this.CARAVAN_TRADING_TIME = 5000;
     this.CAMP_SELECTION_SCALE = 0.14;
@@ -120,6 +120,8 @@ function Constants() {
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
 
+    this.DEEVE_SPAWN_RATE = 0.3; // seconds
+    this.DEEVE_NUMBER = 50;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
     this.DEEVE_SCALE = 0.8,

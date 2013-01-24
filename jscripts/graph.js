@@ -13,7 +13,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     var Offset = new Tuple2d(xOffset, yOffset);
     var width = width;
     var height = height;
-
+    var counter = 0;
     var caravanList = [];
     var deeveList = [];
     var deeveMovesList = [];
@@ -24,9 +24,11 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     var graphLayer = new Container();
     var roadLayer = new Container();
 
-    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 47, environment.getCaveBitmap().y + 60));
-    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + 40, environment.getCaveBitmap().y + 60));
-
+    // Initially, place the deeves in front of the cave
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x + environment.getCaveBitmap().image.width * Const.DEEVE_CAVE_SCALE - 50, environment.getCaveBitmap().y + environment.getCaveBitmap().image.height * Const.DEEVE_CAVE_SCALE - 15));
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x - 20, environment.getCaveBitmap().y + environment.getCaveBitmap().image.height * Const.DEEVE_CAVE_SCALE - 15));
+    deeveMovesList.push(new Tuple2d(environment.getCaveBitmap().x - 20, environment.getCaveBitmap().y));
+    
     this.getGraphLayer = function () {
         return graphLayer;
     }
@@ -230,22 +232,31 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
         }
     }
 
-    var nextWave = function () {
-        nextWave = true;
-    }
-
     var addingDeeves = function () {
         //TODO: Set a periodic timer to denote the waves of deeves and then move them
-        /*if (setInterval(waveTime, 5000)) {
-            deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 100, Const.WINDOW_HEIGHT - 100));
-            deeveMovesList.push(new Tuple2d(Const.WINDOW_WIDTH - 200, Const.WINDOW_HEIGHT - 200));
-            deeveMovesList.push(new Tuple2d(0, 0));
+        if (deeveList.length < Const.DEEVE_NUMBER) {
+            if (counter == Const.UPDATE_RATE * Const.DEEVE_SPAWN_RATE) {
+                counter = 0;
+                var deeve = new Deeve(deeveMovesList);
+                deeve.setVisible(true);
+                deeve.transform();
+                deeveList.push(deeve);
+            } else {
+                counter++;
+            }
+        }
+    }
 
-            var deeve = new Deeve(deeveMovesList);
-            deeve.setVisible(true);
-            deeve.transform();
-            deeveList.push(deeve);
-        }*/
+    var deeveCollisions = function () {
+        for (var i = 0; i < deeveCollisions.length; i++) {
+            if (deeveCollisions[i].getPosition().x) {
+
+            }
+        }
+    }
+
+    var nodeCollisions = function () {
+
     }
 
     //sets the transformations of all the bitmaps in this graph instance after placement
@@ -272,7 +283,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
             nodesArray[0].getBase().setHasBazaar(true);
             nodesArray[0].getNeighbors()[0].getBase().setHasBazaar(true);
         }
-        //TEST
+        // END TEST
 
         edgesArray = edges.values();
         placeNodes();
@@ -285,6 +296,8 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     this.updateAll = function () {
         addingCaravans();
         addingDeeves();
+        deeveCollisions();
+        nodesCollisions();
     }
 
     if (typeof String.prototype.startsWith != 'function') {
@@ -430,7 +443,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
                 n1 = getNode(nodeID);
             }
 
-            //parse second node (neighbor) and assign neighbor
+            //parse second node (neighbour) and assign neighbour
             switch (subEntries[4].charAt(0)) {
                 case 'A':
                     nucl = Nucleotide.A;

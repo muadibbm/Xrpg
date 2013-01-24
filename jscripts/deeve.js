@@ -2,7 +2,7 @@
  * @author Andrey
  *
  */
-function Deeve(pointsList) {
+function Deeve(_pointsList) {
     var deeveBitmap = new Bitmap(deeveImage);
     var initialPosition;
     var currentPosition;
@@ -16,16 +16,28 @@ function Deeve(pointsList) {
     var damage = 10; // Level 1 == 10 units of damage
     var hasArrived = false;
     var currentTimer = null;
-
+    var resumeTimer = null;
+    var pointsList = _pointsList.slice(0); // Clone the argument array into a local copy
+    
     deeveBitmap.alpha = Const.HIDDEN_DEEVE;
     environment.getCreatureLayer().addChild(deeveBitmap);
 
-    initialPosition = pointsList[index];
-    currentPosition = initialPosition;
-    finalPosition = pointsList[index + 1];
+    var setMapPoints = function () {
+        // Return a random number between 1 and Const.WINDOW_HEIGHT
+        pointsList.push(new Tuple2d(0, Math.floor((Math.random() * Const.WINDOW_HEIGHT) + 1)));
+    }
+    
+    setMapPoints();
+
+    // Check if the pointsList is empty
+    if (pointsList.length != 0) {
+        initialPosition = pointsList[index];
+        currentPosition = initialPosition;
+        finalPosition = pointsList[index + 1];
+    }
 
     deeveLevel = 1;
-    stoppingDist = 15;
+    stoppingDist = 1;
     hasArrived = false;
 
     var reeval = function () {
@@ -65,15 +77,23 @@ function Deeve(pointsList) {
         if (currentPosition.getDistanceFrom(finalPosition) > stoppingDist) {
             setPosition(newPosition);
         } else {
+            index++;
             if (index == (pointsList.length - 1)) {
+                // Reached the end of the list. Stop the interval.
                 hasArrived = true;
                 clearInterval(currentTimer);
             } else {
+                // Set the next point in the list as the new final destination, from the current position
                 initialPosition = finalPosition;
                 currentPosition = initialPosition;
-                index++;
-                finalPosition = pointsList[index];
+                finalPosition = pointsList[index + 1];
                 reeval();
+
+                if (index == 2) {
+                    // "The wave" points start here. The first two points are only to place the deeves in front of the cave, waiting for the wave timer to go off.
+                    clearInterval(currentTimer);
+                    resumeTimer = setInterval(resume, Const.DEEVE_SPAWN_RATE * Const.DEEVE_NUMBER * 1000);
+                }
             }
         }
     }
@@ -85,6 +105,11 @@ function Deeve(pointsList) {
     }
 
     currentTimer = setInterval(moveDeeve, Const.DEEVE_SPEED);
+
+    var resume = function () {
+        clearInterval(resumeTimer);
+        currentTimer = setInterval(moveDeeve, Const.DEEVE_SPEED);
+    }
 
     this.hasArrived = function () {
         return hasArrived;

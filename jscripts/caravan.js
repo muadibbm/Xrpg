@@ -133,6 +133,6 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
     }
 
     this.transform = function () {
-        caravanBitmap.setTransform(currentPosition.x - caravanBitmap.image.width / 2 * Const.CARAVAN_SCALE, currentPosition.y - caravanBitmap.image.height / 2 * Const.CARAVAN_SCALE, Const.CARAVAN_SCALE, Const.CARAVAN_SCALE);
+        caravanBitmap.setTransform(currentPosition.x - (caravanBitmap.image.width / 2) * Const.CARAVAN_SCALE, currentPosition.y - (caravanBitmap.image.height / 2) * Const.CARAVAN_SCALE, Const.CARAVAN_SCALE, Const.CARAVAN_SCALE);
     }
 }
