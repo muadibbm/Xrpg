@@ -297,7 +297,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
         addingCaravans();
         addingDeeves();
         deeveCollisions();
-        nodesCollisions();
+        //nodesCollisions();
     }
 
     if (typeof String.prototype.startsWith != 'function') {
