@@ -141,6 +141,10 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.setMapping = function (node, score) {
         mapped_node = node;
         node.setMappedNode(self);
+        mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
+        mapping.setScore(score);
+        mapping.transform();
+        mapped_node.copyMapping(mapping);
         for (var k = 0; k < neighbors.length; k++) {
             if (neighbors[k].getMapping() != null) {
                 if (mapped_node.isNeighbor(neighbors[k].getMappedNode())) {
@@ -148,10 +152,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 }
             }
         }
-        mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
-        mapping.setScore(score);
-        mapping.transform();
-        mapped_node.copyMapping(mapping);
     }
 
     /**

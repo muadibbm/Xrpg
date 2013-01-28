@@ -17,7 +17,13 @@ var manifest = [
     { id: "baseSelected5", src: "images/City/selection5.png" },
     { id: "baseSelected6", src: "images/City/selection6.png" },
     { id: "road",          src: "images/Road/sampleRoad.png" },
-    { id: "mapping",       src: "images/Road/sampleMapping.png" },
+    { id: "mapping0",      src: "images/Road/mapping0.png" },
+    { id: "mapping1",      src: "images/Road/mapping1.png" },
+    { id: "mapping2", src: "images/Road/mapping2.png" },
+    { id: "mapping3", src: "images/Road/mapping3.png" },
+    { id: "mapping4", src: "images/Road/mapping4.png" },
+    { id: "mapping5", src: "images/Road/mapping5.png" },
+    { id: "mapping6", src: "images/Road/mapping6.png" },
     { id: "n1",            src: "images/UI/1.png" },
     { id: "n2",            src: "images/UI/2.png" },
     { id: "n3",            src: "images/UI/3.png" },
@@ -45,7 +51,13 @@ var cityBaseSelectedImage4;
 var cityBaseSelectedImage5;
 var cityBaseSelectedImage6;
 var roadImage;
-var mappingImage;
+var mappingImage0;
+var mappingImage1;
+var mappingImage2;
+var mappingImage3;
+var mappingImage4;
+var mappingImage5;
+var mappingImage6;
 var n1Image;
 var n2Image;
 var n3Image;
@@ -85,7 +97,13 @@ function loadImages() {
     cityBaseSelectedImage5 = createResource("baseSelected5");
     cityBaseSelectedImage6 = createResource("baseSelected6");
     roadImage = createResource("road");
-    mappingImage = createResource("mapping");
+    mappingImage0 = createResource("mapping0");
+    mappingImage1 = createResource("mapping1");
+    mappingImage2 = createResource("mapping2");
+    mappingImage3 = createResource("mapping3");
+    mappingImage4 = createResource("mapping4");
+    mappingImage5 = createResource("mapping5");
+    mappingImage6 = createResource("mapping6");
     n1Image = createResource("n1");
     n2Image = createResource("n2");
     n3Image = createResource("n3");
