@@ -2,7 +2,7 @@
  * @author Andrey
  *
  */
-function Deeve(_pointsList) {
+function Deeve(_pointsList, _deeveList) {
     var deeveBitmap = new Bitmap(deeveImage);
     var initialPosition;
     var currentPosition;
@@ -18,16 +18,48 @@ function Deeve(_pointsList) {
     var currentTimer = null;
     var resumeTimer = null;
     var pointsList = _pointsList.slice(0); // Clone the argument array into a local copy
-    
+
+    var deeveSpriteSheet = new SpriteSheet({
+        images: [deeveImage],
+        // width, height & registration point of each sprite
+        frames: { width: 20, height: 32, regX: 10, regY: 16 },
+        animations: {
+            walk: [0, 2, "walk", 6]
+        }
+    });
+
+    var deeveBmpAnimation = new BitmapAnimation(deeveSpriteSheet);    deeveBmpAnimation.gotoAndPlay("walk");
+    deeveBmpAnimation.name = "deeve";
+    deeveBmpAnimation.direction = -90;
+    deeveBmpAnimation.currentFrame = 1;
+
+    stage.addChild(deeveBmpAnimation);
+
     deeveBitmap.alpha = Const.HIDDEN_DEEVE;
     environment.getCreatureLayer().addChild(deeveBitmap);
 
-    var setMapPoints = function () {
+    // Moves this deeve away from any other, so that there is no overlap of deeves
+    // The second position is the position where all the deeves are in front of the cave space, 
+    // before they attack.
+    var placeInPlace = function () {
+        var min = -60;
+        var max = 40;
+        var range1 = Math.floor(Math.random() * (max - min) + min);
+        var range2 = Math.floor(Math.random() * (max - min) + min);
+        var x = pointsList[2].x + range1;
+        var y = pointsList[2].y + range2;
+        var choice = Math.floor(Math.random() * 3);
+        pointsList.push(new Tuple2d(x, y));
+    }
+
+    // Places a random point at the end of the points list to denote final destination.
+    var setMapPoint = function () {
         // Return a random number between 1 and Const.WINDOW_HEIGHT
         pointsList.push(new Tuple2d(0, Math.floor((Math.random() * Const.WINDOW_HEIGHT) + 1)));
     }
-    
-    setMapPoints();
+
+    placeInPlace();
+    setMapPoint();
 
     // Check if the pointsList is empty
     if (pointsList.length != 0) {
@@ -35,6 +67,9 @@ function Deeve(_pointsList) {
         currentPosition = initialPosition;
         finalPosition = pointsList[index + 1];
     }
+
+    deeveBmpAnimation.x = currentPosition.x;
+    deeveBmpAnimation.y = currentPosition.y;    
 
     deeveLevel = 1;
     stoppingDist = 1;
@@ -79,7 +114,7 @@ function Deeve(_pointsList) {
         } else {
             index++;
             if (index == (pointsList.length - 1)) {
-                // Reached the end of the list. Stop the interval.
+                // Reached the end of the list. Final stopping of the interval.
                 hasArrived = true;
                 clearInterval(currentTimer);
             } else {
@@ -89,9 +124,10 @@ function Deeve(_pointsList) {
                 finalPosition = pointsList[index + 1];
                 reeval();
 
-                if (index == 2) {
+                if (index == 3) {
                     // "The wave" points start here. The first two points are only to place the deeves in front of the cave, waiting for the wave timer to go off.
                     clearInterval(currentTimer);
+                    deeveBmpAnimation.gotoAndStop("walk");
                     resumeTimer = setInterval(resume, Const.DEEVE_SPAWN_RATE * Const.DEEVE_NUMBER * 1000);
                 }
             }
@@ -102,6 +138,8 @@ function Deeve(_pointsList) {
         currentPosition = _position;
         deeveBitmap.x = currentPosition.x;
         deeveBitmap.y = currentPosition.y;
+        deeveBmpAnimation.x = currentPosition.x;
+        deeveBmpAnimation.y = currentPosition.y;
     }
 
     currentTimer = setInterval(moveDeeve, Const.DEEVE_SPEED);
@@ -109,6 +147,11 @@ function Deeve(_pointsList) {
     var resume = function () {
         clearInterval(resumeTimer);
         currentTimer = setInterval(moveDeeve, Const.DEEVE_SPEED);
+        deeveBmpAnimation.gotoAndPlay("walk");
+    }
+
+    this.getBmpAnimationObj = function () {
+        return 
     }
 
     this.hasArrived = function () {

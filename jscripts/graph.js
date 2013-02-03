@@ -238,8 +238,8 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
             if (counter == Const.UPDATE_RATE * Const.DEEVE_SPAWN_RATE) {
                 counter = 0;
                 var deeve = new Deeve(deeveMovesList);
-                deeve.setVisible(true);
-                deeve.transform();
+                //deeve.setVisible(true);
+                //deeve.transform();
                 deeveList.push(deeve);
             } else {
                 counter++;
@@ -247,17 +247,9 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
         }
     }
 
-    var deeveCollisions = function () {
-        for (var i = 0; i < deeveCollisions.length; i++) {
-            if (deeveCollisions[i].getPosition().x) {
+    //var deeveNodeCollisions = function () {
 
-            }
-        }
-    }
-
-    var nodeCollisions = function () {
-
-    }
+    //}
 
     //sets the transformations of all the bitmaps in this graph instance after placement
     var transform = function () {
@@ -296,8 +288,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
     this.updateAll = function () {
         addingCaravans();
         addingDeeves();
-        deeveCollisions();
-        //nodesCollisions();
+        //deeveNodesCollisions();
     }
 
     if (typeof String.prototype.startsWith != 'function') {
