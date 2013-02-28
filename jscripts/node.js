@@ -6,7 +6,7 @@
 * @param graphLayer - the GroupLayer of the graph
 * @param player_id - the unique integer value of the player assigned to this graph
 */
-function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
+function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
 
     var id = _id
     var nucleotide = _nucl;
@@ -179,20 +179,17 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
         base.getBitmap().onClick = function (event) { //Called when the mouse is pressed and released
             //Hide previous selections
             var nodes = graph.getNodes();
+            gui.setSelection(false);
+            gui.setHoverSelection(false);
+            gui.setMappingSelection(false);
             for (var i = 0; i < nodes.length; i++) {
                 nodes[i].getBase().setVisible(false);
-                nodes[i].getBase().setSelection(false);
-                nodes[i].getBase().setHoverSelection(false);
-                nodes[i].getBase().setMappingSelection(false);
                 if (nodes[i].getMapping() != null)
                     nodes[i].getMapping().setVisible(false);
             }
             nodes = otherGraph.getNodes();
             for (var i = 0; i < nodes.length; i++) {
                 nodes[i].getBase().setVisible(false);
-                nodes[i].getBase().setSelection(false);
-                nodes[i].getBase().setHoverSelection(false);
-                nodes[i].getBase().setMappingSelection(false);
                 if (nodes[i].getMapping() != null)
                     nodes[i].getMapping().setVisible(false);
             }
@@ -205,7 +202,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             //Select New Node and set new neighbors visible
             player.selectNode(self);
             base.setVisible(true);
-            base.setSelection(true);
+            gui.positionSelection(coordinates.x, coordinates.y);
+            gui.setSelection(true);
             neighbors = self.getNeighbors();
             for (var j = 0; j < neighbors.length; j++)
                 neighbors[j].getBase().setVisible(true);
@@ -292,21 +290,18 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
     this.addMouseDoubleClick = function (graph, otherGraph, player) {
         base.getBitmap().onDoubleClick = function (event) { //Called when the mouse is double clicked
             //Hide previous selections
+            gui.setSelection(false);
+            gui.setHoverSelection(false);
+            gui.setMappingSelection(false);
             var nodes = graph.getNodes();
             for (var i = 0; i < nodes.length; i++) {
                 nodes[i].getBase().setVisible(false);
-                nodes[i].getBase().setSelection(false);
-                nodes[i].getBase().setHoverSelection(false);
-                nodes[i].getBase().setMappingSelection(false);
                 if (nodes[i].getMapping() != null)
                     nodes[i].getMapping().setVisible(false);
             }
             nodes = otherGraph.getNodes();
             for (var i = 0; i < nodes.length; i++) {
                 nodes[i].getBase().setVisible(false);
-                nodes[i].getBase().setSelection(false);
-                nodes[i].getBase().setHoverSelection(false);
-                nodes[i].getBase().setMappingSelection(false);
                 if (nodes[i].getMapping() != null)
                     nodes[i].getMapping().setVisible(false);
             }
@@ -320,10 +315,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
             player.selectNode(self);
             base.setVisible(true);
             if (player.getSelectedNode().getMapping() != null) {
-                base.setSelection(true);
+                gui.positionSelection(coordinates.x, coordinates.y);
+                gui.setSelection(true);
             }
             else {
-                base.setMappingSelection(true);
+                gui.positionMappingSelection(coordinates.x, coordinates.y);
+                gui.setMappingSelection(true);
             }
             for (var j = 0; j < neighbors.length; j++)
                 neighbors[j].getBase().setVisible(true);
@@ -405,7 +402,7 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 for (var j = 0; j < neighbors.length; j++)
                     if (player.getSelectedNode() == neighbors[j] || player.getNodeToBeMapped() == neighbors[j])
                         base.setVisible(true);
-                base.setHoverSelection(false);
+                gui.setHoverSelection(false);
                 for (var j = 0; j < neighbors.length; j++) {
                     if (player.getSelectedNode() != neighbors[j] & player.getNodeToBeMapped() != neighbors[j])
                         neighbors[j].getBase().setVisible(false);
@@ -471,7 +468,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id) {
                 (player.getNodeToBeMapped() != null & player.getNodeToBeMapped() != self)) {
                 //Set the node and neighbors visible
                 base.setVisible(true);
-                base.setHoverSelection(true);
+                gui.positionHoverSelection(coordinates.x, coordinates.y);
+                gui.setHoverSelection(true);
                 for (var j = 0; j < neighbors.length; j++)
                     neighbors[j].getBase().setVisible(true);
                 //Set all edges of the selected node visible

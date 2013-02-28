@@ -1,7 +1,7 @@
 ﻿/**
  * This class contains the nodes and edges of the given graph read from the file system
  */
-function Graph(id, _isCity, xOffset, yOffset, width, height) {
+function Graph(id, _isCity, xOffset, yOffset, width, height, gui) {
     var nodes = new Hashtable();
     var edges = new Hashtable();
 
@@ -428,7 +428,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
             }
 
             if (!contains(nodeID)) {
-                n1 = new Node(nodeID, nucl, isCity, graphLayer, id, player_id);
+                n1 = new Node(nodeID, nucl, isCity, graphLayer, id, player_id, gui);
                 addNode(n1);
             } else {
                 n1 = getNode(nodeID);
@@ -458,7 +458,7 @@ function Graph(id, _isCity, xOffset, yOffset, width, height) {
             }
 
             if (!contains(neighborID)) {
-                n2 = new Node(neighborID, nucl, isCity, graphLayer, id, player_id);
+                n2 = new Node(neighborID, nucl, isCity, graphLayer, id, player_id, gui);
                 addNode(n2);
             } else {
                 n2 = getNode(neighborID);

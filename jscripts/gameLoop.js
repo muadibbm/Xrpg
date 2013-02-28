@@ -54,14 +54,15 @@ function prepareGame() {
     environment.prepare();
 
     player = new Player(1, "player 1");
+    gui = new Gui(environment.getUiLayer());
 
     graphDataA = createResource("graphDataA");
     graphDataB = createResource("graphDataB");
 
-    cityGraphA = new Graph(1, true, Const.GRAPH_X, Const.GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT);
+    cityGraphA = new Graph(1, true, Const.GRAPH_X, Const.GRAPH_Y, Const.CITY_GRAPH_WIDTH, Const.CITY_GRAPH_HEIGHT, gui);
     cityGraphA.generateGraph(graphDataA, player.getId());
 
-    campGraphA = new Graph(2, false, Const.GRAPH_X + Const.GRAPH_GAP + Const.CITY_GRAPH_WIDTH, Const.GRAPH_Y, Const.TOWER_GRAPH_WIDTH, Const.TOWER_GRAPH_HEIGHT);
+    campGraphA = new Graph(2, false, Const.GRAPH_X + Const.GRAPH_GAP + Const.CITY_GRAPH_WIDTH, Const.GRAPH_Y, Const.TOWER_GRAPH_WIDTH, Const.TOWER_GRAPH_HEIGHT, gui);
     campGraphA.generateGraph(graphDataB, player.getId());
 
     trees = [];
@@ -107,4 +108,6 @@ function startGame() {
 function tick() {
     cityGraphA.updateAll();
     stage.update();
+    player.setGold(player.getGold() - 1);
+    gui.setGold(player.getGold());
 }

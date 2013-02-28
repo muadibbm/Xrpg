@@ -20,26 +20,30 @@ function Constants() {
     this.GRAPH_GAP = this.WORLD_WIDTH / 10.0;
 
     this.STARTING_GOLD = 1000;
+    this.GOLD_SCALE = 0.3;
+    this.INFO_PANEL_SCALE = 0.15;
     
-    this.BASE_CITY_SCALE = 0.3;
+    this.BASE_CITY_SCALE = 0.45;
     this.BASE_TOWER_SCALE = 0.2;
 
     this.CITY_SELECTION_SCALE1 = 0.17;
     this.CITY_SELECTION_SCALE2 = 0.12;
-    this.CARAVAN_SCALE = 0.1;
+    this.CARAVAN_SCALE = 0.06;
     this.CARAVAN_MOVING_TIME = 200;
     this.CARAVAN_TRADING_TIME = 5000;
     this.CAMP_SELECTION_SCALE = 0.14;
     this.SELECTION_ALPHA = 0.75;
-    this.SELECTED_BASE_ALPHA = 1.0;
+    this.SELECTED_BASE_ALPHA = 0.48;
     this.BASE_SELECTION_SPEED = 1000;
 
     //this.BASE_SELECTION_SPEED = 1000;
     
-    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 60.0;
+    this.MIN_CITY_DISTANCE = this.WORLD_WIDTH / 20.0;
     this.MAX_CITY_DISTANCE = this.WORLD_WIDTH - 100.0;
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
-    this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10.0;
+    this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
+
+    this.CITY_ICON_SCALE = 0.35;
     
     /*PALACE_X : 0.0,
 	PALACE_Y : -23.0,
@@ -118,14 +122,14 @@ function Constants() {
     
     this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 100.0;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
-    this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 10;
+    this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
     this.DEEVE_SPAWN_RATE = 0.3; // seconds
-    this.DEEVE_NUMBER = 50;
+    this.DEEVE_NUMBER = 300;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
     this.DEEVE_SCALE = 0.8,
-    this.DEEVE_SPEED = 20,
+    this.DEEVE_SPEED = 30,
 
     this.TREE_SCALE = 0.81,
     this.MAX_TREE_NUMBER = 1800,
