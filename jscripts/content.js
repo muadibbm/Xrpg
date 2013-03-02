@@ -4,7 +4,7 @@ var manifest = [
     { id: "graphDataB",    src: "graphData/3CGP_modified.txt" },
     { id: "background",    src: "images/Background/bg.png" },
     { id: "cave",          src: "images/Cave/cave.png" },
-    { id: "tree",          src: "images/Background/tree.png" },
+    { id: "tree",          src: "images/Background/treeVer2.png" },
     { id: "treeShadow",    src: "images/Background/tree_shadow.png" },
     { id: "cityBase", src: "images/City/cityBase.png" },
     { id: "cityIcon", src: "images/City/cityIcon.png" },
@@ -35,7 +35,8 @@ var manifest = [
     { id: "n8",            src: "images/UI/8.png" },
     { id: "n9",            src: "images/UI/9.png" },
     { id: "n0",            src: "images/UI/0.png" },
-    { id: "infoPanel",     src: "images/UI/infoPanel.png" },
+    { id: "infoPanel", src: "images/UI/infoPanel.png" },
+    { id: "population", src: "images/UI/population.png" }
 ];
 // List of all Images
 var bgImage;
@@ -72,6 +73,7 @@ var n8Image;
 var n9Image;
 var n0Image;
 var infoPanelImage;
+var populationImage;
 
 //general public function for creating resources(called once for every resource)
 function createResource(id) {
@@ -120,4 +122,5 @@ function loadImages() {
     n9Image = createResource("n9");
     n0Image = createResource("n0");
     infoPanelImage = createResource("infoPanel");
+    populationImage = createResource("population");
 }

@@ -30,7 +30,50 @@ function Gui(uiLayer) {
     infoPanel.setTransform(Const.WINDOW_WIDTH / 2.0 - infoPanel.image.width / 2 * Const.INFO_PANEL_SCALE, Const.WORLD_HEIGHT - infoPanel.image.height * Const.INFO_PANEL_SCALE, Const.INFO_PANEL_SCALE, Const.INFO_PANEL_SCALE);
     infoPanel.alpha = 1.0;
     uiLayer.addChild(infoPanel);
+    var population = [];
+    var hoverPopulation = [];
     var goldAmount = new Digits(uiLayer, Const.WINDOW_WIDTH / 2.0 - infoPanel.image.width / 7.0 * Const.INFO_PANEL_SCALE, Const.WORLD_HEIGHT - infoPanel.image.height / 2.0 * Const.INFO_PANEL_SCALE, Const.GOLD_SCALE);
+
+    this.setPopulation = function (amount) {
+        var tmpBitmap;
+        for (var i = 0; i < amount; i++) {
+            tmpBitmap = new Bitmap(populationImage);
+            tmpBitmap.setTransform(Const.WINDOW_WIDTH / 2.0 + Const.POPULATION_INBETWEEN - i*10.0, Const.WORLD_HEIGHT - infoPanel.image.height / 1.5 * Const.INFO_PANEL_SCALE, Const.POPULATION_SCALE, Const.POPULATION_SCALE);
+            uiLayer.addChild(tmpBitmap);
+            population.push(tmpBitmap);
+        }
+    }
+
+    this.setPopulationVisibility = function (bool) {
+        for (var i = 0; i < population.length; i++)
+            population[i].visible = bool;
+    }
+
+    this.removePopulation = function () {
+        var tmpBitmap;
+        for (var i = 0; i < population.length; i++) {
+            uiLayer.removeChild(population[i]);
+        }
+        population = [];
+    }
+
+    this.setHoverPopulation = function (amount) {
+        var tmpBitmap;
+        for (var i = 0; i < amount; i++) {
+            tmpBitmap = new Bitmap(populationImage);
+            tmpBitmap.setTransform(Const.WINDOW_WIDTH / 2.0 + Const.POPULATION_INBETWEEN - i * 10.0, Const.WORLD_HEIGHT - infoPanel.image.height / 1.5 * Const.INFO_PANEL_SCALE, Const.POPULATION_SCALE, Const.POPULATION_SCALE);
+            uiLayer.addChild(tmpBitmap);
+            hoverPopulation.push(tmpBitmap);
+        }
+    }
+
+    this.removeHoverPopulation = function () {
+        var tmpBitmap;
+        for (var i = 0; i < hoverPopulation.length; i++) {
+            uiLayer.removeChild(hoverPopulation[i]);
+        }
+        hoverPopulation = [];
+    }
 
     /** 
     *   sets the UI gold to the given amount

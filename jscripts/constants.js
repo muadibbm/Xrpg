@@ -22,18 +22,20 @@ function Constants() {
     this.STARTING_GOLD = 1000;
     this.GOLD_SCALE = 0.3;
     this.INFO_PANEL_SCALE = 0.15;
+    this.POPULATION_SCALE = 0.4;
+    this.POPULATION_INBETWEEN = 65.0;
     
     this.BASE_CITY_SCALE = 0.45;
     this.BASE_TOWER_SCALE = 0.2;
 
-    this.CITY_SELECTION_SCALE1 = 0.17;
-    this.CITY_SELECTION_SCALE2 = 0.12;
+    this.CITY_SELECTION_SCALE1 = 0.19;
+    this.CITY_SELECTION_SCALE2 = 0.14;
     this.CARAVAN_SCALE = 0.06;
     this.CARAVAN_MOVING_TIME = 200;
     this.CARAVAN_TRADING_TIME = 5000;
-    this.CAMP_SELECTION_SCALE = 0.14;
+    this.CAMP_SELECTION_SCALE = 0.15;
     this.SELECTION_ALPHA = 0.75;
-    this.SELECTED_BASE_ALPHA = 0.48;
+    this.SELECTED_BASE_ALPHA = 0.45;
     this.BASE_SELECTION_SPEED = 1000;
 
     //this.BASE_SELECTION_SPEED = 1000;
@@ -43,7 +45,7 @@ function Constants() {
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
-    this.CITY_ICON_SCALE = 0.35;
+    this.CITY_ICON_SCALE = 0.4;
     
     /*PALACE_X : 0.0,
 	PALACE_Y : -23.0,
@@ -124,19 +126,19 @@ function Constants() {
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
-    this.DEEVE_SPAWN_RATE = 0.3; // seconds
-    this.DEEVE_NUMBER = 300;
+    this.DEEVE_SPAWN_RATE = 1.0; // seconds
+    this.DEEVE_NUMBER = 100;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
-    this.DEEVE_SCALE = 0.8,
-    this.DEEVE_SPEED = 30,
+    this.DEEVE_SCALE = 0.7,
+    this.DEEVE_SPEED = 100,
 
-    this.TREE_SCALE = 0.81,
-    this.MAX_TREE_NUMBER = 1800,
-    this.MIN_INBETWEEN_TREE_DISTANCE = 10.0,
-    this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 9.0,
-    this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 43.0,
-    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 63.0,
+    this.TREE_SCALE = 0.63,
+    this.MAX_TREE_NUMBER = 300,
+    this.MIN_INBETWEEN_TREE_DISTANCE = this.WORLD_WIDTH / 20.0,
+    this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 6.5,
+    this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 12.0,
+    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 13.0,
 
     this.MAPPING_POINT_X = 0.0;
     this.MAPPING_POINT_Y = 0.0;

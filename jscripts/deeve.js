@@ -69,7 +69,8 @@ function Deeve(_pointsList, _deeveList) {
     }
 
     deeveBmpAnimation.x = currentPosition.x;
-    deeveBmpAnimation.y = currentPosition.y;    
+    deeveBmpAnimation.y = currentPosition.y;
+    deeveBmpAnimation.setTransform(currentPosition.x, currentPosition.y, Const.DEEVE_SCALE, Const.DEEVE_SCALE);
 
     deeveLevel = 1;
     stoppingDist = 1;

@@ -263,18 +263,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
                 player.setNodeToBeMapped(null);
             }
             //Show population
-            /*switch(node.getNodeLevel()) {
-                case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-                case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-                case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-                case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-                case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-                case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-                case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-                case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-                case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-                default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
-            }*/
+            gui.removePopulation();
+            gui.setPopulation(base.getPopulation());
             nodes = null;
             edges = null;
 
@@ -361,18 +351,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
                 //TODO : remove the graphical indication - Andrey add removal drag mapping HERE <--
             }
             //Show population
-            /*switch(node.getNodeLevel()) {
-                case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-                case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-                case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-                case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-                case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-                case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-                case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-                case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-                case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-                default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
-            }*/
+            gui.removePopulation();
+            gui.setPopulation(base.getPopulation());
             nodes = null;
             edges = null;
         }
@@ -425,39 +405,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
                 }
             }
 
-            //gui.hidePopulation();
-
-            if (player.getSelectedNode() != null) {
-                //Show population
-                /* switch(player.getSelectedNode().getNodeLevel()) {
-                     case 1 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-                     case 2 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-                     case 3 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-                     case 4 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-                     case 5 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-                     case 6 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-                     case 7 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-                     case 8 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-                     case 9 : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-                     default : gui.setPopulation(player.getSelectedNode().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
-                 }
-             }
-             if (player.getNodeToBeMapped() != null) {
-                 //Show population
-                 /*switch(player.getNodeToBeMapped().getNodeLevel()) {
-                     case 1 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-                     case 2 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-                     case 3 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-                     case 4 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-                     case 5 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-                     case 6 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-                     case 7 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-                     case 8 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-                     case 9 : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-                     default : gui.setPopulation(player.getNodeToBeMapped().getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
-                 }
-             }*/
-            }
+            gui.setPopulationVisibility(true);
+            gui.removeHoverPopulation();
         }
     }
 
@@ -486,19 +435,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
                     mapped_node.getBase().setVisible(true);
                 }
 
-                //Show population
-                /*switch(node.getNodeLevel()) {
-                    case 1 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N1_IMAGE); break;
-                    case 2 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N2_IMAGE); break;
-                    case 3 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N3_IMAGE); break;
-                    case 4 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N4_IMAGE); break;
-                    case 5 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N5_IMAGE); break;
-                    case 6 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N6_IMAGE); break;
-                    case 7 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N7_IMAGE); break;
-                    case 8 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N8_IMAGE); break;
-                    case 9 : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N9_IMAGE); break;
-                    default : gui.setPopulation(node.getNodeLevel(), environment.getUILayer(), Const.N0_IMAGE); break;
-                }*/
+                gui.setPopulationVisibility(false);
+                gui.setHoverPopulation(base.getPopulation());
             }
         }
     }
