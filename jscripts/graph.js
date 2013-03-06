@@ -269,14 +269,6 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui) {
     this.generateGraph = function (data, player_id) {
         parseGraphFile(data, player_id);
         nodesArray = nodes.values();
-
-        // TEST
-        if (isCity) {
-            nodesArray[0].getBase().setHasBazaar(true);
-            nodesArray[0].getNeighbors()[0].getBase().setHasBazaar(true);
-        }
-        // END TEST
-
         edgesArray = edges.values();
         placeNodes();
         setNodeLevels();

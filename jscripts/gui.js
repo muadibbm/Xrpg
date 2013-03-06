@@ -3,6 +3,12 @@
  */
 function Gui(uiLayer) {
 
+    //User interface GroupLayer
+    var uiGroup = new Container();
+
+    //UiKey Pressed
+    var keyPressed = false;
+
     //Selection Bitmaps
     var selectionLayer1 = new Bitmap(cityBaseSelectedImage1);
     var selectionLayer2 = new Bitmap(cityBaseSelectedImage2);
@@ -29,17 +35,20 @@ function Gui(uiLayer) {
     var infoPanel = new Bitmap(infoPanelImage);
     infoPanel.setTransform(Const.WINDOW_WIDTH / 2.0 - infoPanel.image.width / 2 * Const.INFO_PANEL_SCALE, Const.WORLD_HEIGHT - infoPanel.image.height * Const.INFO_PANEL_SCALE, Const.INFO_PANEL_SCALE, Const.INFO_PANEL_SCALE);
     infoPanel.alpha = 1.0;
-    uiLayer.addChild(infoPanel);
+    uiGroup.addChild(infoPanel);
     var population = [];
     var hoverPopulation = [];
-    var goldAmount = new Digits(uiLayer, Const.WINDOW_WIDTH / 2.0 - infoPanel.image.width / 7.0 * Const.INFO_PANEL_SCALE, Const.WORLD_HEIGHT - infoPanel.image.height / 2.0 * Const.INFO_PANEL_SCALE, Const.GOLD_SCALE);
+    var goldAmount = new Digits(uiGroup, Const.WINDOW_WIDTH / 2.0 - infoPanel.image.width / 2.0 * Const.INFO_PANEL_SCALE/45.0, Const.WORLD_HEIGHT - infoPanel.image.height / 2.0 * Const.INFO_PANEL_SCALE, Const.GOLD_SCALE);
+    var uiKey = new Bitmap(uiKeyImage);
+    uiKey.setTransform(Const.WINDOW_WIDTH / 2.0 - uiKey.image.width / 2.1 * Const.UI_KEY_SCALE, Const.WORLD_HEIGHT - 2.75 * uiKey.image.height * Const.UI_KEY_SCALE, Const.UI_KEY_SCALE, Const.UI_KEY_SCALE);
+    uiGroup.addChild(uiKey);
 
     this.setPopulation = function (amount) {
         var tmpBitmap;
         for (var i = 0; i < amount; i++) {
             tmpBitmap = new Bitmap(populationImage);
             tmpBitmap.setTransform(Const.WINDOW_WIDTH / 2.0 + Const.POPULATION_INBETWEEN - i*10.0, Const.WORLD_HEIGHT - infoPanel.image.height / 1.5 * Const.INFO_PANEL_SCALE, Const.POPULATION_SCALE, Const.POPULATION_SCALE);
-            uiLayer.addChild(tmpBitmap);
+            uiGroup.addChild(tmpBitmap);
             population.push(tmpBitmap);
         }
     }
@@ -52,7 +61,7 @@ function Gui(uiLayer) {
     this.removePopulation = function () {
         var tmpBitmap;
         for (var i = 0; i < population.length; i++) {
-            uiLayer.removeChild(population[i]);
+            uiGroup.removeChild(population[i]);
         }
         population = [];
     }
@@ -62,7 +71,7 @@ function Gui(uiLayer) {
         for (var i = 0; i < amount; i++) {
             tmpBitmap = new Bitmap(populationImage);
             tmpBitmap.setTransform(Const.WINDOW_WIDTH / 2.0 + Const.POPULATION_INBETWEEN - i * 10.0, Const.WORLD_HEIGHT - infoPanel.image.height / 1.5 * Const.INFO_PANEL_SCALE, Const.POPULATION_SCALE, Const.POPULATION_SCALE);
-            uiLayer.addChild(tmpBitmap);
+            uiGroup.addChild(tmpBitmap);
             hoverPopulation.push(tmpBitmap);
         }
     }
@@ -70,7 +79,7 @@ function Gui(uiLayer) {
     this.removeHoverPopulation = function () {
         var tmpBitmap;
         for (var i = 0; i < hoverPopulation.length; i++) {
-            uiLayer.removeChild(hoverPopulation[i]);
+            uiGroup.removeChild(hoverPopulation[i]);
         }
         hoverPopulation = [];
     }
@@ -140,4 +149,17 @@ function Gui(uiLayer) {
     this.setSelection(false);
     this.setMappingSelection(false);
     this.setHoverSelection(false);
+
+    uiLayer.addChild(uiGroup);
+
+    uiKey.onClick = function (mouseEvent) {
+        if (keyPressed) {
+            keyPressed = false;
+            uiGroup.setTransform(uiGroup.x, uiGroup.y - infoPanel.image.height * Const.INFO_PANEL_SCALE, 1.0, 1.0);
+        }
+        else {
+            keyPressed = true;
+            uiGroup.setTransform(uiGroup.x, uiGroup.y + infoPanel.image.height * Const.INFO_PANEL_SCALE, 1.0, 1.0);
+        }
+    }
 }

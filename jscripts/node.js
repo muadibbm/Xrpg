@@ -272,7 +272,6 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
             if (mapping != null) {
                 mapping.setVisible(true);
                 mapped_node.getBase().setVisible(true);
-                console.log("score " + mapping.getScore());
             }
         }
     }

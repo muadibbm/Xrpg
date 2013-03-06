@@ -8,6 +8,8 @@ var manifest = [
     { id: "treeShadow",    src: "images/Background/tree_shadow.png" },
     { id: "cityBase", src: "images/City/cityBase.png" },
     { id: "cityIcon", src: "images/City/cityIcon.png" },
+    { id: "bazarIcon", src: "images/City/bazarIcon.png" },
+    { id: "wallIcon", src: "images/City/wallIcon.png" },
     { id: "towerBase",     src: "images/Tower/towerBase.png" },
     { id: "caravan",       src: "images/Caravan/Caravan.png" },
     { id: "deeve",         src: "images/Deeve/deeve.png"},
@@ -36,7 +38,8 @@ var manifest = [
     { id: "n9",            src: "images/UI/9.png" },
     { id: "n0",            src: "images/UI/0.png" },
     { id: "infoPanel", src: "images/UI/infoPanel.png" },
-    { id: "population", src: "images/UI/population.png" }
+    { id: "population", src: "images/UI/population.png" },
+    { id: "uiKey", src: "images/UI/uiKey.png" }
 ];
 // List of all Images
 var bgImage;
@@ -45,6 +48,8 @@ var treeImage;
 var treeShadowImage;
 var cityBaseImage;
 var cityIconImage;
+var bazarIconImage;
+var wallIconImage;
 var towerBaseImage;
 var caravanImage;
 var deeveImage;
@@ -74,6 +79,7 @@ var n9Image;
 var n0Image;
 var infoPanelImage;
 var populationImage;
+var uiKeyImage;
 
 //general public function for creating resources(called once for every resource)
 function createResource(id) {
@@ -94,6 +100,8 @@ function loadImages() {
     treeShadowImage = createResource("treeShadow");
     cityBaseImage = createResource("cityBase");
     cityIconImage = createResource("cityIcon");
+    bazarIconImage = createResource("bazarIcon");
+    wallIconImage = createResource("wallIcon");
     towerBaseImage = createResource("towerBase");
     caravanImage = createResource("caravan");
     deeveImage = createResource("deeve");
@@ -123,4 +131,5 @@ function loadImages() {
     n0Image = createResource("n0");
     infoPanelImage = createResource("infoPanel");
     populationImage = createResource("population");
+    uiKeyImage = createResource("uiKey");
 }

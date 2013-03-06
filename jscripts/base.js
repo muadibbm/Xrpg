@@ -6,10 +6,13 @@ function Base(graphLayer, _id, _isCity, gui) {
     var position = new Tuple2d(0.0, 0.0);
     var id = _id;
     var isCity = _isCity;
-    var hasBazaar = false;
     var hasCaravan = false;
     var baseBitmap;
-    var cityBitmap;
+    //var cityBitmap;
+    if (isCity) {
+        var bazarBitmap;
+        var wallBitmap;
+    }
 
     // Instantiate all the animations
     //var mouseOverCity = new SpriteSheet({
@@ -37,20 +40,22 @@ function Base(graphLayer, _id, _isCity, gui) {
     */
     this.setVisible = function (visible) {
         if (visible) {
-            baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
             if (isCity) {
-                cityBitmap.alpha = 1.0;
+                baseBitmap.alpha = 1.0;
+                bazarBitmap.alpha = 1.0;
+                wallBitmap.alpha = 1.0;
             }
             else {
-
+                baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
             }
         } else {
-            baseBitmap.alpha = Const.BASE_ALPHA;
             if (isCity) {
-                cityBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+                baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+                bazarBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+                wallBitmap.alpha = Const.SELECTED_BASE_ALPHA;
             }
             else {
-
+                baseBitmap.alpha = Const.BASE_ALPHA;
             }
         }
     }
@@ -69,17 +74,25 @@ function Base(graphLayer, _id, _isCity, gui) {
     }
 
     if (isCity) {
-        baseBitmap = new Bitmap(cityBaseImage);
-        cityBitmap = new Bitmap(cityIconImage);
-        baseBitmap.alpha = Const.BASE_ALPHA;
-        cityBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+        baseBitmap = new Bitmap(cityIconImage);
+        bazarBitmap = new Bitmap(bazarIconImage);
+        wallBitmap = new Bitmap(wallIconImage);
+        baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+        bazarBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+        wallBitmap.alpha = Const.SELECTED_BASE_ALPHA;
     } else {
         baseBitmap = new Bitmap(towerBaseImage);
         baseBitmap.alpha = Const.BASE_ALPHA;
     }
 
+    if (isCity) {
+        graphLayer.addChild(wallBitmap);
+        graphLayer.addChild(bazarBitmap);
+        wallBitmap.visible = false;
+        bazarBitmap.visible = false;
+    }
+
     graphLayer.addChild(baseBitmap);
-    graphLayer.addChild(cityBitmap);
 
     this.getPosition = function () {
         return position;
@@ -97,8 +110,9 @@ function Base(graphLayer, _id, _isCity, gui) {
     this.transform = function () {
         //normalizeOnCanvas(baseBitmap);
         if (isCity) {
-            baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.BASE_CITY_SCALE, position.y - baseBitmap.image.height / 2 * Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE, Const.BASE_CITY_SCALE);
-            cityBitmap.setTransform(position.x - cityBitmap.image.width / 2 * Const.CITY_ICON_SCALE, position.y - cityBitmap.image.height / 2 * Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE);
+            baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.CITY_ICON_SCALE, position.y - baseBitmap.image.height / 2 * Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE);
+            bazarBitmap.setTransform(position.x - bazarBitmap.image.width / 2 * Const.BAZAR_ICON_SCALE + Const.BAZAR_ICON_X, position.y - bazarBitmap.image.height / 2 * Const.BAZAR_ICON_SCALE + Const.BAZAR_ICON_Y, Const.BAZAR_ICON_SCALE, Const.BAZAR_ICON_SCALE);
+            wallBitmap.setTransform(position.x - wallBitmap.image.width / 2 * Const.WALL_ICON_SCALE + Const.WALL_ICON_X, position.y - wallBitmap.image.height / 2 * Const.WALL_ICON_SCALE + Const.WALL_ICON_Y, Const.WALL_ICON_SCALE, Const.WALL_ICON_SCALE);
         } else {
             baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
         }
@@ -117,15 +131,6 @@ function Base(graphLayer, _id, _isCity, gui) {
         return population;
     }
 
-	// Additional set of functions for a city
-    this.hasBazaar = function () {
-        return hasBazaar;
-    }
-
-    this.setHasBazaar = function (_hasBazaar) {
-        hasBazaar = _hasBazaar;
-    }
-
     this.hasCaravan = function () {
         return hasCaravan;
     }
@@ -134,7 +139,15 @@ function Base(graphLayer, _id, _isCity, gui) {
         hasCaravan = _hasCaravan;
     }
 
+    this.hasBazaar = function () {
+        return bazarBitmap.visible;
+    }
+
     this.buildBazaar = function () {
-        // TODO: Build bazaar. This will contain all there types of market we have so far.
+        bazarBitmap.visible = true;
+    }
+
+    this.buildWall = function () {
+        wallBitmap.visible = true;
     }
 }

@@ -24,12 +24,13 @@ function Constants() {
     this.INFO_PANEL_SCALE = 0.15;
     this.POPULATION_SCALE = 0.4;
     this.POPULATION_INBETWEEN = 65.0;
+    this.UI_KEY_SCALE = 0.5;
     
-    this.BASE_CITY_SCALE = 0.45;
-    this.BASE_TOWER_SCALE = 0.2;
+    //this.BASE_CITY_SCALE = 0.5;
+    this.BASE_TOWER_SCALE = 0.25;
 
-    this.CITY_SELECTION_SCALE1 = 0.19;
-    this.CITY_SELECTION_SCALE2 = 0.14;
+    this.CITY_SELECTION_SCALE1 = 0.25;
+    this.CITY_SELECTION_SCALE2 = 0.19;
     this.CARAVAN_SCALE = 0.06;
     this.CARAVAN_MOVING_TIME = 200;
     this.CARAVAN_TRADING_TIME = 5000;
@@ -45,7 +46,13 @@ function Constants() {
     this.CITY_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
-    this.CITY_ICON_SCALE = 0.4;
+    this.CITY_ICON_SCALE = 0.45;
+    this.BAZAR_ICON_SCALE = 0.43;
+    this.BAZAR_ICON_X = 0.0;
+    this.BAZAR_ICON_Y = 19.0;
+    this.WALL_ICON_SCALE = 0.27;
+    this.WALL_ICON_X = 0.0;
+    this.WALL_ICON_Y = 6.0;
     
     /*PALACE_X : 0.0,
 	PALACE_Y : -23.0,
@@ -127,11 +134,11 @@ function Constants() {
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
     this.DEEVE_SPAWN_RATE = 1.0; // seconds
-    this.DEEVE_NUMBER = 100;
+    this.DEEVE_NUMBER = 10;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
-    this.DEEVE_SCALE = 0.7,
-    this.DEEVE_SPEED = 100,
+    this.DEEVE_SCALE = 0.6,
+    this.DEEVE_SPEED = 110,
 
     this.TREE_SCALE = 0.63,
     this.MAX_TREE_NUMBER = 300,

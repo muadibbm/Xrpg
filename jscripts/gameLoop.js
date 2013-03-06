@@ -108,6 +108,5 @@ function startGame() {
 function tick() {
     cityGraphA.updateAll();
     stage.update();
-    player.setGold(player.getGold() - 1);
     gui.setGold(player.getGold());
 }
