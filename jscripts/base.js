@@ -10,8 +10,12 @@ function Base(graphLayer, _id, _isCity, gui) {
     var baseBitmap;
     //var cityBitmap;
     if (isCity) {
+        var palaceBitmap;
         var bazarBitmap;
         var wallBitmap;
+    }
+    else {
+        var tower1Bitmap;
     }
 
     // Instantiate all the animations
@@ -30,10 +34,6 @@ function Base(graphLayer, _id, _isCity, gui) {
         return baseBitmap;
     }
 
-    this.getBaseLayer = function () {
-        return baseLayer;
-    }
-
     /**
     * sets the visibility(transparency level) of the base bitmap according to the given visibility flag
     * @param visible - the boolean flag
@@ -42,20 +42,24 @@ function Base(graphLayer, _id, _isCity, gui) {
         if (visible) {
             if (isCity) {
                 baseBitmap.alpha = 1.0;
+                palaceBitmap.alpha = 1.0;
                 bazarBitmap.alpha = 1.0;
                 wallBitmap.alpha = 1.0;
             }
             else {
                 baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+                tower1Bitmap.alpha = 1.0;
             }
         } else {
             if (isCity) {
-                baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
-                bazarBitmap.alpha = Const.SELECTED_BASE_ALPHA;
-                wallBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+                baseBitmap.alpha = Const.SELECTION_ALPHA;
+                palaceBitmap.alpha = Const.SELECTION_ALPHA;
+                bazarBitmap.alpha = Const.SELECTION_ALPHA;
+                wallBitmap.alpha = Const.SELECTION_ALPHA;
             }
             else {
                 baseBitmap.alpha = Const.BASE_ALPHA;
+                tower1Bitmap.alpha = Const.SELECTION_ALPHA;
             }
         }
     }
@@ -75,21 +79,30 @@ function Base(graphLayer, _id, _isCity, gui) {
 
     if (isCity) {
         baseBitmap = new Bitmap(cityIconImage);
+        palaceBitmap = new Bitmap(palaceIconImage);
         bazarBitmap = new Bitmap(bazarIconImage);
         wallBitmap = new Bitmap(wallIconImage);
-        baseBitmap.alpha = Const.SELECTED_BASE_ALPHA;
-        bazarBitmap.alpha = Const.SELECTED_BASE_ALPHA;
-        wallBitmap.alpha = Const.SELECTED_BASE_ALPHA;
+        baseBitmap.alpha = Const.SELECTION_ALPHA;
+        bazarBitmap.alpha = Const.SELECTION_ALPHA;
+        wallBitmap.alpha = Const.SELECTION_ALPHA;
     } else {
         baseBitmap = new Bitmap(towerBaseImage);
+        tower1Bitmap = new Bitmap(tower1IconImage);
+        tower1Bitmap.alpha = Const.SELECTION_ALPHA;
         baseBitmap.alpha = Const.BASE_ALPHA;
     }
 
     if (isCity) {
         graphLayer.addChild(wallBitmap);
         graphLayer.addChild(bazarBitmap);
+        graphLayer.addChild(palaceBitmap);
         wallBitmap.visible = false;
         bazarBitmap.visible = false;
+        palaceBitmap.visible = false;
+    }
+    else {
+        graphLayer.addChild(tower1Bitmap);
+        tower1Bitmap.visible = false;
     }
 
     graphLayer.addChild(baseBitmap);
@@ -111,10 +124,12 @@ function Base(graphLayer, _id, _isCity, gui) {
         //normalizeOnCanvas(baseBitmap);
         if (isCity) {
             baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.CITY_ICON_SCALE, position.y - baseBitmap.image.height / 2 * Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE, Const.CITY_ICON_SCALE);
+            palaceBitmap.setTransform(position.x - palaceBitmap.image.width / 2 * Const.PALACE_ICON_SCALE + Const.PALACE_ICON_X, position.y - palaceBitmap.image.height / 2 * Const.PALACE_ICON_SCALE + Const.PALACE_ICON_Y, Const.PALACE_ICON_SCALE, Const.PALACE_ICON_SCALE);
             bazarBitmap.setTransform(position.x - bazarBitmap.image.width / 2 * Const.BAZAR_ICON_SCALE + Const.BAZAR_ICON_X, position.y - bazarBitmap.image.height / 2 * Const.BAZAR_ICON_SCALE + Const.BAZAR_ICON_Y, Const.BAZAR_ICON_SCALE, Const.BAZAR_ICON_SCALE);
             wallBitmap.setTransform(position.x - wallBitmap.image.width / 2 * Const.WALL_ICON_SCALE + Const.WALL_ICON_X, position.y - wallBitmap.image.height / 2 * Const.WALL_ICON_SCALE + Const.WALL_ICON_Y, Const.WALL_ICON_SCALE, Const.WALL_ICON_SCALE);
         } else {
             baseBitmap.setTransform(position.x - baseBitmap.image.width / 2 * Const.BASE_TOWER_SCALE, position.y - baseBitmap.image.height / 2 * Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE, Const.BASE_TOWER_SCALE);
+            tower1Bitmap.setTransform(position.x - tower1Bitmap.image.width / 2 * Const.TOWER1_ICON_SCALE + Const.TOWER1_ICON_X, position.y - tower1Bitmap.image.height / 2 * Const.TOWER1_ICON_SCALE + Const.TOWER1_ICON_Y, Const.TOWER1_ICON_SCALE, Const.TOWER1_ICON_SCALE);
         }
     }
 
@@ -139,15 +154,35 @@ function Base(graphLayer, _id, _isCity, gui) {
         hasCaravan = _hasCaravan;
     }
 
-    this.hasBazaar = function () {
+    this.hasPalace = function () {
+        return palaceBitmap.visible;
+    }
+
+    this.hasBazar = function () {
         return bazarBitmap.visible;
     }
 
-    this.buildBazaar = function () {
+    this.hasWall = function () {
+        return wallBitmap.visible;
+    }
+
+    this.hasTower1 = function () {
+        return tower1Bitmap.visible;
+    }
+
+    this.buildPalace = function () {
+        palaceBitmap.visible = true;
+    }
+
+    this.buildBazar = function () {
         bazarBitmap.visible = true;
     }
 
     this.buildWall = function () {
         wallBitmap.visible = true;
+    }
+
+    this.buildTower1 = function () {
+        tower1Bitmap.visible = true;
     }
 }

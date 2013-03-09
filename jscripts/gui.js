@@ -1,7 +1,7 @@
 ﻿/**
  * This class manages all the user interface
  */
-function Gui(uiLayer) {
+function Gui(uiLayer, player) {
 
     //User interface GroupLayer
     var uiGroup = new Container();
@@ -16,7 +16,7 @@ function Gui(uiLayer) {
     var selectionLayerM2 = new Bitmap(cityBaseSelectedImage4);//selection for mapping node
     var selectionLayerH1 = new Bitmap(cityBaseSelectedImage5);//selection for hover node
     var selectionLayerH2 = new Bitmap(cityBaseSelectedImage6);//selection for hover node
-
+    
     selectionLayer1.alpha = Const.SELECTION_ALPHA;
     selectionLayer2.alpha = Const.SELECTION_ALPHA;
     selectionLayerM1.alpha = Const.SELECTION_ALPHA;
@@ -42,6 +42,50 @@ function Gui(uiLayer) {
     var uiKey = new Bitmap(uiKeyImage);
     uiKey.setTransform(Const.WINDOW_WIDTH / 2.0 - uiKey.image.width / 2.1 * Const.UI_KEY_SCALE, Const.WORLD_HEIGHT - 2.75 * uiKey.image.height * Const.UI_KEY_SCALE, Const.UI_KEY_SCALE, Const.UI_KEY_SCALE);
     uiGroup.addChild(uiKey);
+
+    //City Constructions
+    var cpPalace = new Bitmap(constructionPaneImage);
+    var cpBazar = new Bitmap(constructionPaneImage);
+    var cpWall = new Bitmap(constructionPaneImage);
+    var cpPalaceSelected = new Bitmap(selectedConstructionPaneImage);
+    var cpBazarSelected = new Bitmap(selectedConstructionPaneImage);
+    var cpWallSelected = new Bitmap(selectedConstructionPaneImage);
+    var palaceUi = new Bitmap(palaceUiImage);
+    var bazarUi = new Bitmap(bazarUiImage);
+    var wallUi = new Bitmap(wallUiImage);
+    cpPalace.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 150.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpBazar.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 245.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpWall.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 342.5, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpPalaceSelected.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 150.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpBazarSelected.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 245.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpWallSelected.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE - 342.5, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    palaceUi.setTransform(Const.WINDOW_WIDTH / 2.0 - palaceUi.image.width / 2 * Const.BUILD_UI_SCALE - 150.0, Const.WORLD_HEIGHT - palaceUi.image.height * Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE);
+    bazarUi.setTransform(Const.WINDOW_WIDTH / 2.0 - palaceUi.image.width / 2 * Const.BUILD_UI_SCALE - 245.0, Const.WORLD_HEIGHT - palaceUi.image.height * Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE);
+    wallUi.setTransform(Const.WINDOW_WIDTH / 2.0 - palaceUi.image.width / 2 * Const.BUILD_UI_SCALE - 343.0, 3.0 + Const.WORLD_HEIGHT - palaceUi.image.height * Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE);
+    cpPalaceSelected.visible = false;
+    cpBazarSelected.visible = false;
+    cpWallSelected.visible = false;
+    uiGroup.addChild(cpPalace);
+    uiGroup.addChild(cpBazar);
+    uiGroup.addChild(cpWall);
+    uiGroup.addChild(cpPalaceSelected);
+    uiGroup.addChild(cpBazarSelected);
+    uiGroup.addChild(cpWallSelected);
+    uiGroup.addChild(palaceUi);
+    uiGroup.addChild(bazarUi);
+    uiGroup.addChild(wallUi);
+
+    //Tower Constructions
+    var cpTower1 = new Bitmap(constructionPaneImage);
+    var cpTower1Selected = new Bitmap(selectedConstructionPaneImage);
+    var tower1Ui = new Bitmap(tower1UiImage);
+    cpTower1.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE + 150.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    cpTower1Selected.setTransform(Const.WINDOW_WIDTH / 2.0 - cpPalace.image.width / 2 * Const.CP_SCALE + 150.0, Const.WORLD_HEIGHT - cpPalace.image.height * Const.CP_SCALE, Const.CP_SCALE, Const.CP_SCALE);
+    tower1Ui.setTransform(Const.WINDOW_WIDTH / 2.0 - palaceUi.image.width / 2 * Const.BUILD_UI_SCALE + 150.0, Const.WORLD_HEIGHT - palaceUi.image.height * Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE, Const.BUILD_UI_SCALE);
+    cpTower1Selected.visible = false;
+    uiGroup.addChild(cpTower1);
+    uiGroup.addChild(cpTower1Selected);
+    uiGroup.addChild(tower1Ui);
 
     this.setPopulation = function (amount) {
         var tmpBitmap;
@@ -160,6 +204,90 @@ function Gui(uiLayer) {
         else {
             keyPressed = true;
             uiGroup.setTransform(uiGroup.x, uiGroup.y + infoPanel.image.height * Const.INFO_PANEL_SCALE, 1.0, 1.0);
+        }
+    }
+
+    cpPalace.onPress = function (mouseEvent) {
+        if (cpPalace.visible) {
+            cpPalace.visible = false;
+            cpPalaceSelected.visible = true;
+
+            if (player.getSelectedNode() != null)
+                if (player.getSelectedNode().getBase().isCity())
+                    if (player.getSelectedNode().getBase().hasPalace() == false)
+                        if (player.getGold() >= Const.PALACE_COST) {
+                            player.setGold(player.getGold() - Const.PALACE_COST);
+                            player.getSelectedNode().getBase().buildPalace();
+                        }
+        }
+        mouseEvent.onMouseUp = function (mouseEvent) {
+            if (cpPalace.visible == false) {
+                cpPalace.visible = true;
+                cpPalaceSelected.visible = false;
+            }
+        }
+    }
+
+    cpBazar.onPress = function (mouseEvent) {
+        if (cpBazar.visible) {
+            cpBazar.visible = false;
+            cpBazarSelected.visible = true;
+
+            if (player.getSelectedNode() != null)
+                if (player.getSelectedNode().getBase().isCity())
+                    if (player.getSelectedNode().getBase().hasBazar() == false)
+                        if (player.getGold() >= Const.BAZAR_COST) {
+                            player.setGold(player.getGold() - Const.BAZAR_COST);
+                            player.getSelectedNode().getBase().buildBazar();
+                        }
+        }
+        mouseEvent.onMouseUp = function (mouseEvent) {
+            if (cpBazar.visible == false) {
+                cpBazar.visible = true;
+                cpBazarSelected.visible = false;
+            }
+        }
+    }
+
+    cpWall.onPress = function (mouseEvent) {
+        if (cpWall.visible) {
+            cpWall.visible = false;
+            cpWallSelected.visible = true;
+
+            if (player.getSelectedNode() != null)
+                if (player.getSelectedNode().getBase().isCity())
+                    if (player.getSelectedNode().getBase().hasWall() == false)
+                        if (player.getGold() >= Const.WALL_COST) {
+                            player.setGold(player.getGold() - Const.WALL_COST);
+                            player.getSelectedNode().getBase().buildWall();
+                        }
+        }
+        mouseEvent.onMouseUp = function (mouseEvent) {
+            if (cpWall.visible == false) {
+                cpWall.visible = true;
+                cpWallSelected.visible = false;
+            }
+        }
+    }
+
+    cpTower1.onPress = function (mouseEvent) {
+        if (cpTower1.visible) {
+            cpTower1.visible = false;
+            cpTower1Selected.visible = true;
+
+            if (player.getSelectedNode() != null)
+                if (player.getSelectedNode().getBase().isCity()==false)
+                    if (player.getSelectedNode().getBase().hasTower1() == false)
+                        if (player.getGold() >= Const.TOWER1_COST) {
+                            player.setGold(player.getGold() - Const.TOWER1_COST);
+                            player.getSelectedNode().getBase().buildTower1();
+                        }
+        }
+        mouseEvent.onMouseUp = function (mouseEvent) {
+            if (cpTower1.visible == false) {
+                cpTower1.visible = true;
+                cpTower1Selected.visible = false;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿/**
  * This class contains the nodes and edges of the given graph read from the file system
  */
-function Graph(id, _isCity, xOffset, yOffset, width, height, gui) {
+function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
     var nodes = new Hashtable();
     var edges = new Hashtable();
 
@@ -212,15 +212,15 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui) {
             for (var i = 0; i < nodesArray.length; i++) {
                 // The graph contains only cities
                 var city1 = nodesArray[i].getBase();
-                if (city1.hasBazaar()) {
+                if (city1.hasBazar()) {
                     var neighbours = nodesArray[i].getNeighbors();
                     for (var j = 0; j < neighbours.length; j++) {
                         var city2 = neighbours[j].getBase();
-                        if (city2.hasBazaar()) {
+                        if (city2.hasBazar()) {
                             if (!city1.hasCaravan() || !city2.hasCaravan()) {
                                 city1.setHasCaravan(true);
                                 city2.setHasCaravan(true);
-                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), (nodesArray[i].getBase().getBitmap().image.width * Const.BASE_CITY_SCALE) / 10);
+                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), 1, player);//(nodesArray[i].getBase().getBitmap().image.width * Const.BASE_CITY_SCALE) / 
                                 caravan.setVisible(true);
                                 caravan.transform();
                                 caravanList.push(caravan);

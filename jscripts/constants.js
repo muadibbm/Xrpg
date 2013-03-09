@@ -19,24 +19,27 @@ function Constants() {
     this.GRAPH_Y = this.WORLD_HEIGHT / 45.0;
     this.GRAPH_GAP = this.WORLD_WIDTH / 10.0;
 
-    this.STARTING_GOLD = 1000;
+    this.STARTING_GOLD = 100;
     this.GOLD_SCALE = 0.3;
     this.INFO_PANEL_SCALE = 0.15;
     this.POPULATION_SCALE = 0.4;
     this.POPULATION_INBETWEEN = 65.0;
     this.UI_KEY_SCALE = 0.5;
+    this.BUILD_UI_SCALE = 0.13;
+    this.CP_SCALE = 0.5;
     
     //this.BASE_CITY_SCALE = 0.5;
-    this.BASE_TOWER_SCALE = 0.25;
+    this.BASE_TOWER_SCALE = 0.23;
 
     this.CITY_SELECTION_SCALE1 = 0.25;
     this.CITY_SELECTION_SCALE2 = 0.19;
     this.CARAVAN_SCALE = 0.06;
     this.CARAVAN_MOVING_TIME = 200;
-    this.CARAVAN_TRADING_TIME = 5000;
+    this.CARAVAN_TRADING_TIME = 30000;
+    this.CARAVAN_GOLD_EARNED = 2;
     this.CAMP_SELECTION_SCALE = 0.15;
-    this.SELECTION_ALPHA = 0.75;
-    this.SELECTED_BASE_ALPHA = 0.45;
+    this.SELECTION_ALPHA = 0.68;
+    this.SELECTED_BASE_ALPHA = 0.5;
     this.BASE_SELECTION_SPEED = 1000;
 
     //this.BASE_SELECTION_SPEED = 1000;
@@ -47,105 +50,43 @@ function Constants() {
     this.CITY_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
     this.CITY_ICON_SCALE = 0.45;
-    this.BAZAR_ICON_SCALE = 0.43;
+    this.PALACE_ICON_SCALE = 0.43;
+    this.PALACE_ICON_X = -1.0;
+    this.PALACE_ICON_Y = -10.0;
+    this.BAZAR_ICON_SCALE = 0.45;
     this.BAZAR_ICON_X = 0.0;
     this.BAZAR_ICON_Y = 19.0;
     this.WALL_ICON_SCALE = 0.27;
     this.WALL_ICON_X = 0.0;
     this.WALL_ICON_Y = 6.0;
-    
-    /*PALACE_X : 0.0,
-	PALACE_Y : -23.0,
-	PALACE_DEPTH : 3.2,
-	PALACE_SCALE : 0.048,
-	BAZAR_X : -17.5,
-	BAZAR_Y : -2.0,
-	BAZAR_DEPTH : 3.43,
-	BAZAR_SCALE : 0.015,
-	BAZAR_FOOD_X : -17.5,
-	BAZAR_FOOD_Y : -2.0,
-	BAZAR_FOOD_DEPTH : 3.42,
-	BAZAR_FOOD_SCALE : 0.015,
-	BAZAR_CHINA_X : -16.0,
-	BAZAR_CHINA_Y : -9.5,
-	BAZAR_CHINA_DEPTH : 3.41,
-	BAZAR_CHINA_SCALE : 0.014,
-	BAZAR_CARPET_X : -20.0,
-	BAZAR_CARPET_Y : 7.0,
-	BAZAR_CARPET_DEPTH : 3.43,
-	BAZAR_CARPET_SCALE : 0.016,
-	GARDEN_X : 18.8,
-	GARDEN_Y : -5.0,
-	GARDEN_DEPTH : 3.3,
-	GARDEN_SCALE : 0.029,
-	SMITHY_X : 21.0,
-	SMITHY_Y : 15.0,
-    SMITHY_DEPTH : 3.4,
-	SMITHY_SCALE : 0.021,
-	TOWER1_X : 29.0,
-	TOWER1_Y : 19.0,
-	TOWER2_X : -29.0,
-	TOWER2_Y : 19.0,
-	TOWER3_X : 20.0,
-	TOWER3_Y : -24.0,
-	TOWER4_X : -20.0,
-	TOWER4_Y : -24.0,
-	TOWER_GATE1_X : 12.0,
-	TOWER_GATE1_Y : 19.0,
-	TOWER_GATE2_X : -11.0,
-	TOWER_GATE2_Y : 19.0,
-	TOWER_GATE_SCALE : 0.017,
-	TOWER_FRONT_DEPTH : 3.7,
-	TOWER_FRONT_SCALE : 0.015,
-	TOWER_BACK_DEPTH : 3.2,
-	TOWER_BACK_SCALE : 0.0072,
-	WALL_FRONT_X : 0.0,
-	WALL_FRONT_Y : 22.0,
-	WALL_BACK_X : 0.0,
-	WALL_BACK_Y : -23.2,
-	WALL_LEFT_X : -29.29,
-	WALL_LEFT_Y : 1.67,
-	WALL_RIGHT_X : 29.29,
-	WALL_RIGHT_Y : 1.67,
-	WALL_FRONT_DEPTH : 3.9,
-	WALL_FRONT_SCALE : 0.01333*3,
-	WALL_FRONT_SCALE_VERTICAL : 0.0223*3,
-	WALL_BACK_DEPTH : 3.1,
-	WALL_BACK_SCALE : 0.00812*3,
-	WALL_BACK_SCALE_VERTICAL : 0.0109*3,
-	WALL_SIDE_SCALE : 0.016,
-	WALL_SIDE_SCALE_VERTICAL : 0.029,*/ 
-	/*CARAVAN_DEPTH : 4.0,
-	CARAVAN_ALPHA : 0.93,
-	CARAVAN_SCALE : 0.023,
-	CARAVAN_TRADING_TIME : 5000,
-	CARAVAN_SPEED : 100,*/
-	/*PALACE_COST : 100,
-	BAZAR_FOOD_COST : 40,
-	BAZAR_CHINA_COST : 50,
-	BAZAR_CARPET_COST : 60,
-	GARDEN_COST : 80,
-	SMITHY_COST : 70,
-	TOWER_COST : 60,
-	WALL_COST : 50,*/
+
+    this.PALACE_COST = 200;
+    this.BAZAR_COST = 40;
+    this.WALL_COST = 100;
     
     this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 100.0;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
+
+    this.TOWER1_ICON_SCALE = 0.54;
+    this.TOWER1_ICON_X = 0.0;
+    this.TOWER1_ICON_Y = -7.0;
+
+    this.TOWER1_COST = 10;
 
     this.DEEVE_SPAWN_RATE = 1.0; // seconds
     this.DEEVE_NUMBER = 10;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
     this.DEEVE_SCALE = 0.6,
-    this.DEEVE_SPEED = 110,
+    this.DEEVE_SPEED = 120,
 
     this.TREE_SCALE = 0.63,
     this.MAX_TREE_NUMBER = 300,
     this.MIN_INBETWEEN_TREE_DISTANCE = this.WORLD_WIDTH / 20.0,
     this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 6.5,
-    this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 12.0,
-    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 13.0,
+    this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 11.0,
+    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 12.0,
 
     this.MAPPING_POINT_X = 0.0;
     this.MAPPING_POINT_Y = 0.0;
@@ -167,21 +108,6 @@ function Constants() {
     this.VISIBLE_CARAVAN = 1.0;
     this.HIDDEN_DEEVE = 0.0;
     this.VISIBLE_DEEVE = 1.0;
-    
-    //UI_DEPTH : 3.0,
-    //CONSTRUCTION_PANEL_X : 0.0,
-    //CONSTRUCTION_PANEL_Y : this.WINDOW_WIDTH/13.0,
-    //CONSTRUCTION_PANEL_SCALE : 0.15,
-    //INFO_PANEL_X : 0.0,
-    //INFO_PANEL_Y : 0.0,
-    //INFO_PANEL_SCALE : 0.3/1.9,
-    //POPULATION_SCALE : 0.7/1.9,
-    //GOLD_SCALE : 0.6/1.9,
-    /* TODO : Must be set in the initialize script
-	POPULATION_X : INFO_PANEL_X + 2*assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
-	POPULATION_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE,
-	GOLD_X : INFO_PANEL_X + assets().getImage("images/UI/infoPanel.png").width()/3*INFO_PANEL_SCALE,
-	GOLD_Y : assets().getImage("images/UI/infoPanel.png").height()/3*INFO_PANEL_SCALE, */
 
     // Key codes for key events
     this.KEYCODE_DOWN = 40;

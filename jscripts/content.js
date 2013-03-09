@@ -8,9 +8,11 @@ var manifest = [
     { id: "treeShadow",    src: "images/Background/tree_shadow.png" },
     { id: "cityBase", src: "images/City/cityBase.png" },
     { id: "cityIcon", src: "images/City/cityIcon.png" },
+    { id: "palaceIcon", src: "images/City/palaceIcon.png" },
     { id: "bazarIcon", src: "images/City/bazarIcon.png" },
     { id: "wallIcon", src: "images/City/wallIcon.png" },
-    { id: "towerBase",     src: "images/Tower/towerBase.png" },
+    { id: "towerBase", src: "images/Tower/towerBase.png" },
+    { id: "tower1Icon", src: "images/Tower/tower1Icon.png" },
     { id: "caravan",       src: "images/Caravan/Caravan.png" },
     { id: "deeve",         src: "images/Deeve/deeve.png"},
     { id: "baseSelected1", src: "images/City/selection1.png" },
@@ -39,7 +41,13 @@ var manifest = [
     { id: "n0",            src: "images/UI/0.png" },
     { id: "infoPanel", src: "images/UI/infoPanel.png" },
     { id: "population", src: "images/UI/population.png" },
-    { id: "uiKey", src: "images/UI/uiKey.png" }
+    { id: "uiKey", src: "images/UI/uiKey.png" },
+    { id: "constructionPane", src: "images/UI/constructionPane.png" },
+    { id: "selectedConstructionPane", src: "images/UI/selectedConstructionPane.png" },
+    { id: "palaceUi", src: "images/UI/palaceUi.png" },
+    { id: "bazarUi", src: "images/UI/bazarUi.png" },
+    { id: "wallUi", src: "images/UI/wallUi.png" },
+    { id: "tower1Ui", src: "images/UI/tower1Ui.png" }
 ];
 // List of all Images
 var bgImage;
@@ -48,9 +56,11 @@ var treeImage;
 var treeShadowImage;
 var cityBaseImage;
 var cityIconImage;
+var palaceIconImage;
 var bazarIconImage;
 var wallIconImage;
 var towerBaseImage;
+var tower1IconImage;
 var caravanImage;
 var deeveImage;
 var cityBaseSelectedImage1;
@@ -80,6 +90,12 @@ var n0Image;
 var infoPanelImage;
 var populationImage;
 var uiKeyImage;
+var constructionPaneImage;
+var selectedConstructionPaneImage;
+var palaceUiImage;
+var bazarUiImage;
+var wallUiImage;
+var tower1UiImage;
 
 //general public function for creating resources(called once for every resource)
 function createResource(id) {
@@ -100,9 +116,11 @@ function loadImages() {
     treeShadowImage = createResource("treeShadow");
     cityBaseImage = createResource("cityBase");
     cityIconImage = createResource("cityIcon");
+    palaceIconImage = createResource("palaceIcon");
     bazarIconImage = createResource("bazarIcon");
     wallIconImage = createResource("wallIcon");
     towerBaseImage = createResource("towerBase");
+    tower1IconImage = createResource("tower1Icon");
     caravanImage = createResource("caravan");
     deeveImage = createResource("deeve");
     cityBaseSelectedImage1 = createResource("baseSelected1");
@@ -132,4 +150,10 @@ function loadImages() {
     infoPanelImage = createResource("infoPanel");
     populationImage = createResource("population");
     uiKeyImage = createResource("uiKey");
+    constructionPaneImage = createResource("constructionPane");
+    selectedConstructionPaneImage = createResource("selectedConstructionPane");
+    palaceUiImage = createResource("palaceUi");
+    bazarUiImage = createResource("bazarUi");
+    wallUiImage = createResource("wallUi");
+    tower1UiImage = createResource("tower1Ui");
 }

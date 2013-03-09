@@ -1,7 +1,7 @@
 ﻿/**
  * This class contains all the image and game logic for a corresponding caravan
  */
-function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
+function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance, player) {
     var caravanBitmap = new Bitmap(caravanImage);
     var visible = false;
     var initialPosition;
@@ -48,6 +48,9 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance) {
     }
 
     var swapDestination = function () {
+        //Earn Trading Gold
+        player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED);
+
         var temp = finalPosition;
         finalPosition = initialPosition;
         initialPosition = temp;
