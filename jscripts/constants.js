@@ -98,10 +98,11 @@ function Constants() {
     this.TOWER3_RANGE_SCALE = this.WORLD_WIDTH / 5200;
 
     this.ARROW_SCALE = 0.12;
-    this.ARROW_SPEED = 7;
-    this.ARROW_COOLDOWN = 50;
-    this.ARROW_KILL_DISTANCE = 12.0;
+    this.ARROW_SPEED = 13;
+    this.ARROW_COOLDOWN = 100;
+    this.ARROW_KILL_DISTANCE = 10.0;
     this.ARROW_OFFSET = 8.0;
+    this.ARROW_MISS_DISTANCE = 10.0;
 
     this.DEEVE_SPAWN_RATE = 1.0; // seconds
     this.DEEVE_NUMBER = 10;
@@ -109,6 +110,7 @@ function Constants() {
     this.DEEVE_WAVE_WAITING_TIME = 5000,
     this.DEEVE_SCALE = 0.6,
     this.DEEVE_SPEED = 130,
+    this.DEEVE_KILLED_GOLD = 1;
 
     this.TREE_SCALE = 0.63,
     this.MAX_TREE_NUMBER = 300,

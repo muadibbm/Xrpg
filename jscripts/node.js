@@ -143,12 +143,14 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
         node.setMappedNode(self);
         mapping = new Mapping(environment.getUiLayer(), environment.getMappingLayer(), coordinates, mapped_node.getPos(), score);
         mapping.setScore(score);
+        base.setDamage(base.getDamage() + score);
         mapping.transform();
         mapped_node.copyMapping(mapping);
         for (var k = 0; k < neighbors.length; k++) {
             if (neighbors[k].getMapping() != null) {
                 if (mapped_node.isNeighbor(neighbors[k].getMappedNode())) {
                     neighbors[k].getMapping().setScore(neighbors[k].getMapping().getScore() + score);
+                    neighbors[k].getBase().setDamage(neighbors[k].getBase().getDamage() + score);
                 }
             }
         }
@@ -163,9 +165,12 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
             if (neighbors[k].getMapping() != null) {
                 if (mapped_node.isNeighbor(neighbors[k].getMappedNode())) {
                     neighbors[k].getMapping().setScore(neighbors[k].getMapping().getScore() - score);
+                    neighbors[k].getBase().setDamage(neighbors[k].getBase().getDamage() - score);
+
                 }
             }
         }
+        base.setDamage(base.getDamage() - score);
         mapped_node.removeMapping();
         mapping.destroy();
         self.removeMapping();

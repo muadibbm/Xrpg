@@ -227,6 +227,8 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
             if (deeveList[i] != null) {
                 if (deeveList[i].getHealth() <= 0) {
                     deeveList[i].kill();
+                    //TODO: if(deeveList[i] == type)
+                    player.setGold(player.getGold() + Const.DEEVE_KILLED_GOLD)
                     //set Dead bitmap
                     deeveList[i] = null;
                 }
@@ -261,18 +263,20 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
         var towerAwareness = function () {
             for (var i = 0; i < deeveList.length; i++) {
                 for (var j = 0; j < nodesArray.length; j++) {
-                    if (deeveList[i] != null) {
-                        if (deeveList[i].getPosition().getDistanceFrom(nodesArray[j].getPos()) < nodesArray[j].getBase().getRange()) {
-                            if (nodesArray[j].getBase().isShooting() != null) { break; }
-                            else {
-                                nodesArray[j].getBase().setTarget(deeveList[i]);
+                    if (nodesArray[j].getMapping() != null) {
+                        if (deeveList[i] != null) {
+                            if (deeveList[i].getPosition().getDistanceFrom(nodesArray[j].getPos()) < nodesArray[j].getBase().getRange()) {
+                                console.log("here");
+                                if (nodesArray[j].getBase().isShooting() == null) {
+                                    nodesArray[j].getBase().setTarget(deeveList[i]);
+                                }
+                            }
+                            else if (deeveList[i] == nodesArray[j].getBase().getTarget()) {
+                                nodesArray[j].getBase().setTarget(null);
                             }
                         }
-                        else if (deeveList[i] == nodesArray[j].getBase().getTarget()) {
-                            nodesArray[j].getBase().setTarget(null);
-                        }
-                    }
-                    else {break;}
+                        else { break; }
+                    } else { nodesArray[j].getBase().setTarget(null); }
                 }
             }
         }

@@ -20,6 +20,7 @@ function Base(graphLayer, _id, _isCity, gui) {
         hitPoint = 0;
         var damage = 0;
         var rangeBitmap;
+        var range = 0.0;
         var tower1Bitmap;
         var tower2Bitmap;
         var tower3Bitmap;
@@ -98,9 +99,13 @@ function Base(graphLayer, _id, _isCity, gui) {
         return damage;
     }
 
+    this.setDamage = function (_damage) {
+        damage = _damage;
+    }
+
+
     this.getRange = function () {
-        if(tower1Bitmap.visible)
-            return rangeBitmap.image.width / 2 * Const.TOWER1_RANGE_SCALE;
+        return range;
     }
 
     this.setIsCity = function(_isCity) {
@@ -235,8 +240,9 @@ function Base(graphLayer, _id, _isCity, gui) {
         this.buildTower1 = function () {
             tower1Bitmap.visible = true;
             hitPoint = Const.TOWER1_HITPOINT;
-            damage = Const.TOWER1_DAMAGE;
-            rangeBitmap.setTransform(position.x - rangeBitmap.image.width / 2 * Const.TOWER1_RANGE_SCALE, position.y - rangeBitmap.image.height / 2 * Const.TOWER1_RANGE_SCALE, Const.TOWER1_RANGE_SCALE, Const.TOWER1_RANGE_SCALE);
+            damage = damage + Const.TOWER1_DAMAGE;
+            range = rangeBitmap.image.width / 2 * Const.TOWER1_RANGE_SCALE;
+            rangeBitmap.setTransform(position.x - range, position.y - range, Const.TOWER1_RANGE_SCALE, Const.TOWER1_RANGE_SCALE);
             rangeBitmap.visible = true;
             arrowBitmap.x = position.x;
             position.y = position.y - Const.ARROW_OFFSET;
@@ -315,18 +321,27 @@ function Base(graphLayer, _id, _isCity, gui) {
             }
 
             if (target != null) {
-                if (newPosition.getDistanceFrom(target.getPosition()) > Const.ARROW_KILL_DISTANCE) {
-                    arrowBitmap.x = newPosition.x;
-                    arrowBitmap.y = newPosition.y;
-                    arrowBitmap.rotation = Math.atan2(target.getPosition().y - position.y, target.getPosition().x - position.x) * 180 / Math.PI;
+                arrowBitmap.visible = true;
+                if (position.getDistanceFrom(newPosition) > range + Const.ARROW_MISS_DISTANCE) {
+                    arrowBitmap.visible = false;
+                    clearInterval(currentTimer);
+                    fireAgain();
                 }
                 else {
-                    clearInterval(currentTimer);
-                    target.setHealth(target.getHealth() - damage);
-                    if (target.getHealth() <= 0)
-                        target = null;
-                    else 
-                        fireAgain();
+                    if (newPosition.getDistanceFrom(target.getPosition()) > Const.ARROW_KILL_DISTANCE) {
+                        arrowBitmap.x = newPosition.x;
+                        arrowBitmap.y = newPosition.y;
+                        arrowBitmap.rotation = Math.atan2(target.getPosition().y - position.y, target.getPosition().x - position.x) * 180 / Math.PI;
+                    }
+                    else {
+                        clearInterval(currentTimer);
+                        target.setHealth(target.getHealth() - damage);
+                        if (target.getHealth() <= 0) {
+                            target = null;
+                            arrowBitmap.visible = false;
+                        }
+                        else { fireAgain(); }
+                    }
                 }
             }
             else {
