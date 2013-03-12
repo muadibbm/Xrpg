@@ -207,31 +207,6 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
         }
     }
 
-    if (isCity) {
-        var addingCaravans = function () {
-            for (var i = 0; i < nodesArray.length; i++) {
-                // The graph contains only cities
-                var city1 = nodesArray[i].getBase();
-                if (city1.hasBazar()) {
-                    var neighbours = nodesArray[i].getNeighbors();
-                    for (var j = 0; j < neighbours.length; j++) {
-                        var city2 = neighbours[j].getBase();
-                        if (city2.hasBazar()) {
-                            if (!city1.hasCaravan() || !city2.hasCaravan()) {
-                                city1.setHasCaravan(true);
-                                city2.setHasCaravan(true);
-                                var caravan = new Caravan(graphLayer, nodesArray[i].getPos(), neighbours[j].getPos(), 1, player);//(nodesArray[i].getBase().getBitmap().image.width * Const.BASE_CITY_SCALE) / 
-                                caravan.setVisible(true);
-                                caravan.transform();
-                                caravanList.push(caravan);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     var addingDeeves = function () {
         //TODO: Set a periodic timer to denote the waves of deeves and then move them
         if (deeveList.length < Const.DEEVE_NUMBER) {
@@ -247,9 +222,63 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
         }
     }
 
-    //var deeveNodeCollisions = function () {
+    var keepTrackOfDeeves = function () {
+        for (var i = 0; i < deeveList.length; i++) {
+            if (deeveList[i] != null) {
+                if (deeveList[i].getHealth() <= 0) {
+                    deeveList[i].kill();
+                    //set Dead bitmap
+                    deeveList[i] = null;
+                }
+            }
+        }
+    }
 
-    //}
+    if (isCity) {
+        var addingCaravans = function () {
+            for (var i = 0; i < nodesArray.length; i++) {
+                var city1 = nodesArray[i].getBase();
+                if (city1.hasBazar()) {
+                    var neighbours = nodesArray[i].getNeighbors();
+                    for (var j = 0; j < neighbours.length; j++) {
+                        var city2 = neighbours[j].getBase();
+                        if (city2.hasBazar()) {
+                            if (!city1.hasCaravan() || !city2.hasCaravan()) {
+                                city1.setHasCaravan(true);
+                                city2.setHasCaravan(true);
+                                var caravan = new Caravan(graphLayer, nodesArray[i], neighbours[j], 1, player);//(nodesArray[i].getBase().getBitmap().image.width * Const.BASE_CITY_SCALE) / 
+                                caravan.setVisible(true);
+                                caravan.transform();
+                                caravanList.push(caravan);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        var towerAwareness = function () {
+            for (var i = 0; i < deeveList.length; i++) {
+                for (var j = 0; j < nodesArray.length; j++) {
+                    if (deeveList[i] != null) {
+                        if (deeveList[i].getPosition().getDistanceFrom(nodesArray[j].getPos()) < nodesArray[j].getBase().getRange()) {
+                            if (nodesArray[j].getBase().isShooting() != null) { break; }
+                            else {
+                                nodesArray[j].getBase().setTarget(deeveList[i]);
+                            }
+                        }
+                        else if (deeveList[i] == nodesArray[j].getBase().getTarget()) {
+                            nodesArray[j].getBase().setTarget(null);
+                        }
+                    }
+                    else {break;}
+                }
+            }
+        }
+    }
+
+    //var deeveNodeCollisions = function () {
 
     //sets the transformations of all the bitmaps in this graph instance after placement
     var transform = function () {
@@ -276,11 +305,21 @@ function Graph(id, _isCity, xOffset, yOffset, width, height, gui, player) {
         transform();
     }
 
-    // updates all the positions of the moving instances associated with the graph
+    // updates all the positions and behaviour of the moving instances(Caravans) associated with the graph and the logics of towers and cities
     this.updateAll = function () {
-        addingCaravans();
+        if (isCity) {
+            addingCaravans();
+            //city hitpoint
+        } else {
+            towerAwareness();
+            //tower hitpoint
+        }
+    }
+
+    this.updateCollisions = function () {
         addingDeeves();
         //deeveNodesCollisions();
+        keepTrackOfDeeves();
     }
 
     if (typeof String.prototype.startsWith != 'function') {

@@ -439,4 +439,8 @@ function Node(_id, _nucl, isCity, graphLayer, _graph_id, _player_id, gui) {
             }
         }
     }
+
+    this.update = function () {
+
+    }
 }

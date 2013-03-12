@@ -13,6 +13,8 @@ var manifest = [
     { id: "wallIcon", src: "images/City/wallIcon.png" },
     { id: "towerBase", src: "images/Tower/towerBase.png" },
     { id: "tower1Icon", src: "images/Tower/tower1Icon.png" },
+    { id: "range", src: "images/Tower/range.png" },
+    { id: "arrow", src: "images/Tower/arrow.png" },
     { id: "caravan",       src: "images/Caravan/Caravan.png" },
     { id: "deeve",         src: "images/Deeve/deeve.png"},
     { id: "baseSelected1", src: "images/City/selection1.png" },
@@ -61,6 +63,8 @@ var bazarIconImage;
 var wallIconImage;
 var towerBaseImage;
 var tower1IconImage;
+var rangeImage;
+var arrowImage;
 var caravanImage;
 var deeveImage;
 var cityBaseSelectedImage1;
@@ -121,6 +125,8 @@ function loadImages() {
     wallIconImage = createResource("wallIcon");
     towerBaseImage = createResource("towerBase");
     tower1IconImage = createResource("tower1Icon");
+    rangeImage = createResource("range");
+    arrowImage = createResource("arrow");
     caravanImage = createResource("caravan");
     deeveImage = createResource("deeve");
     cityBaseSelectedImage1 = createResource("baseSelected1");

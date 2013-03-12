@@ -13,7 +13,7 @@ function Deeve(_pointsList, _deeveList) {
     var index = 0;
     var visible = false;
     var health = 100; // 100 % full
-    var damage = 10; // Level 1 == 10 units of damage
+    var damage = 0;
     var hasArrived = false;
     var currentTimer = null;
     var resumeTimer = null;
@@ -211,5 +211,11 @@ function Deeve(_pointsList, _deeveList) {
 
     this.setDamage = function (_damage) {
         damage = _damage;
+    }
+
+    this.kill = function () {
+        deeveBitmap.alpha = Const.HIDDEN_DEEVE;
+        deeveBmpAnimation.alpha = Const.HIDDEN_DEEVE;
+        clearInterval(resumeTimer);
     }
 }

@@ -27,6 +27,7 @@ function Constants() {
     this.UI_KEY_SCALE = 0.5;
     this.BUILD_UI_SCALE = 0.13;
     this.CP_SCALE = 0.5;
+    this.CONSTRUCTION_UNAVAILABLE = 0.3;
     
     //this.BASE_CITY_SCALE = 0.5;
     this.BASE_TOWER_SCALE = 0.23;
@@ -34,8 +35,8 @@ function Constants() {
     this.CITY_SELECTION_SCALE1 = 0.25;
     this.CITY_SELECTION_SCALE2 = 0.19;
     this.CARAVAN_SCALE = 0.06;
-    this.CARAVAN_MOVING_TIME = 200;
-    this.CARAVAN_TRADING_TIME = 30000;
+    this.CARAVAN_MOVING_TIME = 100;
+    this.CARAVAN_TRADING_TIME = 40000;
     this.CARAVAN_GOLD_EARNED = 2;
     this.CAMP_SELECTION_SCALE = 0.15;
     this.SELECTION_ALPHA = 0.68;
@@ -63,8 +64,15 @@ function Constants() {
     this.PALACE_COST = 200;
     this.BAZAR_COST = 40;
     this.WALL_COST = 100;
+
+    this.PALACE_GOLD_INCREASE = 8;
+
+    this.CITY_HITPOINT = 500;
+    this.PALACE_HITPOINT = 200;
+    this.BAZAR_HITPOINT = 100;
+    this.WALL_HITPOINT = 300;
     
-    this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 100.0;
+    this.MIN_TOWER_DISTANCE = this.WORLD_WIDTH / 20.0;
     this.TOWER_GRAPH_WIDTH = this.WORLD_WIDTH / 3.0;
     this.TOWER_GRAPH_HEIGHT = this.WORLD_HEIGHT - this.WORLD_HEIGHT / 8.0;
 
@@ -73,20 +81,41 @@ function Constants() {
     this.TOWER1_ICON_Y = -7.0;
 
     this.TOWER1_COST = 10;
+    this.TOWER2_COST = 30;
+    this.TOWER3_COST = 50;
+
+    this.TOWER1_HITPOINT = 200;
+    this.TOWER2_HITPOINT = 300;
+    this.TOWER3_HITPOINT = 400;
+
+    this.TOWER1_DAMAGE = 10;
+    this.TOWER2_DAMAGE = 20;
+    this.TOWER3_DAMAGE = 30;
+
+    this.RANGE_ALPHA = 0.5;
+    this.TOWER1_RANGE_SCALE = this.WORLD_WIDTH / 7500;
+    this.TOWER2_RANGE_SCALE = this.WORLD_WIDTH / 6300;
+    this.TOWER3_RANGE_SCALE = this.WORLD_WIDTH / 5200;
+
+    this.ARROW_SCALE = 0.12;
+    this.ARROW_SPEED = 7;
+    this.ARROW_COOLDOWN = 50;
+    this.ARROW_KILL_DISTANCE = 12.0;
+    this.ARROW_OFFSET = 8.0;
 
     this.DEEVE_SPAWN_RATE = 1.0; // seconds
     this.DEEVE_NUMBER = 10;
     this.DEEVE_CAVE_SCALE = 0.17;
     this.DEEVE_WAVE_WAITING_TIME = 5000,
     this.DEEVE_SCALE = 0.6,
-    this.DEEVE_SPEED = 120,
+    this.DEEVE_SPEED = 130,
 
     this.TREE_SCALE = 0.63,
     this.MAX_TREE_NUMBER = 300,
     this.MIN_INBETWEEN_TREE_DISTANCE = this.WORLD_WIDTH / 20.0,
     this.MIN_CAVE_TREE_DISTANCE = this.WORLD_WIDTH / 6.5,
     this.MIN_CITY_TREE_DISTANCE = this.WORLD_WIDTH / 11.0,
-    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 12.0,
+    this.MIN_TOWER_TREE_DISTANCE = this.WORLD_WIDTH / 15.0,
 
     this.MAPPING_POINT_X = 0.0;
     this.MAPPING_POINT_Y = 0.0;

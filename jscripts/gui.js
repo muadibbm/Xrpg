@@ -290,4 +290,19 @@ function Gui(uiLayer, player) {
             }
         }
     }
+
+    this.update = function () {
+        palaceUi.alpha = Const.CONSTRUCTION_UNAVAILABLE;
+        bazarUi.alpha = Const.CONSTRUCTION_UNAVAILABLE;
+        wallUi.alpha = Const.CONSTRUCTION_UNAVAILABLE;
+        tower1Ui.alpha = Const.CONSTRUCTION_UNAVAILABLE;
+        if (player.getGold() >= Const.PALACE_COST)
+            palaceUi.alpha = 1.0;
+        if (player.getGold() >= Const.BAZAR_COST)
+            bazarUi.alpha = 1.0;
+        if (player.getGold() >= Const.WALL_COST)
+            wallUi.alpha = 1.0;
+        if (player.getGold() >= Const.TOWER1_COST)
+            tower1Ui.alpha = 1.0;
+    }
 }

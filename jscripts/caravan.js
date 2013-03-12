@@ -1,7 +1,7 @@
 ﻿/**
  * This class contains all the image and game logic for a corresponding caravan
  */
-function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance, player) {
+function Caravan(graphLayer, city1, city2, stoppingDistance, player) {
     var caravanBitmap = new Bitmap(caravanImage);
     var visible = false;
     var initialPosition;
@@ -11,15 +11,17 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance, player) {
     var caravanLevel;
     var hasArrived;
     var dx, dy, err, sx, sy;
+    var e2;
+    var newPosition;
     var currentTimer = null;
 
     caravanBitmap.alpha = Const.HIDDEN_CARAVAN;
     graphLayer.addChild(caravanBitmap);
 
     caravanLevel = 1;
-    initialPosition = city1Pos;
-    currentPosition = city1Pos;
-    finalPosition = city2Pos;
+    initialPosition = city1.getPos();
+    currentPosition = city1.getPos();
+    finalPosition = city2.getPos();
     stoppingDist = stoppingDistance;
     hasArrived = false;
 
@@ -49,7 +51,18 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance, player) {
 
     var swapDestination = function () {
         //Earn Trading Gold
-        player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED);
+        if (city1.getPos().x == currentPosition.x && city1.getPos().y == currentPosition.y) {
+            if (city1.getBase().hasPalace())
+                player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED + Const.PALACE_GOLD_INCREASE);
+            else
+                player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED);
+        }
+        else {
+            if (city2.getBase().hasPalace())
+                player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED + Const.PALACE_GOLD_INCREASE);
+            else
+                player.setGold(player.getGold() + Const.CARAVAN_GOLD_EARNED);
+        }
 
         var temp = finalPosition;
         finalPosition = initialPosition;
@@ -66,8 +79,8 @@ function Caravan(graphLayer, city1Pos, city2Pos, stoppingDistance, player) {
     * Declaring the function before call below it. Otherwise, produces an error of undefined. 
     */
     var moveCaravan = function () {
-        var e2 = 2 * err;
-        var newPosition = new Tuple2d(currentPosition.x, currentPosition.y);
+        e2 = 2 * err;
+        newPosition = new Tuple2d(currentPosition.x, currentPosition.y);
 
         if (e2 > -dy) {
             err -= dy;
